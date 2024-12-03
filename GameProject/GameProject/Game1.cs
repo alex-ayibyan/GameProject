@@ -2,8 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Comora;
+
 namespace GameProject
 {
+    enum Direction
+    {
+        Down, Up, Left, Right
+    }
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -15,6 +21,10 @@ namespace GameProject
         Texture2D walkLeft;
 
         Texture2D background;
+
+        Player player = new Player();
+
+        Camera camera;
 
         public Game1()
         {
@@ -28,6 +38,8 @@ namespace GameProject
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.ApplyChanges();
+
+            this.camera = new Camera(_graphics.GraphicsDevice);
 
             base.Initialize();
         }
@@ -50,7 +62,10 @@ namespace GameProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            player.Update(gameTime);
+
+            this.camera.Position = player.Position;
+            this.camera.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -59,9 +74,10 @@ namespace GameProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(this.camera);
 
-            _spriteBatch.Draw(background, new Vector2(-100, -100), Color.White);
+            _spriteBatch.Draw(background, new Vector2(100, 100), Color.White);
+            _spriteBatch.Draw(playerSprite, player.Position, Color.White);
 
             _spriteBatch.End();
 

@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Player.cs",
+              "RelativeDocumentMoniker": "GameProject\\Player.cs",
+              "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Player.cs",
+              "RelativeToolTip": "GameProject\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T22:56:10.621Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,7 @@
               "RelativeDocumentMoniker": "GameProject\\Game1.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Game1.cs*",
               "RelativeToolTip": "GameProject\\Game1.cs*",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAD8AAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAwwEIAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-03T22:46:53.633Z",
               "EditorCaption": ""

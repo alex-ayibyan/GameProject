@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Comora/0.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.1/Comora.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Comora.dll": {}
+        }
+      },
       "MonoGame.Content.Builder.Task/3.8.1.303": {
         "type": "package",
         "build": {
@@ -58,6 +67,19 @@
     }
   },
   "libraries": {
+    "Comora/0.5.0": {
+      "sha512": "lIuU35HW2T1jljv9pKuPyVJi4i26AxEKed1hJ2eMeBZ5f/f4hD7r6eBNfqpbsJcEHUjIVRkR+R4xQK+YeadMqQ==",
+      "type": "package",
+      "path": "comora/0.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "comora.0.5.0.nupkg.sha512",
+        "comora.nuspec",
+        "lib/netstandard1.1/Comora.dll",
+        "lib/portable-net45+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Comora.dll"
+      ]
+    },
     "MonoGame.Content.Builder.Task/3.8.1.303": {
       "sha512": "9Ilzzje62LhWElbPNEl7vh7XsRSbze+lvCJdZtTZUGu48FRgvYN6THURwIB9PN98EI33/Wnf6iuShNUtD7hL4Q==",
       "type": "package",
@@ -97,6 +119,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Comora >= 0.5.0",
       "MonoGame.Content.Builder.Task >= 3.8.1.303",
       "MonoGame.Framework.DesktopGL >= 3.8.1.303"
     ]
@@ -151,6 +174,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Comora": {
+            "target": "Package",
+            "version": "[0.5.0, )"
+          },
           "MonoGame.Content.Builder.Task": {
             "target": "Package",
             "version": "[3.8.1.303, )"
