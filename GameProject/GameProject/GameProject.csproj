@@ -13,6 +13,8 @@
   <ItemGroup>
     <None Remove="Content\BlueBall.png" />
     <None Remove="Content\Content.mgcb" />
+    <None Remove="Content\Enemy.png" />
+    <None Remove="Content\SlimeEnemy.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

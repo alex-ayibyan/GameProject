@@ -22,6 +22,7 @@ namespace GameProject
 
         Texture2D background;
         Texture2D ball;
+        Texture2D enemy;
 
         Player player = new Player();
 
@@ -57,6 +58,7 @@ namespace GameProject
 
             background = Content.Load<Texture2D>("GameBG");
             ball = Content.Load<Texture2D>("FireBall");
+            enemy = Content.Load<Texture2D>("SlimeEnemy");
 
             player.animations[0] = new SpriteAnimation(walkDown, 4 , 8);
             player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
@@ -64,6 +66,9 @@ namespace GameProject
             player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
 
             player.animation = player.animations[0];
+
+            Enemy.enemies.Add(new Enemy(new Vector2(500, 500), enemy));
+            Enemy.enemies.Add(new Enemy(new Vector2(300, 300), enemy));
         }
 
         protected override void Update(GameTime gameTime)
@@ -81,6 +86,11 @@ namespace GameProject
                 bullet.Update(gameTime);
             }
 
+            foreach (Enemy enemy in Enemy.enemies)
+            {
+                enemy.Update(gameTime);
+            }
+
             base.Update(gameTime);
         }
 
@@ -91,6 +101,12 @@ namespace GameProject
             _spriteBatch.Begin(this.camera);
 
             _spriteBatch.Draw(background, new Vector2(100, 100), Color.White);
+
+            foreach (Enemy enemy in Enemy.enemies)
+            {
+                enemy.animation.Draw(_spriteBatch);
+            }
+
             foreach (Bullet bullet in Bullet.bullets)
             {
                 _spriteBatch.Draw(ball, new Vector2(bullet.Position.X - 160, bullet.Position.Y - 90), Color.White);
