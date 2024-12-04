@@ -17,6 +17,9 @@ namespace GameProject
         private Direction direction = Direction.Down;
         private bool isMoving = false;
 
+        public SpriteAnimation animation;
+
+        public SpriteAnimation[] animations = new SpriteAnimation[4];
 
         public Vector2 Position
         {
@@ -89,6 +92,21 @@ namespace GameProject
                 }
 
             }
+
+            animation = animations[(int)direction];
+
+            animation.Position = new Vector2(position.X - 40, position.Y - 40);
+
+            if (isMoving)
+            {
+                animation.Update(gameTime);
+            }
+            else
+            {
+                animation.setFrame(0);
+            }
+
+            
         }
 
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player/Sprite.png</SourceFile>
-  <SourceTime>2024-12-03T23:25:13.8975077+01:00</SourceTime>
+  <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/RandomSprite/Sprite.png</SourceFile>
+  <SourceTime>2024-12-04T01:03:16.6209962+01:00</SourceTime>
   <DestFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/bin/DesktopGL/Player/Sprite.xnb</DestFile>
-  <DestTime>2024-12-03T23:46:39.3045362+01:00</DestTime>
+  <DestTime>2024-12-04T01:11:46.1634744+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

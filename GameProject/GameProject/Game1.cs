@@ -20,7 +20,7 @@ namespace GameProject
         Texture2D walkRight;
         Texture2D walkLeft;
 
-        Texture2D background;
+        Texture2D background; 
 
         Player player = new Player();
 
@@ -55,6 +55,13 @@ namespace GameProject
             walkLeft = Content.Load<Texture2D>("Player/Left");
 
             background = Content.Load<Texture2D>("GameBG");
+
+            player.animations[0] = new SpriteAnimation(walkDown, 4 , 8);
+            player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
+            player.animations[2] = new SpriteAnimation(walkLeft, 4, 8);
+            player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
+
+            player.animation = player.animations[0];
         }
 
         protected override void Update(GameTime gameTime)
@@ -77,7 +84,7 @@ namespace GameProject
             _spriteBatch.Begin(this.camera);
 
             _spriteBatch.Draw(background, new Vector2(100, 100), Color.White);
-            _spriteBatch.Draw(playerSprite, player.Position, Color.White);
+            player.animation.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
