@@ -20,7 +20,8 @@ namespace GameProject
         Texture2D walkRight;
         Texture2D walkLeft;
 
-        Texture2D background; 
+        Texture2D background;
+        Texture2D ball;
 
         Player player = new Player();
 
@@ -55,6 +56,7 @@ namespace GameProject
             walkLeft = Content.Load<Texture2D>("Player/Left");
 
             background = Content.Load<Texture2D>("GameBG");
+            ball = Content.Load<Texture2D>("FireBall");
 
             player.animations[0] = new SpriteAnimation(walkDown, 4 , 8);
             player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
@@ -74,6 +76,11 @@ namespace GameProject
             this.camera.Position = player.Position;
             this.camera.Update(gameTime);
 
+            foreach (Bullet bullet in Bullet.bullets)
+            {
+                bullet.Update(gameTime);
+            }
+
             base.Update(gameTime);
         }
 
@@ -84,6 +91,10 @@ namespace GameProject
             _spriteBatch.Begin(this.camera);
 
             _spriteBatch.Draw(background, new Vector2(100, 100), Color.White);
+            foreach (Bullet bullet in Bullet.bullets)
+            {
+                _spriteBatch.Draw(ball, new Vector2(bullet.Position.X - 160, bullet.Position.Y - 90), Color.White);
+            }
             player.animation.Draw(_spriteBatch);
 
             _spriteBatch.End();

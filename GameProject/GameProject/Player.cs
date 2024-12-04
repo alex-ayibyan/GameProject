@@ -16,6 +16,7 @@ namespace GameProject
         private int speed = 300;
         private Direction direction = Direction.Down;
         private bool isMoving = false;
+        private KeyboardState kStateOld = Keyboard.GetState();
 
         public SpriteAnimation animation;
 
@@ -69,6 +70,10 @@ namespace GameProject
                 direction = Direction.Down;
                 isMoving = true;
             }
+            if (kState.IsKeyDown(Keys.Space))
+            {
+                isMoving = false;
+            }
 
             if (isMoving)
             {
@@ -95,9 +100,13 @@ namespace GameProject
 
             animation = animations[(int)direction];
 
-            animation.Position = new Vector2(position.X - 40, position.Y - 40);
+            animation.Position = new Vector2(position.X - 32, position.Y - 32);
 
-            if (isMoving)
+            if (kState.IsKeyDown(Keys.Space))
+            {
+                animation.setFrame(1);
+            }
+            else if (isMoving)
             {
                 animation.Update(gameTime);
             }
@@ -106,6 +115,12 @@ namespace GameProject
                 animation.setFrame(0);
             }
 
+            if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
+            {
+                Bullet.bullets.Add(new Bullet(position, direction));
+            }
+
+            kStateOld = kState;
             
         }
 

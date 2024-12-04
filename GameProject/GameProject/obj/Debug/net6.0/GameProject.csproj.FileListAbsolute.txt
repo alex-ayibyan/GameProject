@@ -31,3 +31,4 @@ C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProje
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\obj\Debug\net6.0\GameProject.pdb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\obj\Debug\net6.0\GameProject.genruntimeconfig.cache
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\obj\Debug\net6.0\ref\GameProject.dll
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\FireBall.xnb
