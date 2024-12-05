@@ -11,7 +11,8 @@
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/RandomSprite/Up.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/SlimeEnemy.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/FireBall.png</File>
-    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/GameBG.png</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/map.png</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Menu.spritefont</File>
   </SourceFiles>
   <DestFiles>
     <File>Player/Down.png</File>
@@ -20,6 +21,7 @@
     <File>Player/Sprite.png</File>
     <File>Player/Up.png</File>
     <File>SlimeEnemy.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

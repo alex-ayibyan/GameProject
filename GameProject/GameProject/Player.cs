@@ -12,11 +12,14 @@ namespace GameProject
 {
     class Player
     {
-        private Vector2 position = new Vector2(500, 300);
+        static public Vector2 defaultPosition = new Vector2(640, 360);
+
+        public Vector2 position = defaultPosition;
         private int speed = 300;
         private Direction direction = Direction.Down;
         private bool isMoving = false;
         private KeyboardState kStateOld = Keyboard.GetState();
+        public bool dead = false;
 
         public SpriteAnimation animation;
 
@@ -70,7 +73,8 @@ namespace GameProject
                 direction = Direction.Down;
                 isMoving = true;
             }
-            if (kState.IsKeyDown(Keys.Space))
+
+            if (dead)
             {
                 isMoving = false;
             }
@@ -80,19 +84,31 @@ namespace GameProject
                 switch (direction)
                 {
                     case Direction.Right:
-                        position.X += speed * dt;
+                        if (position.X < 1100)
+                        {
+                            position.X += speed * dt;
+                        }
                         break;
 
                     case Direction.Left:
-                        position.X -= speed * dt;
+                        if (position.X > 180)
+                        {
+                            position.X -= speed * dt;
+                        }
                         break;
 
                     case Direction.Up:
-                        position.Y -= speed * dt;
+                        if (position.Y > 50)
+                        {
+                            position.Y -= speed * dt;
+                        }
                         break;
 
                     case Direction.Down:
-                        position.Y += speed * dt;
+                        if (position.Y < 620)
+                        {
+                            position.Y += speed * dt;
+                        }
                         break;
                 }
 
@@ -122,6 +138,11 @@ namespace GameProject
 
             kStateOld = kState;
             
+        }
+
+        public void Reset()
+        {
+            position = defaultPosition;
         }
 
     }

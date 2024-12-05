@@ -1,4 +1,3 @@
-C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\GameBG.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Player\Down.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Player\Left.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Player\Right.xnb
@@ -33,3 +32,5 @@ C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProje
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\obj\Debug\net6.0\ref\GameProject.dll
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\FireBall.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\SlimeEnemy.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\map.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Menu.xnb

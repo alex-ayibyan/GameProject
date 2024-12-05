@@ -16,8 +16,9 @@ namespace GameProject
 
         private Vector2 position;
         private int speed = 1000;
-        private int radius = 18;
+        public int radius = 18;
         private Direction direction;
+        private bool collided = false;
 
         public Bullet(Vector2 newPosition, Direction newDirection)
         {
@@ -30,6 +31,18 @@ namespace GameProject
             get
             {
                 return position;
+            }
+        }
+
+        public bool Collided
+        {
+            get
+            {
+                return collided;
+            }
+            set
+            {
+                collided = value;
             }
         }
 

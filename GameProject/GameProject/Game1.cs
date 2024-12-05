@@ -14,7 +14,7 @@ namespace GameProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Texture2D playerSprite;
+        // Texture2D playerSprite;
         Texture2D walkDown;
         Texture2D walkUp;
         Texture2D walkRight;
@@ -24,6 +24,7 @@ namespace GameProject
         Texture2D ball;
         Texture2D enemy;
 
+        SpriteFont menuFont;
         Player player = new Player();
 
         Camera camera;
@@ -38,7 +39,7 @@ namespace GameProject
         protected override void Initialize()
         {
             _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.PreferredBackBufferHeight = 736;
             _graphics.ApplyChanges();
 
             this.camera = new Camera(_graphics.GraphicsDevice);
@@ -50,15 +51,17 @@ namespace GameProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            playerSprite = Content.Load<Texture2D>("Player/Sprite");
+            // playerSprite = Content.Load<Texture2D>("Player/Sprite");
             walkDown = Content.Load<Texture2D>("Player/Down");
             walkUp = Content.Load<Texture2D>("Player/Up");
             walkRight = Content.Load<Texture2D>("Player/Right");
             walkLeft = Content.Load<Texture2D>("Player/Left");
 
-            background = Content.Load<Texture2D>("GameBG");
+            background = Content.Load<Texture2D>("map");
             ball = Content.Load<Texture2D>("FireBall");
             enemy = Content.Load<Texture2D>("SlimeEnemy");
+
+            menuFont = Content.Load<SpriteFont>("Menu");
 
             player.animations[0] = new SpriteAnimation(walkDown, 4 , 8);
             player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
@@ -66,9 +69,6 @@ namespace GameProject
             player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
 
             player.animation = player.animations[0];
-
-            Enemy.enemies.Add(new Enemy(new Vector2(500, 500), enemy));
-            Enemy.enemies.Add(new Enemy(new Vector2(300, 300), enemy));
         }
 
         protected override void Update(GameTime gameTime)
@@ -76,9 +76,17 @@ namespace GameProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.Update(gameTime);
+            if (EnemySpawner.inGame)
+            {
+                player.Update(gameTime);
+            }
 
-            this.camera.Position = player.Position;
+            if (!player.dead)
+            {
+                EnemySpawner.Update(gameTime, enemy);
+            }
+
+            this.camera.Position = player.Position; //new Vector2(640, 370);
             this.camera.Update(gameTime);
 
             foreach (Bullet bullet in Bullet.bullets)
@@ -88,8 +96,29 @@ namespace GameProject
 
             foreach (Enemy enemy in Enemy.enemies)
             {
-                enemy.Update(gameTime);
+                enemy.Update(gameTime, player.Position, player.dead);
+                int sum = 32 + enemy.radius;
+                if (Vector2.Distance(player.Position, enemy.Position) < sum)
+                {
+                    player.dead = true;
+                }
             }
+
+            foreach (Bullet bullet in Bullet.bullets)
+            {
+                foreach (Enemy enemy in Enemy.enemies)
+                {
+                    int sum = bullet.radius + enemy.radius;
+                    if (Vector2.Distance(bullet.Position, enemy.Position) < sum)
+                    {
+                        bullet.Collided = true;
+                        enemy.Dead = true;
+                    }
+                }
+            }
+
+            Bullet.bullets.RemoveAll(b => b.Collided);
+            Enemy.enemies.RemoveAll(e => e.Dead);
 
             base.Update(gameTime);
         }
@@ -100,7 +129,7 @@ namespace GameProject
 
             _spriteBatch.Begin(this.camera);
 
-            _spriteBatch.Draw(background, new Vector2(100, 100), Color.White);
+            _spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
 
             foreach (Enemy enemy in Enemy.enemies)
             {
@@ -111,7 +140,28 @@ namespace GameProject
             {
                 _spriteBatch.Draw(ball, new Vector2(bullet.Position.X - 160, bullet.Position.Y - 90), Color.White);
             }
-            player.animation.Draw(_spriteBatch);
+
+            if (!player.dead)
+            {
+                player.animation.Draw(_spriteBatch);
+            }
+
+            if (EnemySpawner.inGame == false)
+            {
+                string menuMessage = "Press Enter To Begin";
+                string characterMessage = "Player";
+                Vector2 sizeOfText = menuFont.MeasureString(menuMessage);
+                int halfWidth = _graphics.PreferredBackBufferWidth / 2;
+                _spriteBatch.DrawString(menuFont, menuMessage, new Vector2(halfWidth - sizeOfText.X/2, 100), Color.White);
+                _spriteBatch.DrawString(menuFont, characterMessage, new Vector2(5, 70), Color.White);
+            }
+
+            if (player.dead)
+            {
+                string endMessage = "Game Over";
+                _spriteBatch.DrawString(menuFont, endMessage, new Vector2(5, 70), Color.White);
+
+            }
 
             _spriteBatch.End();
 

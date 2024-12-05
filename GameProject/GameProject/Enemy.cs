@@ -15,13 +15,15 @@ namespace GameProject
         public static List<Enemy> enemies = new List<Enemy>();
 
         private Vector2 position = new Vector2(0, 0);
-        private int speed = 150;
+        private int speed = 80;
         public SpriteAnimation animation;
+        public int radius = 30;
+        private bool dead = false;
 
         public Enemy(Vector2 newPosition, Texture2D sprite)
         {
             position = newPosition;
-            animation = new SpriteAnimation(sprite, 9, 15);
+            animation = new SpriteAnimation(sprite, 9, 20);
         }
 
         public Vector2 Position
@@ -32,10 +34,31 @@ namespace GameProject
             }
         }
 
-        public void Update(GameTime gameTime)
+        public bool Dead
+        {
+            get 
+            { 
+                return dead; 
+            }
+            set
+            {
+                dead = value;
+            }
+        }
+
+        public void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
         {
             animation.Position = new Vector2(position.X - 16, position.Y - 16);
             animation.Update(gameTime);
+
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (!isPlayerDead)
+            {
+                Vector2 moveDirection = playerPosition - position;
+                moveDirection.Normalize();
+                position += moveDirection * speed * dt;
+            }
         }
     }
 }
