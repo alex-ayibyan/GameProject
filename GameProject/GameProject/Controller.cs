@@ -77,5 +77,9 @@ namespace GameProject
             score += points;
         }
 
+        public void ResetScore()
+        {
+            score = 0;
+        }
     }
 }

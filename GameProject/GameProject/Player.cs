@@ -140,6 +140,12 @@ namespace GameProject
             
         }
 
+        public void Reset()
+        {
+            position = defaultPosition;
+            dead = false;              
+            isMoving = false;           
+        }
 
     }
 }
