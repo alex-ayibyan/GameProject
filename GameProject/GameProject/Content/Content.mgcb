@@ -116,3 +116,10 @@
 /processorParam:TextureFormat=Compressed
 /build:Menu.spritefont
 
+#begin scoreFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:scoreFont.spritefont
+

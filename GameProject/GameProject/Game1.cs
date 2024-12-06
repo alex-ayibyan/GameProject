@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Comora;
+using System.Threading.Tasks.Sources;
+using static System.Formats.Asn1.AsnWriter;
+using System.Diagnostics;
 
 namespace GameProject
 {
@@ -25,7 +28,10 @@ namespace GameProject
         Texture2D enemy;
 
         SpriteFont menuFont;
+        SpriteFont scoreFont;
+
         Player player = new Player();
+        Controller controller = new Controller();
 
         Camera camera;
 
@@ -62,6 +68,7 @@ namespace GameProject
             enemy = Content.Load<Texture2D>("SlimeEnemy");
 
             menuFont = Content.Load<SpriteFont>("Menu");
+            scoreFont = Content.Load<SpriteFont>("scoreFont");
 
             player.animations[0] = new SpriteAnimation(walkDown, 4 , 8);
             player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
@@ -76,17 +83,17 @@ namespace GameProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (EnemySpawner.inGame)
+            if (Controller.inGame)
             {
                 player.Update(gameTime);
             }
 
             if (!player.dead)
             {
-                EnemySpawner.Update(gameTime, enemy);
+                Controller.Update(gameTime, enemy);
             }
 
-            this.camera.Position = player.Position; //new Vector2(640, 370);
+            this.camera.Position = new Vector2(640, 370); //player.Position;
             this.camera.Update(gameTime);
 
             foreach (Bullet bullet in Bullet.bullets)
@@ -97,7 +104,7 @@ namespace GameProject
             foreach (Enemy enemy in Enemy.enemies)
             {
                 enemy.Update(gameTime, player.Position, player.dead);
-                int sum = 32 + enemy.radius;
+                int sum = 10 + enemy.radius;
                 if (Vector2.Distance(player.Position, enemy.Position) < sum)
                 {
                     player.dead = true;
@@ -113,6 +120,8 @@ namespace GameProject
                     {
                         bullet.Collided = true;
                         enemy.Dead = true;
+                        controller.UpdateScore(10);
+                        Debug.WriteLine("Enemy hit");
                     }
                 }
             }
@@ -130,6 +139,7 @@ namespace GameProject
             _spriteBatch.Begin(this.camera);
 
             _spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+            _spriteBatch.DrawString(scoreFont, $"Score: {controller.Score}", new Vector2(1200, 100), Color.White);
 
             foreach (Enemy enemy in Enemy.enemies)
             {
@@ -146,7 +156,7 @@ namespace GameProject
                 player.animation.Draw(_spriteBatch);
             }
 
-            if (EnemySpawner.inGame == false)
+            if (Controller.inGame == false)
             {
                 string menuMessage = "Press Enter To Begin";
                 string characterMessage = "Player";
@@ -159,7 +169,7 @@ namespace GameProject
             if (player.dead)
             {
                 string endMessage = "Game Over";
-                _spriteBatch.DrawString(menuFont, endMessage, new Vector2(5, 70), Color.White);
+                _spriteBatch.DrawString(menuFont, endMessage, new Vector2(640, 370), Color.White);
 
             }
 

@@ -11,12 +11,21 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject
 {
-    class EnemySpawner
+    class Controller
     {
         public static double timer = 2D;
         public static double maxTime = 2D;
         static Random rnd = new Random();
         public static bool inGame = false;
+
+        private int score = 0;
+
+        public int Score {
+            get 
+            { 
+                return score; 
+            } 
+        }
 
 
         public static void Update(GameTime gametime, Texture2D sprite)
@@ -62,5 +71,11 @@ namespace GameProject
                 }
             }
         }
+
+        public void UpdateScore(int points)
+        {
+            score += points;
+        }
+
     }
 }
