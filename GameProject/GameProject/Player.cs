@@ -112,31 +112,19 @@ namespace GameProject
                 switch (direction)
                 {
                     case Direction.Right:
-                        if (position.X < 1100)
-                        {
                             position.X += speed * dt;
-                        }
                         break;
 
                     case Direction.Left:
-                        if (position.X > 180)
-                        {
                             position.X -= speed * dt;
-                        }
                         break;
 
                     case Direction.Up:
-                        if (position.Y > 50)
-                        {
                             position.Y -= speed * dt;
-                        }
                         break;
 
                     case Direction.Down:
-                        if (position.Y < 620)
-                        {
                             position.Y += speed * dt;
-                        }
                         break;
                 }
 

@@ -15,43 +15,78 @@ namespace GameProject.Map
 {
     public class MapGenerator
     {
-        private TmxMap _map;
         private Texture2D _tilesetTexture;
-        private Texture2D _tileset;
-        private int _tileHeight;
-        private int _tileWidth;
+        private Dictionary<Vector2, int> ground;
+        private Dictionary<Vector2, int> objects;
+        private Dictionary<Vector2, int> collision;
 
-        public MapGenerator(TmxMap map, ContentManager content)
+        public MapGenerator(ContentManager content)
         {
-            _map = map;
-            _tileset = content.Load<Texture2D>("Textures/" + _map.Tilesets[0].Name);
+            _tilesetTexture = content.Load<Texture2D>("Textures/CosmicLilac_Tiles32x32");
+        }
+
+        public void LoadMap(string groundLayerPath, string objectsLayerPath, string collisionLayerPath)
+        {
+            ground = LoadLayer(groundLayerPath);
+            objects = LoadLayer(objectsLayerPath);
+            collision = LoadLayer(collisionLayerPath);
+        }
+
+        private Dictionary<Vector2, int> LoadLayer(string filepath)
+        {
+            var layer = new Dictionary<Vector2, int>();
+
+            using (StreamReader reader = new StreamReader(filepath))
+            {
+                int y = 0;
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] items = line.Split(',');
+                    for (int x = 0; x < items.Length; x++)
+                    {
+                        if (int.TryParse(items[x], out int value) && value >= 0)
+                        {
+                            layer[new Vector2(x, y)] = value;
+                        }
+                    }
+                    y++;
+                }
+            }
+
+            return layer;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (var i = 0; i < _map.Layers[0].Tiles.Count; i++)
+            DrawLayer(spriteBatch, ground, _tilesetTexture, 0);
+            
+            DrawLayer(spriteBatch, objects, _tilesetTexture, 1);
+
+            DrawLayer(spriteBatch, collision, _tilesetTexture, 2);
+        }
+
+        private void DrawLayer(SpriteBatch spriteBatch, Dictionary<Vector2, int> layer, Texture2D texture, int tileSize)
+        {
+            foreach (var item in layer)
             {
-                int gid = _map.Layers[0].Tiles[i].Gid;
+                Rectangle destRect = new Rectangle((int)item.Key.X * 32, (int)item.Key.Y * 32, 32, 32);
+                int tileIndex = item.Value;
+                int tilesPerRow = texture.Width / 32;
 
-                // Empty tile, do nothing
-                if (gid == 0)
-                {
+                Rectangle srcRect = new Rectangle(
+                    (tileIndex % tilesPerRow) * 32,
+                    (tileIndex / tilesPerRow) * 32,
+                    32,
+                    32
+                );
 
-                }
-                else
-                {
-                    int tileFrame = gid - 1;
-                    int row = tileFrame / (_tileset.Height / _tileHeight);
-
-                    float x = (i % _map.Width) * _map.TileWidth;
-                    float y = (float)Math.Floor(i / (double)_map.Width) * _map.TileHeight;
-
-                    Rectangle tilesetRec = new Rectangle(_tileWidth * tileFrame, _tileHeight * row, 32, 32);
-
-                    spriteBatch.Draw(_tileset, new Rectangle((int)x, (int)y, 32, 32), tilesetRec, Color.White);
-                }
+                spriteBatch.Draw(texture, destRect, srcRect, Color.White);
             }
         }
+
+
+
     }
 }
 

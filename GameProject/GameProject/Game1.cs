@@ -25,7 +25,6 @@ namespace GameProject
         private SpriteBatch _spriteBatch;
         private GameWorld _world;
         private TmxMap map;
-        private MapGenerator mapManager;
         Camera camera;
 
         public Game1()
@@ -58,6 +57,7 @@ namespace GameProject
             var menuFont = Content.Load<SpriteFont>("Menu");
 
 
+
             Texture2D slimeEnemy = Content.Load<Texture2D>("SlimeEnemy");
 
             Texture2D walkDown = Content.Load<Texture2D>("Player/Down");
@@ -65,21 +65,25 @@ namespace GameProject
             Texture2D walkRight = Content.Load<Texture2D>("Player/Right");
             Texture2D walkLeft = Content.Load<Texture2D>("Player/Left");
 
-            player.animations[0] = new SpriteAnimation(walkDown, 4, 8); // Down
-            player.animations[1] = new SpriteAnimation(walkUp, 4, 8);   // Up
-            player.animations[2] = new SpriteAnimation(walkLeft, 4, 8); // Left
-            player.animations[3] = new SpriteAnimation(walkRight, 4, 8); // Right
+            MapGenerator gameMap = new MapGenerator(Content);
+
+            gameMap.LoadMap("../../../MapData/GameMap3_Collision.csv", "../../../MapData/GameMap3_Ground.csv", "../../../MapData/GameMap3_Objects.csv");
+
+
+            player.animations[0] = new SpriteAnimation(walkDown, 4, 8);
+            player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
+            player.animations[2] = new SpriteAnimation(walkLeft, 4, 8);
+            player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
             player.animation = player.animations[0];
 
             Texture2D bulletTexture = Content.Load<Texture2D>("FireBall");
             player.bulletTexture = bulletTexture;
 
-            var tmxMap = new TmxMap("Content/GameMap.tmx");
-            var mapGenerator = new MapGenerator(tmxMap, Content);
+            
 
-            _world = new GameWorld(camera, menuFont, score);
+            _world = new GameWorld(camera, menuFont, score, gameMap);
 
-            _world.InitializeStates(player, slimeEnemy, mapGenerator);
+            _world.InitializeStates(player, slimeEnemy);
         }
 
         protected override void Update(GameTime gameTime)

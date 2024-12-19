@@ -20,18 +20,17 @@ namespace GameProject.GameState
         private Camera _camera;
         private Texture2D _enemyTexture;
         private MapGenerator _mapGenerator;
-        private List<Tile> tiles;
         
 
 
-        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D enemyTexture, MapGenerator mapGenerator)
+        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D enemyTexture)
         {
             _world = world;
             _player = player;
             _score = score;
             _camera = camera;
             _enemyTexture = enemyTexture;
-            _mapGenerator = mapGenerator;
+            _mapGenerator = _world.GameMap;
         }
 
         public void Update(GameTime gameTime)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameProject.Map;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameProject.GameState
 {
@@ -29,10 +30,10 @@ namespace GameProject.GameState
         public List<Bullet> Bullets { get; private set; }
         public SpriteFont MenuFont { get; private set; }
         public ScoreController Score { get; private set; }
-        public MapGenerator mapGenerator { get; private set; }
+        public MapGenerator GameMap { get; private set; }
 
 
-        public GameWorld(Camera camera, SpriteFont menuFont, ScoreController score)
+        public GameWorld(Camera camera, SpriteFont menuFont, ScoreController score, MapGenerator gameMap)
         {
             Camera = camera;
             MenuFont = menuFont;
@@ -41,14 +42,16 @@ namespace GameProject.GameState
             Bullets = new List<Bullet>();
 
             _states = new Dictionary<GameStates, IGameState>();
+
+            GameMap = gameMap;
         }
 
-        public void InitializeStates(Player player, Texture2D enemyTexture, MapGenerator mapGenerator)
+        public void InitializeStates(Player player, Texture2D enemyTexture)
         {
             Player = player;
             _enemyTexture = enemyTexture;
 
-            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture, mapGenerator);
+            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture);
             _states[GameStates.GameOver] = new GameOverState(this);
 
             ChangeState(GameStates.Playing);

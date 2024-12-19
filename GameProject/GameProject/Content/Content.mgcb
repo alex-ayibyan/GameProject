@@ -98,11 +98,6 @@
 /processorParam:TextureFormat=Color
 /build:FireBall.png
 
-#begin GameMap.tmx
-/importer:
-/processor:
-/build:GameMap.tmx
-
 #begin map2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -177,7 +172,7 @@
 /processorParam:TextureFormat=Compressed
 /build:scoreFont.spritefont
 
-#begin Textures/crate.png
+#begin Textures/CosmicLilac_Tiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -187,9 +182,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/crate.png
+/build:Textures/CosmicLilac_Tiles.png
 
-#begin Textures/grass.png
+#begin Textures/CosmicLilac_Tiles32x32.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -199,7 +194,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/grass.png
+/build:Textures/CosmicLilac_Tiles32x32.png
 
 #begin Tiny Adventure Pack/Character/Char_one/Attack/Char_atk_down.png
 /importer:TextureImporter

@@ -39,8 +39,6 @@ C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProje
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Player2\Right.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Player2\Up.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\map2.xnb
-C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Textures\crate.xnb
-C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Textures\grass.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Tiny Adventure Pack\Character\Char_one\Attack\Char_atk_down.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Tiny Adventure Pack\Character\Char_one\Attack\Char_atk_left.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Tiny Adventure Pack\Character\Char_one\Attack\Char_atk_right.xnb
@@ -91,3 +89,5 @@ C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProje
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Tiny Adventure Pack\Skeleton\Walk\Skel_walk_up.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\TiledSharp.dll
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Textures\CosmicLilac_Tiles.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Textures\CosmicLilac_Tiles32x32.xnb
