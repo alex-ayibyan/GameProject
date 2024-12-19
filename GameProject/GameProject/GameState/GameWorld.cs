@@ -29,7 +29,7 @@ namespace GameProject.GameState
         public List<Bullet> Bullets { get; private set; }
         public SpriteFont MenuFont { get; private set; }
         public ScoreController Score { get; private set; }
-        public MapGenerator GameMap { get; private set; }
+        public MapGenerator mapGenerator { get; private set; }
 
 
         public GameWorld(Camera camera, SpriteFont menuFont, ScoreController score)
@@ -43,12 +43,12 @@ namespace GameProject.GameState
             _states = new Dictionary<GameStates, IGameState>();
         }
 
-        public void InitializeStates(Player player, Texture2D enemyTexture)
+        public void InitializeStates(Player player, Texture2D enemyTexture, MapGenerator mapGenerator)
         {
             Player = player;
             _enemyTexture = enemyTexture;
 
-            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture);
+            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture, mapGenerator);
             _states[GameStates.GameOver] = new GameOverState(this);
 
             ChangeState(GameStates.Playing);

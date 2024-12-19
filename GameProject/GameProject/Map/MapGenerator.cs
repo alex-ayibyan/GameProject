@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -14,48 +15,42 @@ namespace GameProject.Map
 {
     public class MapGenerator
     {
-        private SpriteBatch spriteBatch;
-        TmxMap map;
-        Texture2D tileset;
-        int tilesetTilesWide;
-        int tileWidth;
-        int tileHeight;
+        private TmxMap _map;
+        private Texture2D _tilesetTexture;
+        private Texture2D _tileset;
+        private int _tileHeight;
+        private int _tileWidth;
 
-        public MapGenerator(SpriteBatch _spriteBatch, TmxMap _map, Texture2D _tileset, int _tilesetTilesWide, int _tileWidth, int _tileHeight)
+        public MapGenerator(TmxMap map, ContentManager content)
         {
-            spriteBatch = _spriteBatch;
-            map = _map;
-            tileset = _tileset;
-            tilesetTilesWide = _tilesetTilesWide;
-            tileWidth = _tileWidth;
-            tileHeight = _tileHeight;
+            _map = map;
+            _tileset = content.Load<Texture2D>("Textures/" + _map.Tilesets[0].Name);
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();//Strating the drawing to the screen
-            for (var i = 0; i < map.Layers.Count; i++)//This loops through all the tile map layers present on our tile map
+            for (var i = 0; i < _map.Layers[0].Tiles.Count; i++)
             {
-                for (var j = 0; j < map.Layers[i].Tiles.Count; j++)//this loops through the tiles in each tile layer
+                int gid = _map.Layers[0].Tiles[i].Gid;
+
+                // Empty tile, do nothing
+                if (gid == 0)
                 {
-                    int gid = map.Layers[i].Tiles[j].Gid;//Getting the GID
-                    if (gid == 0)
-                    {
-                        //If empty then do nothing
-                    }
-                    else//If not empty
-                    {//Some complex math to check for the tile position :(
-                        int tileFrame = gid - 1;
-                        int column = tileFrame % tilesetTilesWide;
-                        int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-                        float x = (j % map.Width) * map.TileWidth;
-                        float y = (float)Math.Floor(j / (double)map.Width) * map.TileHeight;
-                        Rectangle tilesetRec = new Rectangle((tileWidth) * column, (tileHeight) * row, tileWidth, tileHeight);//The origin rectangle
-                        spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);//Drawing the tile
-                    }
+
+                }
+                else
+                {
+                    int tileFrame = gid - 1;
+                    int row = tileFrame / (_tileset.Height / _tileHeight);
+
+                    float x = (i % _map.Width) * _map.TileWidth;
+                    float y = (float)Math.Floor(i / (double)_map.Width) * _map.TileHeight;
+
+                    Rectangle tilesetRec = new Rectangle(_tileWidth * tileFrame, _tileHeight * row, 32, 32);
+
+                    spriteBatch.Draw(_tileset, new Rectangle((int)x, (int)y, 32, 32), tilesetRec, Color.White);
                 }
             }
-            spriteBatch.End();
         }
     }
 }

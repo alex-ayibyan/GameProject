@@ -4,7 +4,6 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Game/GameBG.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/RandomSprite/Down.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/RandomSprite/Left.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/RandomSprite/Right.png</File>
@@ -71,7 +70,6 @@
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Tiny Adventure Pack/Skeleton/Walk/Skel_walk_up.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>GameBG.png</File>
     <File>Player/Down.png</File>
     <File>Player/Left.png</File>
     <File>Player/Right.png</File>

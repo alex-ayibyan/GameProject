@@ -24,14 +24,14 @@ namespace GameProject.GameState
         
 
 
-        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D enemyTexture)
+        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D enemyTexture, MapGenerator mapGenerator)
         {
             _world = world;
             _player = player;
             _score = score;
             _camera = camera;
             _enemyTexture = enemyTexture;
-            _bg = bg;
+            _mapGenerator = mapGenerator;
         }
 
         public void Update(GameTime gameTime)
@@ -53,6 +53,7 @@ namespace GameProject.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            _mapGenerator.Draw(spriteBatch);
             _player.animation.Draw(spriteBatch);
 
             EntityController.Draw(spriteBatch);

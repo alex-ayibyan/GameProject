@@ -10,20 +10,9 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\4.0.3\lib\net8.0\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
-
-#begin ../../../../../../../../Pictures/Game/GameBG.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../../../../Pictures/Game/GameBG.png;GameBG.png
 
 #begin ../../../../../../../../Pictures/Sprites/RandomSprite/Down.png
 /importer:TextureImporter
@@ -108,6 +97,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:FireBall.png
+
+#begin GameMap.tmx
+/importer:
+/processor:
+/build:GameMap.tmx
 
 #begin map2.png
 /importer:TextureImporter

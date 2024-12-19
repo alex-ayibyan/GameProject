@@ -73,10 +73,13 @@ namespace GameProject
 
             Texture2D bulletTexture = Content.Load<Texture2D>("FireBall");
             player.bulletTexture = bulletTexture;
-            
+
+            var tmxMap = new TmxMap("Content/GameMap.tmx");
+            var mapGenerator = new MapGenerator(tmxMap, Content);
+
             _world = new GameWorld(camera, menuFont, score);
 
-            _world.InitializeStates(player, slimeEnemy);
+            _world.InitializeStates(player, slimeEnemy, mapGenerator);
         }
 
         protected override void Update(GameTime gameTime)
