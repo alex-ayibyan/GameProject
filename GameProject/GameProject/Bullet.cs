@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject
 {
-    class Bullet
+    public class Bullet
     {
         public static List<Bullet> bullets = new List<Bullet>();
 
@@ -20,10 +21,13 @@ namespace GameProject
         private Direction direction;
         private bool collided = false;
 
-        public Bullet(Vector2 newPosition, Direction newDirection)
+        private Texture2D texture;
+
+        public Bullet(Vector2 newPosition, Direction newDirection, Texture2D bulletTexture)
         {
             position = newPosition;
             direction = newDirection;
+            texture = bulletTexture;
         }
 
         public Vector2 Position
@@ -32,6 +36,7 @@ namespace GameProject
             {
                 return position;
             }
+           
         }
 
         public bool Collided
@@ -68,6 +73,11 @@ namespace GameProject
                     position.Y += speed * dt;
                     break;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, new Vector2(position.X - 160, position.Y - 90), Color.White);
         }
     }
 }

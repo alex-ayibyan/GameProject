@@ -1,30 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-
+using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameProject
 {
-    class Player
+    public class Player
     {
         static public Vector2 defaultPosition = new Vector2(640, 360);
 
         public Vector2 position = defaultPosition;
         private int speed = 300;
-        private Direction direction = Direction.Down;
+        public Direction direction = Direction.Down;
         private bool isMoving = false;
         private KeyboardState kStateOld = Keyboard.GetState();
         public bool dead = false;
+        public float scale = 1.0f;
 
         public SpriteAnimation animation;
 
         public SpriteAnimation[] animations = new SpriteAnimation[4];
+        public Texture2D bulletTexture;
 
+        public MapGenerator GameMap;
+        private Vector2 newPosition;
+
+        public float Scale
+        {
+            get
+            {
+                return scale;
+            }
+        }
         public Vector2 Position
         {
             get
@@ -50,29 +64,43 @@ namespace GameProject
 
             isMoving = false;
 
-            if (kState.IsKeyDown(Keys.Right))
+            if (kState.GetPressedKeyCount() > 0)
             {
-                direction = Direction.Right;
-                isMoving = true;
+                if (kState.IsKeyDown(Keys.Right))
+                {
+                    direction = Direction.Right;
+                    isMoving = true;
+                }
+
+                if (kState.IsKeyDown(Keys.Left))
+                {
+                    direction = Direction.Left;
+                    isMoving = true;
+                }
+
+                if (kState.IsKeyDown(Keys.Up))
+                {
+                    direction = Direction.Up;
+                    isMoving = true;
+                }
+
+                if (kState.IsKeyDown(Keys.Down))
+                {
+                    direction = Direction.Down;
+                    isMoving = true;
+                }
+            }
+            
+            if (kState.IsKeyDown(Keys.LeftShift))
+            {
+                speed = 600;
+            }
+            else
+            {
+                speed = 300;
             }
 
-            if (kState.IsKeyDown(Keys.Left))
-            {
-                direction = Direction.Left;
-                isMoving = true;
-            }
 
-            if (kState.IsKeyDown(Keys.Up))
-            {
-                direction = Direction.Up;
-                isMoving = true;
-            }
-
-            if (kState.IsKeyDown(Keys.Down))
-            {
-                direction = Direction.Down;
-                isMoving = true;
-            }
 
             if (dead)
             {
@@ -133,11 +161,13 @@ namespace GameProject
 
             if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
             {
-                Bullet.bullets.Add(new Bullet(position, direction));
+                Debug.WriteLine($"Firing bullet at position: {position}, Direction: {direction}");
+                Bullet.bullets.Add(new Bullet(position, direction, bulletTexture));
             }
 
             kStateOld = kState;
-            
+
+
         }
 
         public void Reset()
@@ -146,6 +176,5 @@ namespace GameProject
             dead = false;              
             isMoving = false;           
         }
-
     }
 }

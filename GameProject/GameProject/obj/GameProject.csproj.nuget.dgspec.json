@@ -58,9 +58,21 @@
               "target": "Package",
               "version": "[3.8.1.303, )"
             },
+            "MonoGame.Extended.Content.Pipeline": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "TiledSharp": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             }
           },
           "imports": [

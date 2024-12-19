@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject
 {
-    class Enemy
+    public class Enemy
     {
         public static List<Enemy> enemies = new List<Enemy>();
 
@@ -59,6 +59,11 @@ namespace GameProject
                 moveDirection.Normalize();
                 position += moveDirection * speed * dt;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            animation.Draw(spriteBatch);
         }
     }
 }

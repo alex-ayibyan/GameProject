@@ -11,21 +11,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject
 {
-    class Controller
+    public class Controller
     {
         public static double timer = 2D;
         public static double maxTime = 2D;
         static Random rnd = new Random();
         public static bool inGame = false;
-
-        private int score = 0;
-
-        public int Score {
-            get 
-            { 
-                return score; 
-            } 
-        }
 
 
         public static void Update(GameTime gametime, Texture2D sprite)
@@ -37,7 +28,7 @@ namespace GameProject
             else
             {
                 KeyboardState kState = Keyboard.GetState();
-                if (kState.IsKeyDown(Keys.Enter))
+                if (kState.GetPressedKeyCount() > 0)
                 {
                     inGame = true;
                 }
@@ -62,7 +53,7 @@ namespace GameProject
                         Enemy.enemies.Add(new Enemy(new Vector2(rnd.Next(0, 1000), 1000), sprite));
                         break;
                 }
-
+                Console.WriteLine($"Enemy spawned. Total enemies: {Enemy.enemies.Count}");
                 timer = maxTime;
 
                 if (maxTime > 0.5)
@@ -72,14 +63,6 @@ namespace GameProject
             }
         }
 
-        public void UpdateScore(int points)
-        {
-            score += points;
-        }
-
-        public void ResetScore()
-        {
-            score = 0;
-        }
+        
     }
 }
