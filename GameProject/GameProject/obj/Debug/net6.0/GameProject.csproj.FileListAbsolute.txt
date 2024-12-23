@@ -91,3 +91,5 @@ C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProje
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\TiledSharp.dll
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Textures\CosmicLilac_Tiles.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Textures\CosmicLilac_Tiles32x32.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\StartScreenFont.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\StartButton.xnb

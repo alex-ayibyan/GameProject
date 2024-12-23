@@ -14,7 +14,7 @@ namespace GameProject.GameState
 {
     public enum GameStates
     {
-        Playing, GameOver, Restart
+        StartScreen, Playing, GameOver, Restart
     }
     public class GameWorld
     {
@@ -29,6 +29,8 @@ namespace GameProject.GameState
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
         public SpriteFont MenuFont { get; private set; }
+
+        public Texture2D ButtonTexture { get; private set; }
         public ScoreController Score { get; private set; }
         public MapGenerator GameMap { get; private set; }
 
@@ -46,15 +48,16 @@ namespace GameProject.GameState
             GameMap = gameMap;
         }
 
-        public void InitializeStates(Player player, Texture2D enemyTexture)
+        public void InitializeStates(Player player, Texture2D enemyTexture, Texture2D ButtonTexture)
         {
             Player = player;
             _enemyTexture = enemyTexture;
 
+            _states[GameStates.StartScreen] = new StartScreenState(this, MenuFont, Camera, ButtonTexture);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture);
             _states[GameStates.GameOver] = new GameOverState(this);
 
-            ChangeState(GameStates.Playing);
+            ChangeState(GameStates.StartScreen);
         }
 
         public void ChangeState(GameStates newState)
