@@ -20,7 +20,9 @@ namespace GameProject.GameState
         private Camera _camera;
         private Texture2D _enemyTexture;
         private MapGenerator _mapGenerator;
-        
+
+        private bool debugMode = true;
+
 
 
         public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D enemyTexture)
@@ -37,8 +39,11 @@ namespace GameProject.GameState
         {
             _player.Update(gameTime);
 
-            _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
+            //_camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
+            _camera.Position = new Vector2(700, 1100);
             _camera.Update(gameTime);
+
+            // _player.position = new Vector2(700, 500);
 
             Controller.Update(gameTime, _enemyTexture);
             EntityController.Update(gameTime, _player, _player.Position, _player.dead, _score);
@@ -54,10 +59,36 @@ namespace GameProject.GameState
         {
             _mapGenerator.Draw(spriteBatch);
             _player.animation.Draw(spriteBatch);
+           
 
             EntityController.Draw(spriteBatch);
 
             spriteBatch.DrawString(_score.Font, $"Score: {_score.Score}", new Vector2(1150, 100), Color.White);
+
+            if (debugMode)
+            {
+                DrawDebugRectangles(spriteBatch);
+            }
+        }
+
+        private void DrawDebugRectangles(SpriteBatch spriteBatch)
+        {
+            // Draw a rectangle around the player
+            Rectangle playerRectangle = new Rectangle((int)_player.Position.X, (int)_player.Position.Y, 32, 32);
+            spriteBatch.Draw(_mapGenerator.GetRectangleTexture(), playerRectangle, Color.Red);  // Red for player
+
+            // Assuming enemies are part of EntityController or a similar collection
+            foreach (var enemy in Enemy.enemies)
+            {
+                Rectangle enemyRectangle = new Rectangle((int)enemy.Position.X, (int)enemy.Position.Y, 32, 32);
+                spriteBatch.Draw(_mapGenerator.GetRectangleTexture(), enemyRectangle, Color.Green);  // Green for enemies
+            }
+
+            foreach (var bullet in Bullet.bullets)
+            {
+                Rectangle bulletRectangle = new Rectangle((int)bullet.Position.X, (int)bullet.Position.Y, 32, 32);
+                spriteBatch.Draw(_mapGenerator.GetRectangleTexture(), bulletRectangle, Color.Orange);  // Orange for bullets
+            }
         }
     }
 }

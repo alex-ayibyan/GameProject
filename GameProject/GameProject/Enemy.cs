@@ -15,7 +15,7 @@ namespace GameProject
         public static List<Enemy> enemies = new List<Enemy>();
 
         private Vector2 position = new Vector2(0, 0);
-        private int speed = 80;
+        private int speed = 10;
         public SpriteAnimation animation;
         public int radius = 30;
         private bool dead = false;

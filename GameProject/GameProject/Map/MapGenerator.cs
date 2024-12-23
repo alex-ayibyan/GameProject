@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,22 +17,29 @@ namespace GameProject.Map
     public class MapGenerator
     {
         private Texture2D _tilesetTexture;
+        private GraphicsDevice _graphicsDevice;
+        private Texture2D _rectangleTexture;
         private Dictionary<Vector2, int> ground;
         private Dictionary<Vector2, int> objects;
         private Dictionary<Vector2, int> collision;
 
-        public MapGenerator(ContentManager content)
+        public MapGenerator(ContentManager content, GraphicsDevice graphicsDevice)
         {
             _tilesetTexture = content.Load<Texture2D>("Textures/CosmicLilac_Tiles32x32");
+
+            _graphicsDevice = graphicsDevice;
+            _rectangleTexture = new Texture2D(_graphicsDevice, 1, 1);
+            _rectangleTexture.SetData(new Color[] { Color.White });
         }
 
         public void LoadMap(string groundLayerPath, string objectsLayerPath, string collisionLayerPath)
         {
-            ground = LoadLayer(groundLayerPath);
-            objects = LoadLayer(objectsLayerPath);
-            collision = LoadLayer(collisionLayerPath);
+            ground = LoadLayer(groundLayerPath);   // Load ground layer
+            objects = LoadLayer(objectsLayerPath); // Load objects layer
+            collision = LoadLayer(collisionLayerPath); // Load collision layer
         }
 
+        
         private Dictionary<Vector2, int> LoadLayer(string filepath)
         {
             var layer = new Dictionary<Vector2, int>();
@@ -54,6 +62,9 @@ namespace GameProject.Map
                 }
             }
 
+            // Check if the layer is loaded correctly
+            Debug.WriteLine($"Map loaded with {layer.Count} tiles.");
+
             return layer;
         }
 
@@ -63,7 +74,7 @@ namespace GameProject.Map
             
             DrawLayer(spriteBatch, objects, _tilesetTexture, 1);
 
-            DrawLayer(spriteBatch, collision, _tilesetTexture, 2);
+           // DrawLayer(spriteBatch, collision, _tilesetTexture, 2);
         }
 
         private void DrawLayer(SpriteBatch spriteBatch, Dictionary<Vector2, int> layer, Texture2D texture, int tileSize)
@@ -81,13 +92,27 @@ namespace GameProject.Map
                     32
                 );
 
-                spriteBatch.Draw(texture, destRect, srcRect, Color.White);
+                if (tileIndex == 96)  // Assume tile value 1 represents a blocked (solid) tile
+                {
+                    spriteBatch.Draw(texture, destRect, srcRect, Color.Red);  // Use red to highlight solid tiles
+                }
+                else
+                {
+                    spriteBatch.Draw(texture, destRect, srcRect, Color.White);  // Otherwise draw normally
+                }
             }
         }
 
+        public Dictionary<Vector2, int> Collision
+        {
+            get { return collision; }
+        }
 
+        public Texture2D GetRectangleTexture()
+        {
+            return _rectangleTexture;
+        }
 
     }
 }
-
 

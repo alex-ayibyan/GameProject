@@ -16,7 +16,7 @@ namespace GameProject
         public static List<Bullet> bullets = new List<Bullet>();
 
         private Vector2 position;
-        private int speed = 1000;
+        private int speed = 100;
         public int radius = 18;
         private Direction direction;
         private bool collided = false;
