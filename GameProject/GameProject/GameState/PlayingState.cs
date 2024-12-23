@@ -20,8 +20,9 @@ namespace GameProject.GameState
         private Camera _camera;
         private Texture2D _enemyTexture;
         private MapGenerator _mapGenerator;
+        private Controller _controller;
 
-        private bool debugMode = true;
+        private bool debugMode = false;
 
 
 
@@ -33,6 +34,8 @@ namespace GameProject.GameState
             _camera = camera;
             _enemyTexture = enemyTexture;
             _mapGenerator = _world.GameMap;
+
+            _controller = new Controller(_mapGenerator);
         }
 
         public void Update(GameTime gameTime)
@@ -45,7 +48,7 @@ namespace GameProject.GameState
 
             // _player.position = new Vector2(700, 500);
 
-            Controller.Update(gameTime, _enemyTexture);
+            _controller.Update(gameTime, _enemyTexture);
             EntityController.Update(gameTime, _player, _player.Position, _player.dead, _score);
 
             if (_player.dead)

@@ -151,7 +151,7 @@ namespace GameProject
             if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
             {
                 Debug.WriteLine($"Firing bullet at position: {position}, Direction: {direction}");
-                Bullet.bullets.Add(new Bullet(position, direction, bulletTexture));
+                Bullet.bullets.Add(new Bullet(position, direction, bulletTexture, GameMap));
             }
 
             // Store the current keyboard state for next frame

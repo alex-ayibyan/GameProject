@@ -29,7 +29,7 @@ namespace GameProject.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_world.MenuFont, "Game Over! Press Space to Restart", new Vector2(200, 100), Color.White);
+            spriteBatch.DrawString(_world.MenuFont, "Game Over! Press Space to Restart", new Vector2(200, 500), Color.White);
         }
     }
 }

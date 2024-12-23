@@ -1,4 +1,6 @@
 ﻿
+using GameProject.GameState;
+using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,16 +15,19 @@ namespace GameProject
 {
     public static class EntityController
     {
+
+        private static MapGenerator _gameWorld;
+
         public static void CreateBullet(Vector2 position, Direction direction, Texture2D texture)
         {
-            var bullet = new Bullet(position, direction, texture);
+            var bullet = new Bullet(position, direction, texture, _gameWorld);
             Bullet.bullets.Add(bullet);
         }
 
 
         public static void CreateEnemy(Vector2 position, Texture2D texture)
         {
-            var enemy = new Enemy(position, texture);
+            var enemy = new Enemy(position, texture, _gameWorld);
             Enemy.enemies.Add(enemy);
         }
 
