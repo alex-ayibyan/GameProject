@@ -56,7 +56,7 @@ namespace GameProject
 
         private bool CanMove(Vector2 newPosition)
         {
-            int tileSize = 32; // Ensure this matches your actual tile size
+            int tileSize = 32;
             int tileX = (int)(newPosition.X / tileSize);
             int tileY = (int)(newPosition.Y / tileSize);
             Vector2 tileKey = new Vector2(tileX, tileY);
@@ -65,24 +65,23 @@ namespace GameProject
             {
                 if (_gameMap.Collision.TryGetValue(tileKey, out int tileValue))
                 {
-                    // If the tile is solid (blocked), prevent movement
-                    if (tileValue == 96) // Solid tile, collision detected (assuming 96 is the solid tile)
+                    if (tileValue == 96) 
                     {
                         return false;
                     }
                 }
             }
 
-            return true; // No collision, movement is allowed
+            return true; 
         }
 
         public void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Vector2 proposedPosition = position; // Start with the current position
+            Vector2 proposedPosition = position; 
 
-            // Calculate the proposed new position based on direction
+
             switch (direction)
             {
                 case Direction.Right:
@@ -102,14 +101,14 @@ namespace GameProject
                     break;
             }
 
-            // Check for collision before updating position
+
             if (CanMove(proposedPosition))
             {
-                position = proposedPosition; // Update position if no collision
+                position = proposedPosition; 
             }
             else
             {
-                collided = true; // Mark bullet as collided if blocked
+                collided = true; 
             }
         }
 

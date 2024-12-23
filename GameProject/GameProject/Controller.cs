@@ -38,14 +38,12 @@ namespace GameProject
                     inGame = true;
                 }
             }
-
-            // If timer hits zero, spawn an enemy and reset the timer
+                     
             if (timer <= 0)
             {
                 SpawnEnemy(enemySprite);
                 timer = maxTime;
 
-                // Gradually reduce spawn interval for increased difficulty
                 if (maxTime > 0.5)
                 {
                     maxTime -= 0.05D;
@@ -53,37 +51,33 @@ namespace GameProject
             }
         }
 
-        // Method to handle enemy spawning at random positions
         private void SpawnEnemy(Texture2D sprite)
         {
-            int side = rnd.Next(5);  // Random side (0-4)
+            int side = rnd.Next(5);
 
-            // Define random spawn positions based on the side
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
 
-            // Create and add the enemy to the enemies list
             Enemy.enemies.Add(new Enemy(spawnPosition, sprite, gameMap));
 
             Console.WriteLine($"Enemy spawned. Total enemies: {Enemy.enemies.Count}");
         }
 
-        // Get a spawn position based on the selected side
         private Vector2 GetRandomSpawnPosition(int side)
         {
             switch (side)
             {
                 case 0:
-                    return new Vector2(44 * 32, 6 * 32);  // Example spawn point on side 0
+                    return new Vector2(54 * 32, 30 * 32); //Spawn Top/Mid
                 case 1:
-                    return new Vector2(30 * 32, 6 * 32);  // Example spawn point on side 1
+                    return new Vector2(30 * 32, 30 * 32); // Spawn Top/Left
                 case 2:
-                    return new Vector2(38 * 32, 44 * 32); // Example spawn point on side 2
+                    return new Vector2(69 * 32, 30 * 32); // Spawn Top/Right
                 case 3:
-                    return new Vector2(5 * 32, 6 * 32);   // Example spawn point on side 3
+                    return new Vector2(36 * 32, 69 * 32);   // Spawn Bottom/Left
                 case 4:
-                    return new Vector2(11 * 32, 44 * 32);  // Example spawn point on side 4
+                    return new Vector2(68 * 32, 69 * 32);  // Spawn Bottom/Right
                 default:
-                    return Vector2.Zero;  // Default to origin if no match
+                    return Vector2.Zero;
             }
         }
 

@@ -22,7 +22,7 @@ namespace GameProject.GameState
         private MapGenerator _mapGenerator;
         private Controller _controller;
 
-        private bool debugMode = false;
+        private bool debugMode = true;
 
 
 
@@ -42,8 +42,8 @@ namespace GameProject.GameState
         {
             _player.Update(gameTime);
 
-            //_camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
-            _camera.Position = new Vector2(700, 1100);
+            _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
+            //_camera.Position = new Vector2(1500, 1900);
             _camera.Update(gameTime);
 
             // _player.position = new Vector2(700, 500);

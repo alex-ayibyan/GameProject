@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameProject.Map;
+﻿using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace GameProject
 {
@@ -77,10 +73,9 @@ namespace GameProject
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!isPlayerDead)
-            {
+            { 
                 Vector2 moveDirection = playerPosition - position;
                 moveDirection.Normalize();
-
 
                 Vector2 proposedPosition = position + moveDirection * speed * dt;
 
@@ -90,69 +85,52 @@ namespace GameProject
                 }
                 else
                 {
-                    Vector2 leftMove = position + new Vector2(-1, 0) * speed * dt;
-                    Vector2 rightMove = position + new Vector2(1, 0) * speed * dt;
-                    Vector2 upMove = position + new Vector2(0, -1) * speed * dt;
-                    Vector2 downMove = position + new Vector2(0, 1) * speed * dt;
+                    Vector2[] potentialMoves = new Vector2[]
+                    {
+                        position + new Vector2(-1, 0) * speed * dt, 
+                        position + new Vector2(1, 0) * speed * dt, 
+                        position + new Vector2(0, -1) * speed * dt, 
+                        position + new Vector2(0, 1) * speed * dt 
+                    };
 
-                    // Check all possible directions and move to the first valid one, prioritizing horizontal moves
-                    if (CanMove(leftMove) && moveDirection.X > 0) // Move left only if the player is to the right
+
+                    Vector2 bestMove = Vector2.Zero;
+                    float bestDistance = float.MaxValue;
+                    bool moveFound = false;
+
+                    foreach (var move in potentialMoves)
                     {
-                        position = leftMove; // Move left if possible
+                        if (CanMove(move))
+                        {
+                            float distanceToPlayer = Vector2.Distance(move, playerPosition);
+
+                            if (distanceToPlayer < bestDistance)
+                            {
+                                bestDistance = distanceToPlayer;
+                                bestMove = move;
+                                moveFound = true;
+                            }
+                        }
                     }
-                    else if (CanMove(rightMove) && moveDirection.X < 0) // Move right only if the player is to the left
+
+                    if (moveFound)
                     {
-                        position = rightMove; // Move right if possible
-                    }
-                    else if (CanMove(upMove)) // If blocked vertically, try moving up
-                    {
-                        position = upMove;
-                    }
-                    else if (CanMove(downMove)) // If still blocked, try moving down
-                    {
-                        position = downMove;
+                        position = bestMove;
                     }
                     else
                     {
-                        // If all directions are blocked, back off slightly and reattempt
-                        Vector2 backOffMove = position - moveDirection * speed * dt * 0.5f; // Move back a little
-                        if (CanMove(backOffMove))
+                        Vector2 oppositeDirection = -moveDirection;
+                        Vector2 backMove = position + oppositeDirection * speed * dt;
+
+                        if (CanMove(backMove))
                         {
-                            position = backOffMove; // Move back if possible
-                        }
-                        else
-                        {
-                            // If still blocked, attempt random directions (side-step or wiggle)
-                            RandomSideStep();
+                            position = backMove;
                         }
                     }
                 }
             }
         }
 
-        // Method to handle side-stepping if stuck (wiggling)
-        private void RandomSideStep()
-        {
-            // Try random side-stepping movements (left or right)
-            Random random = new Random();
-            int sideDirection = random.Next(2); // 0 for left, 1 for right
-
-            Vector2 sideMove;
-            if (sideDirection == 0)
-            {
-                sideMove = position + new Vector2(-10, 0) * speed * 0.5f; // Move left
-            }
-            else
-            {
-                sideMove = position + new Vector2(10, 0) * speed * 0.5f; // Move right
-            }
-
-            // Try side movement if possible
-            if (CanMove(sideMove))
-            {
-                position = sideMove;
-            }
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

@@ -14,7 +14,7 @@ namespace GameProject
 {
     public class Player
     {
-        static public Vector2 defaultPosition = new Vector2(800, 500);
+        static public Vector2 defaultPosition = new Vector2(1600, 1500);
 
         public Vector2 position = defaultPosition;
         private int speed = 300;
