@@ -22,7 +22,7 @@ namespace GameProject.GameState
         private MapGenerator _mapGenerator;
         private Controller _controller;
 
-        private bool debugMode = true;
+        private bool debugMode = false;
 
 
 
@@ -35,7 +35,7 @@ namespace GameProject.GameState
             _enemyTexture = enemyTexture;
             _mapGenerator = _world.GameMap;
 
-            _controller = new Controller(_mapGenerator);
+            _controller = new Controller(_mapGenerator, score);
         }
 
         public void Update(GameTime gameTime)
@@ -43,7 +43,7 @@ namespace GameProject.GameState
             _player.Update(gameTime);
 
             _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
-            //_camera.Position = new Vector2(1500, 1900);
+            //_camera.Position = new Vector2(1500, 1500);
             _camera.Update(gameTime);
 
             // _player.position = new Vector2(700, 500);
@@ -59,7 +59,7 @@ namespace GameProject.GameState
         }
 
         public void Draw(SpriteBatch spriteBatch)
-        {
+        { 
             _mapGenerator.Draw(spriteBatch);
             _player.animation.Draw(spriteBatch);
            

@@ -11,15 +11,16 @@
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/RandomSprite/Up.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/Sprites/SlimeEnemy.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/FireBall.png</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/GeneralFont.spritefont</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/MenuFont.spritefont</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/TitleFont.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/map2.png</File>
-    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Menu.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Down.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Left.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Right.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Up.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/scoreFont.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/StartButton.png</File>
-    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/StartScreenFont.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Textures/CosmicLilac_Tiles.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Textures/CosmicLilac_Tiles32x32.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Tiny Adventure Pack/Character/Char_one/Attack/Char_atk_down.png</File>
@@ -78,6 +79,7 @@
     <File>Player/Sprite.png</File>
     <File>Player/Up.png</File>
     <File>SlimeEnemy.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

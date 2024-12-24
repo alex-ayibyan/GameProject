@@ -10,7 +10,7 @@ namespace GameProject
     {
         public static List<Enemy> enemies = new List<Enemy>();
 
-        private Vector2 position = new Vector2(0, 0);
+        public Vector2 position = new Vector2(0, 0);
         private int speed = 100;
         public SpriteAnimation animation;
         public int radius = 30;
@@ -44,7 +44,7 @@ namespace GameProject
             }
         }
 
-        private bool CanMove(Vector2 newPosition)
+        public bool CanMove(Vector2 newPosition)
         {
             int tileSize = 32;
             int tileX = (int)(newPosition.X / tileSize);
@@ -65,7 +65,7 @@ namespace GameProject
             return true;
         }
 
-        public void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
+        public virtual void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
         {
             animation.Position = new Vector2(position.X - 16, position.Y - 16);
             animation.Update(gameTime);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/MenuFont.spritefont</SourceFile>
+  <SourceTime>2024-12-23T23:04:33.6795471+01:00</SourceTime>
+  <DestFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/bin/DesktopGL/Fonts/MenuFont.xnb</DestFile>
+  <DestTime>2024-12-23T23:29:26.6952185+01:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

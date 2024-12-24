@@ -98,6 +98,27 @@
 /processorParam:TextureFormat=Color
 /build:FireBall.png
 
+#begin Fonts/GeneralFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/GeneralFont.spritefont
+
+#begin Fonts/MenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/MenuFont.spritefont
+
+#begin Fonts/TitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TitleFont.spritefont
+
 #begin map2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,13 +130,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:map2.png
-
-#begin Menu.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Menu.spritefont
 
 #begin Player2/Down.png
 /importer:TextureImporter
@@ -183,13 +197,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:StartButton.png
-
-#begin StartScreenFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:StartScreenFont.spritefont
 
 #begin Textures/CosmicLilac_Tiles.png
 /importer:TextureImporter

@@ -30,7 +30,6 @@ namespace GameProject
         public Texture2D bulletTexture;
 
         public MapGenerator GameMap;
-        private Vector2 newPosition;
 
         public float Scale
         {

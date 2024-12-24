@@ -47,7 +47,15 @@ namespace GameProject
                     if (Vector2.Distance(bullet.Position, enemy.Position) < sum)
                     {
                         bullet.Collided = true;
-                        enemy.Dead = true;
+
+                        if (enemy is TankEnemy tankEnemy)
+                        {
+                            tankEnemy.TakeDamage();
+                        }
+                        else
+                        {
+                            enemy.Dead = true;
+                        }
                         score.UpdateScore(10);
                     }
                 }

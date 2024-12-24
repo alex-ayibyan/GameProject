@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using GameProject.Map;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using System.Reflection.Metadata;
+using System.Diagnostics;
 
 namespace GameProject.GameState
 {
@@ -28,32 +30,40 @@ namespace GameProject.GameState
 
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
-        public SpriteFont MenuFont { get; private set; }
+        public SpriteFont GeneralFont { get; private set; }
 
         public Texture2D ButtonTexture { get; private set; }
+
+        public Texture2D Background { get; private set; }
         public ScoreController Score { get; private set; }
         public MapGenerator GameMap { get; private set; }
 
+        private ContentManager _content;
 
-        public GameWorld(Camera camera, SpriteFont menuFont, ScoreController score, MapGenerator gameMap)
+        public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content)
         {
             Camera = camera;
-            MenuFont = menuFont;
             Score = score;
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
+            GeneralFont = generalFont;
+
+            _content = content;
 
             _states = new Dictionary<GameStates, IGameState>();
 
             GameMap = gameMap;
         }
 
-        public void InitializeStates(Player player, Texture2D enemyTexture, Texture2D ButtonTexture)
+        public void InitializeStates(Player player, Texture2D enemyTexture, GraphicsDevice graphicsDevice, Camera camera)
         {
             Player = player;
             _enemyTexture = enemyTexture;
 
-            _states[GameStates.StartScreen] = new StartScreenState(this, MenuFont, Camera, ButtonTexture);
+            SpriteFont titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
+            SpriteFont menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
+
+            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture);
             _states[GameStates.GameOver] = new GameOverState(this);
 
@@ -63,6 +73,7 @@ namespace GameProject.GameState
         public void ChangeState(GameStates newState)
         {
             _currentState = _states[newState];
+            Debug.WriteLine($"State changed to: {newState}");
         }
 
         public void Update(GameTime gameTime)
@@ -82,6 +93,7 @@ namespace GameProject.GameState
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
             Controller.timer = Controller.maxTime; // reset enemy spawner
+            Camera.Position = new Vector2(1600,1500);
         }
     }
 

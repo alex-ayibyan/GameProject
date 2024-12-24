@@ -35,9 +35,9 @@ namespace GameProject
 
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 2000
-                ;
+            _graphics.PreferredBackBufferWidth = 3000;
             _graphics.PreferredBackBufferHeight = 1200;
+
             this.camera = new Camera(_graphics.GraphicsDevice);
             _graphics.ApplyChanges();
 
@@ -53,10 +53,7 @@ namespace GameProject
 
             var scoreFont = Content.Load<SpriteFont>("scoreFont");
             var score = new ScoreController(scoreFont);
-            var menuFont = Content.Load<SpriteFont>("Menu");
-            var buttonTexture = Content.Load<Texture2D>("StartButton");
-
-
+            var generalFont = Content.Load<SpriteFont>("Fonts/GeneralFont");
 
             Texture2D slimeEnemy = Content.Load<Texture2D>("SlimeEnemy");
 
@@ -82,9 +79,9 @@ namespace GameProject
 
             
 
-            _world = new GameWorld(camera, menuFont, score, gameMap);
+            _world = new GameWorld(camera, generalFont, score, gameMap, Content);
 
-            _world.InitializeStates(player, slimeEnemy, buttonTexture);
+            _world.InitializeStates(player, slimeEnemy, GraphicsDevice, camera);
         }
 
         protected override void Update(GameTime gameTime)
@@ -99,7 +96,6 @@ namespace GameProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkSlateBlue);
-
 
             _spriteBatch.Begin(this.camera);
             _world.Draw(_spriteBatch);
