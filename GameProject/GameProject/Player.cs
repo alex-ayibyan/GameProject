@@ -23,6 +23,7 @@ namespace GameProject
         private KeyboardState kStateOld = Keyboard.GetState();
         public bool dead = false;
         public float scale = 1.0f;
+        public int Radius = 20;
 
         public SpriteAnimation animation;
 
@@ -150,7 +151,7 @@ namespace GameProject
             if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
             {
                 Debug.WriteLine($"Firing bullet at position: {position}, Direction: {direction}");
-                Bullet.bullets.Add(new Bullet(position, direction, bulletTexture, GameMap));
+                Bullet.bullets.Add(new Bullet(position, direction, bulletTexture, true, GameMap));
             }
 
             // Store the current keyboard state for next frame

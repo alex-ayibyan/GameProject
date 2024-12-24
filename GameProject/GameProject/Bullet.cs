@@ -24,12 +24,15 @@ namespace GameProject
         private Texture2D texture;
         private MapGenerator _gameMap;
 
+        public bool FiredByPlayer { get; set; }
 
-        public Bullet(Vector2 newPosition, Direction newDirection, Texture2D bulletTexture, MapGenerator gameMap)
+
+        public Bullet(Vector2 newPosition, Direction newDirection, Texture2D bulletTexture, bool firedByPLayer, MapGenerator gameMap)
         {
             position = newPosition;
             direction = newDirection;
             texture = bulletTexture;
+            FiredByPlayer = firedByPLayer;
             _gameMap = gameMap;
         }
 
@@ -79,7 +82,7 @@ namespace GameProject
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Vector2 proposedPosition = position; 
+            Vector2 proposedPosition = position;
 
 
             switch (direction)

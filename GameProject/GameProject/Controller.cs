@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameProject.GameState;
 using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,14 +27,18 @@ namespace GameProject
         public static bool inGame = false;
         private MapGenerator gameMap;
         private ScoreController scoreController;
+        private GameWorld gameWorld;
 
-        public Controller(MapGenerator map, ScoreController score)
+        private bool specialTankRoundTriggered = false;
+
+        public Controller(GameWorld gameWorld, MapGenerator map, ScoreController score)
         {
+            this.gameWorld = gameWorld;
             gameMap = map;
             scoreController = score;
         }
 
-        public void Update(GameTime gametime, Texture2D enemySprite)
+        public void Update(GameTime gametime, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
         {
             if (inGame)
             {
@@ -47,10 +52,15 @@ namespace GameProject
                     inGame = true;
                 }
             }
-                     
-            if (timer <= 0)
+
+            if (scoreController.Score >= 50 && !specialTankRoundTriggered)
             {
-                SpawnEnemy(enemySprite);
+                TriggerSpecialRound(tankEnemyTexture);
+            }
+
+            if (timer <= 0 && !specialTankRoundTriggered)
+            {
+                SpawnEnemy(regularEnemyTexture, fastEnemyTexture);
                 timer = maxTime;
 
                 if (maxTime > 0.5)
@@ -60,36 +70,33 @@ namespace GameProject
             }
         }
 
-        private void SpawnEnemy(Texture2D sprite)
+        private void TriggerSpecialRound(Texture2D tankEnemyTexture)
+        {
+            // Trigger special round in the game world
+            specialTankRoundTriggered = true;
+
+            // Switch to SpecialRoundState
+            gameWorld.ChangeState(GameStates.SpecialRound);
+
+            // Start the special round logic (spawn tank enemies)
+            var specialRoundState = (SpecialRoundState)gameWorld._currentState;
+            specialRoundState.StartSpecialRound();
+        }
+
+        private void SpawnEnemy(Texture2D regularEnemyTexture, Texture2D fastEnemyTexture)
         {
             int side = rnd.Next(5);
 
-            // Check the score to determine which type of enemy to spawn
-            EnemyType selectedType;
-
-            if (scoreController.Score >= 50)
-            {
-                selectedType = EnemyType.Tank;  // Spawn TankEnemy after score 50
-            }
-            else if (scoreController.Score >= 30)
-            {
-                selectedType = EnemyType.Fast;  // Spawn FastEnemy after score 30
-            }
-            else
-            {
-                selectedType = EnemyType.Regular;  // Spawn RegularEnemy before score 30
-            }
+            EnemyType selectedType = scoreController.Score >= 30 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch
             {
-                EnemyType.Fast => new FastEnemy(spawnPosition, sprite, gameMap),
-                EnemyType.Tank => new TankEnemy(spawnPosition, sprite, gameMap),
-                _ => new Enemy(spawnPosition, sprite, gameMap)
+                EnemyType.Fast => new FastEnemy(spawnPosition, fastEnemyTexture, gameMap),
+                _ => new Enemy(spawnPosition, regularEnemyTexture, gameMap)
             };
 
             Enemy.enemies.Add(newEnemy);
-            Console.WriteLine($"Enemy spawned. Type: {selectedType}, Total enemies: {Enemy.enemies.Count}");
         }
 
         private Vector2 GetRandomSpawnPosition(int side)
@@ -97,15 +104,15 @@ namespace GameProject
             switch (side)
             {
                 case 0:
-                    return new Vector2(54 * 32, 30 * 32); //Spawn Top/Mid
+                    return new Vector2(54 * 32, 30 * 32);
                 case 1:
-                    return new Vector2(30 * 32, 30 * 32); // Spawn Top/Left
+                    return new Vector2(30 * 32, 30 * 32);
                 case 2:
-                    return new Vector2(69 * 32, 30 * 32); // Spawn Top/Right
+                    return new Vector2(69 * 32, 30 * 32);
                 case 3:
-                    return new Vector2(36 * 32, 69 * 32);   // Spawn Bottom/Left
+                    return new Vector2(36 * 32, 69 * 32);
                 case 4:
-                    return new Vector2(68 * 32, 69 * 32);  // Spawn Bottom/Right
+                    return new Vector2(68 * 32, 69 * 32);
                 default:
                     return Vector2.Zero;
             }

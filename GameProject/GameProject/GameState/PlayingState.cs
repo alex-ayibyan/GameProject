@@ -18,7 +18,11 @@ namespace GameProject.GameState
         private Player _player;
         private ScoreController _score;
         private Camera _camera;
-        private Texture2D _enemyTexture;
+
+        private Texture2D _regularEnemyTexture;
+        private Texture2D _fastEnemyTexture;
+        private Texture2D _tankEnemyTexture;
+
         private MapGenerator _mapGenerator;
         private Controller _controller;
 
@@ -26,16 +30,18 @@ namespace GameProject.GameState
 
 
 
-        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D enemyTexture)
+        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
         {
             _world = world;
             _player = player;
             _score = score;
             _camera = camera;
-            _enemyTexture = enemyTexture;
+            _regularEnemyTexture = regularEnemyTexture;
+            _fastEnemyTexture = fastEnemyTexture;
+            _tankEnemyTexture = tankEnemyTexture;
             _mapGenerator = _world.GameMap;
 
-            _controller = new Controller(_mapGenerator, score);
+            _controller = new Controller(_world ,_mapGenerator, score);
         }
 
         public void Update(GameTime gameTime)
@@ -46,9 +52,7 @@ namespace GameProject.GameState
             //_camera.Position = new Vector2(1500, 1500);
             _camera.Update(gameTime);
 
-            // _player.position = new Vector2(700, 500);
-
-            _controller.Update(gameTime, _enemyTexture);
+            _controller.Update(gameTime, _regularEnemyTexture, _fastEnemyTexture, _tankEnemyTexture);
             EntityController.Update(gameTime, _player, _player.Position, _player.dead, _score);
 
             if (_player.dead)

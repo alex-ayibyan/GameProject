@@ -55,8 +55,6 @@ namespace GameProject
             var score = new ScoreController(scoreFont);
             var generalFont = Content.Load<SpriteFont>("Fonts/GeneralFont");
 
-            Texture2D slimeEnemy = Content.Load<Texture2D>("SlimeEnemy");
-
             Texture2D walkDown = Content.Load<Texture2D>("Player/Down");
             Texture2D walkUp = Content.Load<Texture2D>("Player/Up");
             Texture2D walkRight = Content.Load<Texture2D>("Player/Right");
@@ -81,7 +79,7 @@ namespace GameProject
 
             _world = new GameWorld(camera, generalFont, score, gameMap, Content);
 
-            _world.InitializeStates(player, slimeEnemy, GraphicsDevice, camera);
+            _world.InitializeStates(player, GraphicsDevice, camera);
         }
 
         protected override void Update(GameTime gameTime)

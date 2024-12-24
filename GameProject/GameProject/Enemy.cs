@@ -10,38 +10,25 @@ namespace GameProject
     {
         public static List<Enemy> enemies = new List<Enemy>();
 
-        public Vector2 position = new Vector2(0, 0);
-        private int speed = 100;
+        public Vector2 Position { get; set; }
+        public int Speed { get; set; }
+        public bool Dead { get; set; }
+        public int Radius { get; set; }
+        public int Health { get; set; }
+
         public SpriteAnimation animation;
-        public int radius = 30;
-        private bool dead = false;
         public MapGenerator _gameMap;
 
-        public Enemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap)
+        public Enemy(Vector2 position, Texture2D sprite, MapGenerator gameMap)
         {
-            position = newPosition;
+            Position = position;
             animation = new SpriteAnimation(sprite, 9, 20);
             _gameMap = gameMap;
-        }
 
-        public Vector2 Position
-        {
-            get
-            {
-                return position;
-            }
-        }
-
-        public bool Dead
-        {
-            get 
-            { 
-                return dead; 
-            }
-            set
-            {
-                dead = value;
-            }
+            Dead = false;
+            Speed = 100;
+            Radius = 30;
+            Health = 1;
         }
 
         public bool CanMove(Vector2 newPosition)
@@ -67,30 +54,30 @@ namespace GameProject
 
         public virtual void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
         {
-            animation.Position = new Vector2(position.X - 16, position.Y - 16);
+            animation.Position = new Vector2(Position.X - 16, Position.Y - 16);
             animation.Update(gameTime);
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (!isPlayerDead)
             { 
-                Vector2 moveDirection = playerPosition - position;
+                Vector2 moveDirection = playerPosition - Position;
                 moveDirection.Normalize();
 
-                Vector2 proposedPosition = position + moveDirection * speed * dt;
+                Vector2 proposedPosition = Position + moveDirection * Speed * dt;
 
                 if (CanMove(proposedPosition))
                 {
-                    position = proposedPosition;
+                    Position = proposedPosition;
                 }
                 else
                 {
                     Vector2[] potentialMoves = new Vector2[]
                     {
-                        position + new Vector2(-1, 0) * speed * dt, 
-                        position + new Vector2(1, 0) * speed * dt, 
-                        position + new Vector2(0, -1) * speed * dt, 
-                        position + new Vector2(0, 1) * speed * dt 
+                        Position + new Vector2(-1, 0) * Speed * dt, 
+                        Position + new Vector2(1, 0) * Speed * dt, 
+                        Position + new Vector2(0, -1) * Speed * dt, 
+                        Position + new Vector2(0, 1) * Speed * dt 
                     };
 
 
@@ -115,16 +102,16 @@ namespace GameProject
 
                     if (moveFound)
                     {
-                        position = bestMove;
+                        Position = bestMove;
                     }
                     else
                     {
                         Vector2 oppositeDirection = -moveDirection;
-                        Vector2 backMove = position + oppositeDirection * speed * dt;
+                        Vector2 backMove = Position + oppositeDirection * Speed * dt;
 
                         if (CanMove(backMove))
                         {
-                            position = backMove;
+                            Position = backMove;
                         }
                     }
                 }

@@ -11,31 +11,16 @@ namespace GameProject
 {
     public class FastEnemy : Enemy
     {
-        private int fastSpeed = 200;
+        
         public FastEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap) : base(newPosition, sprite, gameMap)
         {
+            Speed = 200;
+            Radius = 20;
+            animation = new SpriteAnimation(sprite, 4, 20);
 
+            animation.Scale = 1.5f;
         }
 
-        public override void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
-        {
-            animation.Position = new Vector2(Position.X - 16, Position.Y - 16);
-            animation.Update(gameTime);
-
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (!isPlayerDead)
-            {
-                Vector2 moveDirection = playerPosition - Position;
-                moveDirection.Normalize();
-
-                Vector2 proposedPosition = Position + moveDirection * fastSpeed * dt;
-
-                if (CanMove(proposedPosition))
-                {
-                    position = proposedPosition;
-                }
-            }
-        }
+        
     }
 }

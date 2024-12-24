@@ -18,9 +18,9 @@ namespace GameProject
 
         private static MapGenerator _gameWorld;
 
-        public static void CreateBullet(Vector2 position, Direction direction, Texture2D texture)
+        public static void CreateBullet(Vector2 position, Direction direction, Texture2D texture, bool firedByPlayer)
         {
-            var bullet = new Bullet(position, direction, texture, _gameWorld);
+            var bullet = new Bullet(position, direction, texture, firedByPlayer, _gameWorld);
             Bullet.bullets.Add(bullet);
         }
 
@@ -34,29 +34,41 @@ namespace GameProject
 
         public static void Update(GameTime gameTime, Player player ,Vector2 playerPosition, bool isPlayerDead, ScoreController score)
         {
+
             foreach (var bullet in Bullet.bullets)
             {
                 bullet.Update(gameTime);
-            }
 
-            foreach (var bullet in Bullet.bullets)
-            {
-                foreach (var enemy in Enemy.enemies)
+                if (bullet.FiredByPlayer) // Assuming that you have a flag to indicate this
                 {
-                    int sum = bullet.radius + enemy.radius;
-                    if (Vector2.Distance(bullet.Position, enemy.Position) < sum)
+                    foreach (var enemy in Enemy.enemies)
+                    {
+
+
+                        int sum = bullet.radius + enemy.Radius;
+                        if (Vector2.Distance(bullet.Position, enemy.Position) < sum)
+                        {
+                            bullet.Collided = true;
+
+                            if (enemy is TankEnemy tankEnemy)
+                            {
+                                tankEnemy.TakeDamage();
+                            }
+                            else
+                            {
+                                enemy.Dead = true;
+                            }
+                            score.UpdateScore(10);
+                        }
+                    }
+                }
+                if (!bullet.FiredByPlayer)
+                {
+                    int sum = bullet.radius + player.Radius;
+                    if (Vector2.Distance(bullet.Position, player.Position) < sum)
                     {
                         bullet.Collided = true;
-
-                        if (enemy is TankEnemy tankEnemy)
-                        {
-                            tankEnemy.TakeDamage();
-                        }
-                        else
-                        {
-                            enemy.Dead = true;
-                        }
-                        score.UpdateScore(10);
+                        player.dead = true;
                     }
                 }
             }
@@ -69,7 +81,7 @@ namespace GameProject
             {
                 enemy.Update(gameTime, playerPosition, isPlayerDead);
 
-                int sum = 32 + enemy.radius;
+                int sum = 32 + enemy.Radius;
                 if (Vector2.Distance(player.Position, enemy.Position) < sum && !player.dead)
                 {
                     player.dead = true;

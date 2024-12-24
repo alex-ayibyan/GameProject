@@ -16,18 +16,17 @@ namespace GameProject.GameState
 {
     public enum GameStates
     {
-        StartScreen, Playing, GameOver, Restart
+        StartScreen, Playing, GameOver, SpecialRound
     }
     public class GameWorld
     {
-        private IGameState _currentState;
+        public IGameState _currentState;
         private Dictionary<GameStates, IGameState> _states;
 
         public Camera Camera { get; private set; }
         public Player Player { get; private set; }
 
-        private Texture2D _enemyTexture;
-
+        public Texture2D TankEnemy;
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
         public SpriteFont GeneralFont { get; private set; }
@@ -55,16 +54,20 @@ namespace GameProject.GameState
             GameMap = gameMap;
         }
 
-        public void InitializeStates(Player player, Texture2D enemyTexture, GraphicsDevice graphicsDevice, Camera camera)
+        public void InitializeStates(Player player, GraphicsDevice graphicsDevice, Camera camera)
         {
             Player = player;
-            _enemyTexture = enemyTexture;
+
 
             SpriteFont titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
             SpriteFont menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
+            Texture2D regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
+            Texture2D fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
+            TankEnemy= _content.Load<Texture2D>("Enemies/TankEnemy");
 
             _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
-            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, enemyTexture);
+            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, TankEnemy);
+            _states[GameStates.SpecialRound] = new SpecialRoundState(this, GameMap, menuFont);
             _states[GameStates.GameOver] = new GameOverState(this);
 
             ChangeState(GameStates.StartScreen);
@@ -92,7 +95,7 @@ namespace GameProject.GameState
             Score.ResetScore();
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
-            Controller.timer = Controller.maxTime; // reset enemy spawner
+            Controller.timer = Controller.maxTime;
             Camera.Position = new Vector2(1600,1500);
         }
     }

@@ -1,4 +1,5 @@
-﻿using GameProject.Map;
+﻿using GameProject.GameState;
+using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,39 +12,63 @@ namespace GameProject
 {
     public class TankEnemy : Enemy
     {
-        private int tankSpeed = 50;
-        private int health = 2;
+        public bool IsStationary { get; set; }
+        public bool CanShootBackAtPlayer { get; set; }
+        private double shootTimer = 2D;
 
-        public TankEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap) : base(newPosition, sprite, gameMap)
+        public GameWorld _world;
+        public Player _player;
+
+        public TankEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap, GameWorld world) : base(newPosition, sprite, gameMap)
         {
+            Speed = 50;
+            Radius = 40;
+            Health = 2;
+            animation = new SpriteAnimation(sprite, 8, 10);
 
+            animation.Scale = 2.5f;
+
+            IsStationary = true;
+            CanShootBackAtPlayer = true;
+
+            _world = world;
         }
 
         public override void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
         {
-            animation.Position = new Vector2(Position.X - 16, Position.Y - 16);
-            animation.Update(gameTime);
+            base.Update(gameTime, playerPosition, isPlayerDead);
 
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (!isPlayerDead)
+            if (IsStationary)
             {
-                Vector2 moveDirection = playerPosition - Position;
-                moveDirection.Normalize();
+                Speed = 0;
+            }
 
-                Vector2 proposedPosition = Position + moveDirection * tankSpeed * dt;
+            if (CanShootBackAtPlayer)
+            {
+                shootTimer -= gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (CanMove(proposedPosition))
+                if (shootTimer <= 0)
                 {
-                    position = proposedPosition;
+                    ShootAtPlayer();
+                    shootTimer = 0.5D;
                 }
             }
         }
 
+        private void ShootAtPlayer()
+        {
+            Random random = new Random();
+
+            Direction bulletDirection = (Direction)random.Next(0, 4);
+
+            Bullet newBullet = new Bullet(this.Position, bulletDirection, _world.Player.bulletTexture, false, _world.GameMap);
+            Bullet.bullets.Add(newBullet);
+        }
+
         public void TakeDamage()
         {
-            health--;
-            if (health <= 0)
+            Health--;
+            if (Health <= 0)
             {
                 Dead = true;
             }
