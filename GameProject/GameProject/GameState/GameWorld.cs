@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using System.Reflection.Metadata;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameProject.GameState
 {
@@ -64,8 +65,9 @@ namespace GameProject.GameState
             Texture2D regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
             Texture2D fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
             TankEnemy= _content.Load<Texture2D>("Enemies/TankEnemy");
+            var startMusic = _content.Load<Song>("Sounds/StartScreenMusic");
 
-            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
+            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera, startMusic);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, TankEnemy);
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, GameMap, menuFont);
             _states[GameStates.GameOver] = new GameOverState(this);

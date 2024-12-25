@@ -3,6 +3,7 @@ using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,12 +33,16 @@ namespace GameProject.GameState
         private Rectangle[] _buttonRectangles;
         private Rectangle _settingsButtonRectangle;
 
-        public StartScreenState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Camera camera)
+        private bool _musicStarted = false;
+        private Song _startMusic;
+
+        public StartScreenState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Camera camera, Song startMusic)
         {
             _gameWorld = gameWorld;
             _titleFont = titleFont;
             _menuFont = menuFont;
             _camera = camera;
+            _startMusic = startMusic;
 
             Vector2 startTextSize = _menuFont.MeasureString("Start");
             _startButtonRectangle = new Rectangle(450, 300, (int)startTextSize.X, (int)startTextSize.Y);
@@ -58,6 +63,13 @@ namespace GameProject.GameState
 
         public void Update(GameTime gameTime)
         {
+            if (!_musicStarted)
+            {
+                MediaPlayer.Play(_startMusic);
+                MediaPlayer.IsRepeating = true; // Optional: Loop the music
+                _musicStarted = true;
+            }
+
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Down) && !_previousKeyboardState.IsKeyDown(Keys.Down))
