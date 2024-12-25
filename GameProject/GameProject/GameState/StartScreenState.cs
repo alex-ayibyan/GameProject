@@ -65,7 +65,7 @@ namespace GameProject.GameState
         {
             if (!_musicStarted)
             {
-                MediaPlayer.Play(_startMusic);
+                //MediaPlayer.Play(_startMusic);
                 MediaPlayer.IsRepeating = true; // Optional: Loop the music
                 _musicStarted = true;
             }

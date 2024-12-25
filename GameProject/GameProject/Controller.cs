@@ -32,6 +32,12 @@ namespace GameProject
 
         public bool specialTankRoundTriggered = false;
 
+        private double specialRoundCooldownTimer = 0;
+        private const double CooldownTime = 5; // 10 seconds cooldown duration
+        private bool specialRoundOnCooldown = false;
+
+        private int lastSpecialRoundScore = 0;
+
         public Controller(GameWorld gameWorld, MapGenerator map, ScoreController score)
         {
             this.gameWorld = gameWorld;
@@ -54,7 +60,28 @@ namespace GameProject
                 }
             }
 
-            if (scoreController.Score >= 10 && !specialTankRoundTriggered)
+            if (gameWorld._currentState is PlayingState && specialTankRoundTriggered)
+            {
+                specialTankRoundTriggered = false;
+                specialRoundOnCooldown = true; // Enable cooldown after special round ends
+                specialRoundCooldownTimer = 0;
+                Debug.WriteLine("Resetting specialTankRoundTriggered flag in PlayingState.");
+            }
+
+            if (specialRoundOnCooldown)
+            {
+                specialRoundCooldownTimer += gametime.ElapsedGameTime.TotalSeconds; // Count up the cooldown time
+
+                if (specialRoundCooldownTimer >= CooldownTime)
+                {
+                    // Cooldown is complete, allow the special round to be triggered again
+                    specialRoundOnCooldown = false;
+                    specialRoundCooldownTimer = 0; // Reset the cooldown timer
+                    Debug.WriteLine("Cooldown complete, ready for next special round.");
+                }
+            }
+
+            if (scoreController.Score >= (lastSpecialRoundScore + 30) && !specialTankRoundTriggered && !specialRoundOnCooldown)
             {
                 TriggerSpecialRound(tankEnemyTexture);
             }

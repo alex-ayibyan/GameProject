@@ -41,9 +41,6 @@ namespace GameProject.GameState
             _mapGenerator = _world.GameMap;
 
             _controller = new Controller(_world ,_mapGenerator, score);
-
-            _controller.specialTankRoundTriggered = false;
-
         }
 
         public void Update(GameTime gameTime)

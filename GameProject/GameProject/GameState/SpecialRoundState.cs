@@ -110,9 +110,12 @@ namespace GameProject.GameState
 
         private void EndSpecialRound()
         {
+            Debug.WriteLine($"SpecialRoundTriggered flag before reset: {_controller.specialTankRoundTriggered}");
+
             RemoveTankEnemies();
-            _world.ChangeState(GameStates.Playing);
             _controller.specialTankRoundTriggered = false;
+            Debug.WriteLine("Special Round Ended and Flag Reset.");
+            _world.ChangeState(GameStates.Playing);
             transitionBackToPlaying = true;
 
         }

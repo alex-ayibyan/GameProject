@@ -53,12 +53,14 @@ namespace GameProject
                             if (enemy is TankEnemy tankEnemy)
                             {
                                 tankEnemy.TakeDamage();
+                                score.UpdateScore(0);
                             }
                             else
                             {
                                 enemy.Dead = true;
+                                score.UpdateScore(10);
                             }
-                            score.UpdateScore(10);
+                            
                         }
                     }
                 }
