@@ -40,6 +40,13 @@ namespace GameProject.GameState
 
         private ContentManager _content;
 
+        private Song startMusic;
+        private Song gameOverMusic;
+        private Song playMusic;
+        private Song specialRoundMusic;
+
+        private Song _currentMusic;
+
         public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content)
         {
             Camera = camera;
@@ -65,9 +72,14 @@ namespace GameProject.GameState
             Texture2D regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
             Texture2D fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
             TankEnemy= _content.Load<Texture2D>("Enemies/TankEnemy");
-            var startMusic = _content.Load<Song>("Sounds/StartScreenMusic");
 
-            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera, startMusic);
+            startMusic = _content.Load<Song>("Sounds/StartScreenMusic");
+            gameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
+            playMusic = _content.Load<Song>("Sounds/MainGameMusic");
+            specialRoundMusic = _content.Load<Song>("Sounds/SpecialRoundMusic");
+
+
+            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, TankEnemy);
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, TankEnemy);
             _states[GameStates.GameOver] = new GameOverState(this);
@@ -84,6 +96,32 @@ namespace GameProject.GameState
         public void Update(GameTime gameTime)
         {
             _currentState.Update(gameTime);
+
+            Song newMusic = null;
+
+            if (_currentState is StartScreenState)
+            {
+                newMusic = startMusic;
+            }
+            else if (_currentState is PlayingState)
+            {
+                newMusic = playMusic;
+            }
+            else if (_currentState is SpecialRoundState)
+            {
+                newMusic = specialRoundMusic;
+            }
+            else if (_currentState is GameOverState)
+            {
+                newMusic = gameOverMusic;
+            }
+
+            if (newMusic != _currentMusic)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(newMusic);
+                _currentMusic = newMusic;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

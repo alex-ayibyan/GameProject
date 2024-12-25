@@ -22,6 +22,9 @@
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Up.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/scoreFont.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/SlimeEnemy.png</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Sounds/GameOverMusic.ogg</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Sounds/MainGameMusic.ogg</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Sounds/SpecialRoundMusic.ogg</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Sounds/StartScreenMusic.mp3</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/StartButton.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Textures/CosmicLilac_Tiles.png</File>
@@ -81,6 +84,9 @@
     <File>Player/Right.png</File>
     <File>Player/Sprite.png</File>
     <File>Player/Up.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

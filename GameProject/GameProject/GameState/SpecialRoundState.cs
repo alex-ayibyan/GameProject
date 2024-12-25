@@ -15,13 +15,6 @@ namespace GameProject.GameState
     {
         private double displayTime = 1;
         private bool transitionBackToPlaying = false;
-        private Vector2[] tankEnemySpawnPositions = new Vector2[]
-        {
-        new Vector2(64 * 32, 40 * 32), // Spawn Position 1 (Top/Right)
-        new Vector2(64 * 32, 58 * 32), // Spawn Position 2 (Bottom/Right)
-        new Vector2(33 * 32, 58 * 32), // Spawn Position 3 (Bottom/Left)
-        new Vector2(33 * 32, 41 * 32)  // Spawn Position 4 (Top/Left)
-        };
 
         private GameWorld _world;
         private Player _player;
@@ -34,6 +27,14 @@ namespace GameProject.GameState
 
         private MapGenerator _mapGenerator;
         private Controller _controller;
+
+        private Vector2[] tankEnemySpawnPositions = new Vector2[]
+        {
+            new Vector2(64 * 32, 40 * 32), // Spawn Position 1 (Top/Right)
+            new Vector2(64 * 32, 58 * 32), // Spawn Position 2 (Bottom/Right)
+            new Vector2(33 * 32, 58 * 32), // Spawn Position 3 (Bottom/Left)
+            new Vector2(33 * 32, 41 * 32)  // Spawn Position 4 (Top/Left)
+        };
 
         public SpecialRoundState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D tankEnemyTexture)
         {
@@ -76,6 +77,7 @@ namespace GameProject.GameState
             Debug.WriteLine($"TankEnemies remaining: {Enemy.enemies.Count(e => e is TankEnemy && !e.Dead)}");
             Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState})");
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             _mapGenerator.Draw(spriteBatch);
@@ -106,6 +108,7 @@ namespace GameProject.GameState
                 };
                 Enemy.enemies.Add(specialTank);
             }
+            transitionBackToPlaying = false;
         }
 
         private void EndSpecialRound()
@@ -124,8 +127,6 @@ namespace GameProject.GameState
         {
             Enemy.enemies.RemoveAll(e => e is TankEnemy && e.Dead);
         }
-
-
     }
 }
 

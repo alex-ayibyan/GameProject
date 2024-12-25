@@ -210,6 +210,24 @@
 /processorParam:TextureFormat=Color
 /build:SlimeEnemy.png
 
+#begin Sounds/GameOverMusic.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/GameOverMusic.ogg
+
+#begin Sounds/MainGameMusic.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/MainGameMusic.ogg
+
+#begin Sounds/SpecialRoundMusic.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/SpecialRoundMusic.ogg
+
 #begin Sounds/StartScreenMusic.mp3
 /importer:Mp3Importer
 /processor:SongProcessor

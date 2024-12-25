@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\gameworld.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\gameworld.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\startscreenstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\startscreenstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\specialroundstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\specialroundstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\entitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\entitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\playingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\playingstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\gameworld.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\gameworld.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\scorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\scorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\entitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\entitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,16 +39,8 @@
       "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\startscreenstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\startscreenstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\gamestate\\gameoverstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\gamestate\\gameoverstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\scorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|solutionrelative:gameproject\\scorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{353DF4B5-5567-47CC-ADF7-56D5CAC3306B}|GameProject\\GameProject.csproj|c:\\users\\alexa\\documents\\b2s1\\gitprojecten\\gamedevelopment\\gameproject\\gameproject\\gameproject\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,30 +62,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SpecialRoundState.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\SpecialRoundState.cs",
               "RelativeDocumentMoniker": "GameProject\\GameState\\SpecialRoundState.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\SpecialRoundState.cs",
               "RelativeToolTip": "GameProject\\GameState\\SpecialRoundState.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAswD8AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAowIAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-24T17:47:06.496Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "StartScreenState.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\StartScreenState.cs",
               "RelativeDocumentMoniker": "GameProject\\GameState\\StartScreenState.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\StartScreenState.cs",
               "RelativeToolTip": "GameProject\\GameState\\StartScreenState.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAQwEMAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T17:48:45.55Z",
               "EditorCaption": ""
@@ -128,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "EntityController.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\EntityController.cs",
               "RelativeDocumentMoniker": "GameProject\\EntityController.cs",
@@ -136,25 +136,24 @@
               "RelativeToolTip": "GameProject\\EntityController.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAgwDcAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T14:38:35.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T14:38:35.497Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Controller.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Controller.cs",
               "RelativeDocumentMoniker": "GameProject\\Controller.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Controller.cs",
               "RelativeToolTip": "GameProject\\Controller.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACMAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwEYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T01:51:36.786Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "GameOverState.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\GameOverState.cs",
               "RelativeDocumentMoniker": "GameProject\\GameState\\GameOverState.cs",
@@ -166,33 +165,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PlayingState.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\PlayingState.cs",
               "RelativeDocumentMoniker": "GameProject\\GameState\\PlayingState.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\PlayingState.cs",
               "RelativeToolTip": "GameProject\\GameState\\PlayingState.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwEsAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowGwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-06T13:28:14.163Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "GameWorld.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\GameWorld.cs",
               "RelativeDocumentMoniker": "GameProject\\GameState\\GameWorld.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\GameState\\GameWorld.cs",
               "RelativeToolTip": "GameProject\\GameState\\GameWorld.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAASwE8AAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAhwHgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-06T13:32:25.298Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Game1.cs",
               "RelativeDocumentMoniker": "GameProject\\Game1.cs",
@@ -200,12 +199,11 @@
               "RelativeToolTip": "GameProject\\Game1.cs",
               "ViewState": "AgIAADoAAAAAAAAAAAAhwGMAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T13:27:43.376Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T13:27:43.376Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "ScoreController.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\ScoreController.cs",
               "RelativeDocumentMoniker": "GameProject\\ScoreController.cs",
@@ -213,11 +211,12 @@
               "RelativeToolTip": "GameProject\\ScoreController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T13:18:54.732Z"
+              "WhenOpened": "2024-12-06T13:18:54.732Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Player.cs",
               "RelativeDocumentMoniker": "GameProject\\Player.cs",
@@ -225,8 +224,7 @@
               "RelativeToolTip": "GameProject\\Player.cs",
               "ViewState": "AgIAAGQAAAAAAAAAAAAhwJ4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T00:21:22.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T00:21:22.374Z"
             }
           ]
         }

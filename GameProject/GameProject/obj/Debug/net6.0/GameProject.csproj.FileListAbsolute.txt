@@ -98,3 +98,9 @@ C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProje
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Enemies\TankEnemy.xnb
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\StartScreenMusic.ogg
 C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\StartScreenMusic.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\GameOverMusic.ogg
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\GameOverMusic.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\MainGameMusic.ogg
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\MainGameMusic.xnb
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\SpecialRoundMusic.ogg
+C:\Users\alexa\Documents\B2S1\GitProjecten\GameDevelopment\GameProject\GameProject\GameProject\bin\Debug\net6.0\Content\Sounds\SpecialRoundMusic.xnb

@@ -83,6 +83,7 @@ namespace GameProject
 
             if (scoreController.Score >= (lastSpecialRoundScore + 30) && !specialTankRoundTriggered && !specialRoundOnCooldown)
             {
+                lastSpecialRoundScore = scoreController.Score;
                 TriggerSpecialRound(tankEnemyTexture);
             }
             else if (timer <= 0 && !specialTankRoundTriggered)
