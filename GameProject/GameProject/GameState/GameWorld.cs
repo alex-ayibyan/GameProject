@@ -91,6 +91,7 @@ namespace GameProject.GameState
         {
             _currentState = _states[newState];
             Debug.WriteLine($"State changed to: {newState}");
+
         }
 
         public void Update(GameTime gameTime)
@@ -137,6 +138,7 @@ namespace GameProject.GameState
             Bullet.bullets.Clear();
             Controller.timer = Controller.maxTime;
             Camera.Position = new Vector2(1600,1500);
+            TankEnemy = _content.Load<Texture2D>("Enemies/TankEnemy");
         }
     }
 

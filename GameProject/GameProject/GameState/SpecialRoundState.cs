@@ -97,11 +97,10 @@ namespace GameProject.GameState
 
         public void StartSpecialRound()
         {
-            Enemy.enemies.Clear();
             
             foreach (var spawnPosition in tankEnemySpawnPositions)
             {
-                var specialTank = new TankEnemy(spawnPosition, _world.TankEnemy, _mapGenerator, _world)
+                var specialTank = new TankEnemy(spawnPosition, _world.TankEnemy, _mapGenerator, _world, _controller.difficultyLevel)
                 {
                     IsStationary = true,
                     CanShootBackAtPlayer = true

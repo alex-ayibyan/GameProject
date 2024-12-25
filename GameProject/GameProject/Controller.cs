@@ -38,6 +38,8 @@ namespace GameProject
 
         private int lastSpecialRoundScore = 0;
 
+        public int difficultyLevel = 1;
+
         public Controller(GameWorld gameWorld, MapGenerator map, ScoreController score)
         {
             this.gameWorld = gameWorld;
@@ -47,6 +49,12 @@ namespace GameProject
 
         public void Update(GameTime gametime, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
         {
+            if (gameWorld.Player.dead)
+            {
+                ResetGame();
+                return;
+            }
+
             if (inGame)
             {
                 timer -= gametime.ElapsedGameTime.TotalSeconds;
@@ -81,7 +89,14 @@ namespace GameProject
                 }
             }
 
-            if (scoreController.Score >= (lastSpecialRoundScore + 30) && !specialTankRoundTriggered && !specialRoundOnCooldown)
+            int milestone = (difficultyLevel + 1) * 20;
+            if (scoreController.Score >= milestone)
+            {
+                IncreaseDifficulty();
+                Debug.WriteLine($"Difficulty increased to level {difficultyLevel} at score {scoreController.Score}.");
+            }
+
+            if (scoreController.Score >= (lastSpecialRoundScore + 20) && !specialTankRoundTriggered && !specialRoundOnCooldown)
             {
                 lastSpecialRoundScore = scoreController.Score;
                 TriggerSpecialRound(tankEnemyTexture);
@@ -99,10 +114,38 @@ namespace GameProject
 
         }
 
+        public void IncreaseDifficulty()
+        {
+            difficultyLevel++;
+            switch (difficultyLevel)
+            {
+                case 1:
+                    maxTime = 2D;
+                    break;
+
+                case 2:
+                    maxTime = 1.5D;
+                    break;
+
+                case 3:
+                    maxTime = 1D;
+                    break;
+
+                case 4:
+                    maxTime = 0.5D;
+                    break;
+
+                default:
+                    Debug.WriteLine("Maximum difficulty reached.");
+                    break;
+            }
+        }
+
         private void TriggerSpecialRound(Texture2D tankEnemyTexture)
         {
             if (!specialTankRoundTriggered)
             {
+                Enemy.enemies.Clear();
                 specialTankRoundTriggered = true;
 
                 Debug.WriteLine("Triggering Special Round...");
@@ -149,6 +192,13 @@ namespace GameProject
                 default:
                     return Vector2.Zero;
             }
+        }
+        private void ResetGame()
+        {
+            timer = 2D;        
+            maxTime = 2D;     
+            difficultyLevel = 1;
+            lastSpecialRoundScore = 0;
         }
     }
 }

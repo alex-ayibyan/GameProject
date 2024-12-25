@@ -29,6 +29,9 @@ namespace GameProject.GameState
 
         private bool debugMode = false;
 
+        private float _debugTimer = 0f; 
+        private float _debugInterval = 2f;
+
         public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
         {
             _world = world;
@@ -46,7 +49,19 @@ namespace GameProject.GameState
         public void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
-            Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState})");
+
+
+            _debugTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Check if the interval has passed
+            if (_debugTimer >= _debugInterval)
+            {
+                Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState}");
+
+                // Reset the timer
+                _debugTimer = 0f;
+            }
+
 
             _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
             //_camera.Position = new Vector2(1500, 1500);
