@@ -1,8 +1,10 @@
-﻿using GameProject.Map;
+﻿using Comora;
+using GameProject.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +15,6 @@ namespace GameProject.GameState
     {
         private double displayTime = 1;
         private bool transitionBackToPlaying = false;
-        private GameWorld gameWorld;
-        private MapGenerator gameMap;
-        private ScoreController scoreController;
         private Vector2[] tankEnemySpawnPositions = new Vector2[]
         {
         new Vector2(64 * 32, 40 * 32), // Spawn Position 1 (Top/Right)
@@ -24,30 +23,74 @@ namespace GameProject.GameState
         new Vector2(33 * 32, 41 * 32)  // Spawn Position 4 (Top/Left)
         };
 
-        public SpriteFont GeneralFont { get; private set; }
+        private GameWorld _world;
+        private Player _player;
+        private ScoreController _score;
+        private Camera _camera;
 
-        public SpecialRoundState(GameWorld gameWorld, MapGenerator gameMap, SpriteFont generalFont)
+        private Texture2D _regularEnemyTexture;
+        private Texture2D _fastEnemyTexture;
+        private Texture2D _tankEnemyTexture;
+
+        private MapGenerator _mapGenerator;
+        private Controller _controller;
+
+        public SpecialRoundState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D tankEnemyTexture)
         {
-            this.gameWorld = gameWorld;
-            this.gameMap = gameMap;
-            GeneralFont = generalFont;
+            _world = world;
+            _player = player;
+            _score = score;
+            _camera = camera;
+            _tankEnemyTexture = tankEnemyTexture;
+            _mapGenerator = _world.GameMap;
+
+            _controller = new Controller(_world, _mapGenerator, score);
         }
 
         public void Update(GameTime gameTime)
         {
             displayTime -= gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (displayTime <= 0 && !transitionBackToPlaying)
-            {
-                RemoveTankEnemies();
 
-                gameWorld.ChangeState(GameStates.Playing);
-                transitionBackToPlaying = true;
+            _player.Update(gameTime);
+
+            _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
+            //_camera.Position = new Vector2(1500, 1500);
+            _camera.Update(gameTime);
+
+            _controller.Update(gameTime, _regularEnemyTexture, _fastEnemyTexture, _tankEnemyTexture);
+            EntityController.Update(gameTime, _player, _player.Position, _player.dead, _score);
+
+            if(!transitionBackToPlaying)
+    {
+                bool allTankEnemiesDead = Enemy.enemies.All(e => !(e is TankEnemy) || e.Dead);
+                bool noEnemiesLeft = !Enemy.enemies.Any();
+
+                Debug.WriteLine($"AllTankEnemiesDead: {allTankEnemiesDead}, NoEnemiesLeft: {noEnemiesLeft}, PlayerDead: {_world.Player.dead}");
+
+                if (allTankEnemiesDead || noEnemiesLeft || _world.Player.dead)
+                {
+                    EndSpecialRound();
+                }
             }
+            Debug.WriteLine($"TankEnemies remaining: {Enemy.enemies.Count(e => e is TankEnemy && !e.Dead)}");
+            Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState})");
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            _mapGenerator.Draw(spriteBatch);
+            _player.animation.Draw(spriteBatch);
+            EntityController.Draw(spriteBatch);
 
+            spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
+            // Draw the enemies (TankEnemies in this case)
+            foreach (var enemy in Enemy.enemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
+
+            // Optionally display a message indicating the special round
+            spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
         }
 
         public void StartSpecialRound()
@@ -56,13 +99,22 @@ namespace GameProject.GameState
             
             foreach (var spawnPosition in tankEnemySpawnPositions)
             {
-                var specialTank = new TankEnemy(spawnPosition, gameWorld.TankEnemy, gameMap, gameWorld)
+                var specialTank = new TankEnemy(spawnPosition, _world.TankEnemy, _mapGenerator, _world)
                 {
                     IsStationary = true,
                     CanShootBackAtPlayer = true
                 };
                 Enemy.enemies.Add(specialTank);
             }
+        }
+
+        private void EndSpecialRound()
+        {
+            RemoveTankEnemies();
+            _world.ChangeState(GameStates.Playing);
+            _controller.specialTankRoundTriggered = false;
+            transitionBackToPlaying = true;
+
         }
 
         public void RemoveTankEnemies()

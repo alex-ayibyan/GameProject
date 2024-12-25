@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -40,11 +41,15 @@ namespace GameProject.GameState
             _mapGenerator = _world.GameMap;
 
             _controller = new Controller(_world ,_mapGenerator, score);
+
+            _controller.specialTankRoundTriggered = false;
+
         }
 
         public void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
+            Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState})");
 
             _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
             //_camera.Position = new Vector2(1500, 1500);
@@ -57,10 +62,8 @@ namespace GameProject.GameState
             {
                 if (_controller.specialTankRoundTriggered)
                 {
-                    // Cancel special round if player is dead
                     CancelSpecialRound();
                 }
-                // Transition to game over state or reset the game
                 _world.ChangeState(GameStates.GameOver);
             }
 
@@ -68,13 +71,12 @@ namespace GameProject.GameState
 
         private void CancelSpecialRound()
         {
-            // Clear the special round state (tank enemies and special round logic)
-            Enemy.enemies.RemoveAll(e => e is TankEnemy);  // Remove all tank enemies
-            _controller.specialTankRoundTriggered = false;     // Reset special round trigger
+            Enemy.enemies.RemoveAll(e => e is TankEnemy);
+            _controller.specialTankRoundTriggered = false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
-        { 
+        {
             _mapGenerator.Draw(spriteBatch);
             _player.animation.Draw(spriteBatch);
            
@@ -83,10 +85,6 @@ namespace GameProject.GameState
 
             spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
             
-            if (_controller.specialTankRoundTriggered)
-            {
-                spriteBatch.DrawString(_world.GeneralFont, "Special Round", new Vector2(2300, 1500), Color.White);
-            }
 
             if (debugMode)
             {
@@ -100,7 +98,6 @@ namespace GameProject.GameState
             Rectangle playerRectangle = new Rectangle((int)_player.Position.X, (int)_player.Position.Y, 32, 32);
             spriteBatch.Draw(_mapGenerator.GetRectangleTexture(), playerRectangle, Color.Red);  // Red for player
 
-            // Assuming enemies are part of EntityController or a similar collection
             foreach (var enemy in Enemy.enemies)
             {
                 Rectangle enemyRectangle = new Rectangle((int)enemy.Position.X, (int)enemy.Position.Y, 32, 32);

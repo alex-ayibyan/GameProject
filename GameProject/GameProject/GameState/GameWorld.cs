@@ -69,7 +69,7 @@ namespace GameProject.GameState
 
             _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera, startMusic);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, TankEnemy);
-            _states[GameStates.SpecialRound] = new SpecialRoundState(this, GameMap, menuFont);
+            _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, TankEnemy);
             _states[GameStates.GameOver] = new GameOverState(this);
 
             ChangeState(GameStates.StartScreen);

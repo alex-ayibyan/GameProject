@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,12 +54,11 @@ namespace GameProject
                 }
             }
 
-            if (scoreController.Score >= 30 && !specialTankRoundTriggered)
+            if (scoreController.Score >= 10 && !specialTankRoundTriggered)
             {
                 TriggerSpecialRound(tankEnemyTexture);
             }
-
-            if (timer <= 0 && !specialTankRoundTriggered)
+            else if (timer <= 0 && !specialTankRoundTriggered)
             {
                 SpawnEnemy(regularEnemyTexture, fastEnemyTexture);
                 timer = maxTime;
@@ -68,26 +68,31 @@ namespace GameProject
                     maxTime -= 0.05D;
                 }
             }
+
         }
 
         private void TriggerSpecialRound(Texture2D tankEnemyTexture)
         {
-            // Trigger special round in the game world
-            specialTankRoundTriggered = true;
+            if (!specialTankRoundTriggered)
+            {
+                specialTankRoundTriggered = true;
 
-            // Switch to SpecialRoundState
-            gameWorld.ChangeState(GameStates.SpecialRound);
+                Debug.WriteLine("Triggering Special Round...");
 
-            // Start the special round logic (spawn tank enemies)
-            var specialRoundState = (SpecialRoundState)gameWorld._currentState;
-            specialRoundState.StartSpecialRound();
+                gameWorld.ChangeState(GameStates.SpecialRound);
+
+                var specialRoundState = (SpecialRoundState)gameWorld._currentState;
+                specialRoundState.StartSpecialRound();
+
+                Debug.WriteLine("Special Round triggered.");
+            }
         }
 
         private void SpawnEnemy(Texture2D regularEnemyTexture, Texture2D fastEnemyTexture)
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 20 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 10 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch
