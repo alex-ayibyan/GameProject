@@ -50,7 +50,7 @@ namespace GameProject
                 if (shootTimer <= 0)
                 {
                     ShootAtPlayer();
-                    shootTimer = 0.5D;
+                    shootTimer = 2D;
                 }
             }
         }

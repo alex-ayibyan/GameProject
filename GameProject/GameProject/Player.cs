@@ -170,17 +170,17 @@ namespace GameProject
             {
                 if (GameMap.Collision.TryGetValue(tileKey, out int tileValue))
                 {
-                    Debug.WriteLine($"Checking collision at Tile ({tileX}, {tileY}) - Value: {tileValue}");
+                    //Debug.WriteLine($"Checking collision at Tile ({tileX}, {tileY}) - Value: {tileValue}");
 
                     if (tileValue == 96) // Solid tile
                     {
-                        Debug.WriteLine($"Collision detected at Tile ({tileX}, {tileY}) - Value: {tileValue}");
+                        //Debug.WriteLine($"Collision detected at Tile ({tileX}, {tileY}) - Value: {tileValue}");
                         return false; // Block movement
                     }
                 }
                 else
                 {
-                    Debug.WriteLine($"Tile Key {tileKey} not found. Assuming no collision.");
+                    //Debug.WriteLine($"Tile Key {tileKey} not found. Assuming no collision.");
                 }
             }
             else

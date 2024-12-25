@@ -29,7 +29,7 @@ namespace GameProject
         private ScoreController scoreController;
         private GameWorld gameWorld;
 
-        private bool specialTankRoundTriggered = false;
+        public bool specialTankRoundTriggered = false;
 
         public Controller(GameWorld gameWorld, MapGenerator map, ScoreController score)
         {
@@ -53,7 +53,7 @@ namespace GameProject
                 }
             }
 
-            if (scoreController.Score >= 50 && !specialTankRoundTriggered)
+            if (scoreController.Score >= 30 && !specialTankRoundTriggered)
             {
                 TriggerSpecialRound(tankEnemyTexture);
             }
@@ -87,7 +87,7 @@ namespace GameProject
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 30 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 20 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch

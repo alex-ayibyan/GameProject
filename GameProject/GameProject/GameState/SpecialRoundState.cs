@@ -11,9 +11,9 @@ namespace GameProject.GameState
 {
     public class SpecialRoundState : IGameState
     {
-        private double displayTime = 2; // Display for 2 seconds
-        private bool transitionBackToPlaying = false; // Flag to indicate if we should transition back to playing
-        private GameWorld gameWorld; // Reference to the GameWorld to change states
+        private double displayTime = 1;
+        private bool transitionBackToPlaying = false;
+        private GameWorld gameWorld;
         private MapGenerator gameMap;
         private ScoreController scoreController;
         private Vector2[] tankEnemySpawnPositions = new Vector2[]
@@ -42,18 +42,12 @@ namespace GameProject.GameState
                 RemoveTankEnemies();
 
                 gameWorld.ChangeState(GameStates.Playing);
-                transitionBackToPlaying = true; // Ensure we only do this once
-
+                transitionBackToPlaying = true;
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (displayTime > 0)
-            {
-                // Display the "Special Round" message
-                spriteBatch.DrawString(GeneralFont, "Special Round", new Vector2(1000, 1000), Color.Red);
-            }
+
         }
 
         public void StartSpecialRound()
@@ -73,9 +67,10 @@ namespace GameProject.GameState
 
         public void RemoveTankEnemies()
         {
-            // Remove tank enemies once all are dead
             Enemy.enemies.RemoveAll(e => e is TankEnemy && e.Dead);
         }
+
+
     }
 }
 

@@ -28,8 +28,6 @@ namespace GameProject.GameState
 
         private bool debugMode = false;
 
-
-
         public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
         {
             _world = world;
@@ -57,9 +55,22 @@ namespace GameProject.GameState
 
             if (_player.dead)
             {
+                if (_controller.specialTankRoundTriggered)
+                {
+                    // Cancel special round if player is dead
+                    CancelSpecialRound();
+                }
+                // Transition to game over state or reset the game
                 _world.ChangeState(GameStates.GameOver);
             }
 
+        }
+
+        private void CancelSpecialRound()
+        {
+            // Clear the special round state (tank enemies and special round logic)
+            Enemy.enemies.RemoveAll(e => e is TankEnemy);  // Remove all tank enemies
+            _controller.specialTankRoundTriggered = false;     // Reset special round trigger
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -70,7 +81,12 @@ namespace GameProject.GameState
 
             EntityController.Draw(spriteBatch);
 
-            spriteBatch.DrawString(_score.Font, $"Score: {_score.Score}", new Vector2(1150, 100), Color.White);
+            spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
+            
+            if (_controller.specialTankRoundTriggered)
+            {
+                spriteBatch.DrawString(_world.GeneralFont, "Special Round", new Vector2(2300, 1500), Color.White);
+            }
 
             if (debugMode)
             {
