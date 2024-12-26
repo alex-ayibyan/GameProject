@@ -30,7 +30,7 @@ namespace GameProject.GameState
         private bool debugMode = false;
 
         private float _debugTimer = 0f; 
-        private float _debugInterval = 2f;
+        private float _debugInterval = 4f;
 
         public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
         {

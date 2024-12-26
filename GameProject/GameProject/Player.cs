@@ -60,7 +60,6 @@ namespace GameProject
             isMoving = false;
             Vector2 proposedPosition = position;
 
-            // Movement input
             if (kState.GetPressedKeyCount() > 0)
             {
                 if (kState.IsKeyDown(Keys.Right))
@@ -87,23 +86,20 @@ namespace GameProject
 
             if (kState.IsKeyDown(Keys.LeftShift))
             {
-                speed = 600; // Sprint speed
+                speed = 600; // Sprint
             }
             else
             {
-                speed = 300; // Normal speed
+                speed = 300; // Normal
             }
 
-            // Prevent movement if dead
             if (dead)
             {
                 isMoving = false;
             }
 
-            // Movement logic
             if (isMoving)
             {
-                // Save the proposed new position
                 proposedPosition = position;
 
                 switch (direction)
@@ -122,46 +118,41 @@ namespace GameProject
                         break;
                 }
 
-                // Check if the proposed new position is valid (no collision)
                 if (CanMove(proposedPosition))
                 {
-                    position = proposedPosition;  // Apply the movement if no collision
+                    position = proposedPosition; 
                 }
             }
-
-            // Update the animation
             animation = animations[(int)direction];
             animation.Position = new Vector2(position.X - 32, position.Y - 32);
 
-            // Handle animation frame for movement or idle state
+
             if (kState.IsKeyDown(Keys.Space))
             {
                 animation.setFrame(1); // Attack frame when space is pressed
             }
             else if (isMoving)
             {
-                animation.Update(gameTime); // Update animation while moving
+                animation.Update(gameTime);
             }
             else
             {
                 animation.setFrame(0); // Idle frame
             }
 
-            // Bullet firing logic
+            // Bullet firing
             if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
             {
                 Debug.WriteLine($"Firing bullet at position: {position}, Direction: {direction}");
                 Bullet.bullets.Add(new Bullet(position, direction, bulletTexture, true, GameMap));
             }
 
-            // Store the current keyboard state for next frame
             kStateOld = kState;
         }
 
-        // Check if the player can move to the new position (collision detection)
         private bool CanMove(Vector2 newPosition)
         {
-            int tileSize = 32; // Ensure this matches your actual tile size
+            int tileSize = 32;
             int tileX = (int)(newPosition.X / tileSize);
             int tileY = (int)(newPosition.Y / tileSize);
             Vector2 tileKey = new Vector2(tileX, tileY);
@@ -172,15 +163,15 @@ namespace GameProject
                 {
                     //Debug.WriteLine($"Checking collision at Tile ({tileX}, {tileY}) - Value: {tileValue}");
 
-                    if (tileValue == 96) // Solid tile
+                    if (tileValue == 96) // collisiontile
                     {
                         //Debug.WriteLine($"Collision detected at Tile ({tileX}, {tileY}) - Value: {tileValue}");
-                        return false; // Block movement
+                        return false; 
                     }
                 }
                 else
                 {
-                    //Debug.WriteLine($"Tile Key {tileKey} not found. Assuming no collision.");
+                    
                 }
             }
             else
@@ -188,7 +179,7 @@ namespace GameProject
                 Debug.WriteLine("GameMap or Collision layer is null.");
             }
 
-            return true; // Allow movement if no collision is detected
+            return true;
         }
 
         public void Reset()

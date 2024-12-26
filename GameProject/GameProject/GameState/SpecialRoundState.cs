@@ -28,6 +28,9 @@ namespace GameProject.GameState
         private MapGenerator _mapGenerator;
         private Controller _controller;
 
+        private float _debugTimer = 0f;
+        private float _debugInterval = 4f;
+
         private Vector2[] tankEnemySpawnPositions = new Vector2[]
         {
             new Vector2(64 * 32, 40 * 32), // Spawn Position 1 (Top/Right)
@@ -50,6 +53,7 @@ namespace GameProject.GameState
 
         public void Update(GameTime gameTime)
         {
+            
             displayTime -= gameTime.ElapsedGameTime.TotalSeconds;
 
 
@@ -67,15 +71,25 @@ namespace GameProject.GameState
                 bool allTankEnemiesDead = Enemy.enemies.All(e => !(e is TankEnemy) || e.Dead);
                 bool noEnemiesLeft = !Enemy.enemies.Any();
 
-                Debug.WriteLine($"AllTankEnemiesDead: {allTankEnemiesDead}, NoEnemiesLeft: {noEnemiesLeft}, PlayerDead: {_world.Player.dead}");
+                
 
+                if (_debugTimer >= _debugInterval)
+                {
+                    Debug.WriteLine($"AllTankEnemiesDead: {allTankEnemiesDead}, NoEnemiesLeft: {noEnemiesLeft}, PlayerDead: {_world.Player.dead}");
+                    _debugTimer = 0f;
+                }
                 if (allTankEnemiesDead || noEnemiesLeft || _world.Player.dead)
                 {
                     EndSpecialRound();
                 }
             }
-            Debug.WriteLine($"TankEnemies remaining: {Enemy.enemies.Count(e => e is TankEnemy && !e.Dead)}");
-            Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState})");
+            if (_debugTimer >= _debugInterval)
+            {
+                Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState}");
+
+                // Reset the timer
+                _debugTimer = 0f;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -85,22 +99,22 @@ namespace GameProject.GameState
             EntityController.Draw(spriteBatch);
 
             spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
-            // Draw the enemies (TankEnemies in this case)
+
             foreach (var enemy in Enemy.enemies)
             {
                 enemy.Draw(spriteBatch);
             }
 
-            // Optionally display a message indicating the special round
             spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
         }
 
         public void StartSpecialRound()
         {
-            
+
+
             foreach (var spawnPosition in tankEnemySpawnPositions)
             {
-                var specialTank = new TankEnemy(spawnPosition, _world.TankEnemy, _mapGenerator, _world, _controller.difficultyLevel)
+                var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller.difficultyLevel)
                 {
                     IsStationary = true,
                     CanShootBackAtPlayer = true
@@ -108,6 +122,7 @@ namespace GameProject.GameState
                 Enemy.enemies.Add(specialTank);
             }
             transitionBackToPlaying = false;
+
         }
 
         private void EndSpecialRound()

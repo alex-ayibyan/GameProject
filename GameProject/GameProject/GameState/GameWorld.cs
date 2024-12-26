@@ -27,7 +27,12 @@ namespace GameProject.GameState
         public Camera Camera { get; private set; }
         public Player Player { get; private set; }
 
-        public Texture2D TankEnemy;
+        private SpriteFont titleFont;
+        private SpriteFont menuFont;
+        private Texture2D regularEnemy;
+        private Texture2D fastEnemy;
+        private Texture2D tankEnemy;
+
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
         public SpriteFont GeneralFont { get; private set; }
@@ -47,6 +52,8 @@ namespace GameProject.GameState
 
         private Song _currentMusic;
 
+        private GraphicsDevice graphics;
+
         public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content)
         {
             Camera = camera;
@@ -60,35 +67,40 @@ namespace GameProject.GameState
             _states = new Dictionary<GameStates, IGameState>();
 
             GameMap = gameMap;
+
         }
 
         public void InitializeStates(Player player, GraphicsDevice graphicsDevice, Camera camera)
         {
             Player = player;
 
-
-            SpriteFont titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
-            SpriteFont menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
-            Texture2D regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
-            Texture2D fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
-            TankEnemy= _content.Load<Texture2D>("Enemies/TankEnemy");
+            titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
+            menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
+            regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
+            fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
+            tankEnemy = _content.Load<Texture2D>("Enemies/TankEnemy");
 
             startMusic = _content.Load<Song>("Sounds/StartScreenMusic");
             gameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
             playMusic = _content.Load<Song>("Sounds/MainGameMusic");
             specialRoundMusic = _content.Load<Song>("Sounds/SpecialRoundMusic");
 
-
             _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
-            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, TankEnemy);
-            _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, TankEnemy);
+            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy);
+            _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
             _states[GameStates.GameOver] = new GameOverState(this);
 
-            ChangeState(GameStates.StartScreen);
+            _currentState = _states[GameStates.StartScreen];
         }
 
         public void ChangeState(GameStates newState)
         {
+
+            if (_currentState == _states[newState])
+            {
+                return;
+            }
+
             _currentState = _states[newState];
             Debug.WriteLine($"State changed to: {newState}");
 
@@ -136,10 +148,17 @@ namespace GameProject.GameState
             Score.ResetScore();
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
+
             Controller.timer = Controller.maxTime;
             Camera.Position = new Vector2(1600,1500);
-            TankEnemy = _content.Load<Texture2D>("Enemies/TankEnemy");
+
+            InitializeStates(Player, graphics, Camera);
+            if (_currentState != _states[GameStates.GameOver])
+            {
+                ChangeState(GameStates.GameOver);
+            }
         }
     }
-
 }
+
+

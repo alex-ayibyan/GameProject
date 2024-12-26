@@ -63,6 +63,7 @@ namespace GameProject
 
             Direction bulletDirection = (Direction)random.Next(0, 4);
 
+
             Bullet newBullet = new Bullet(this.Position, bulletDirection, _world.Player.bulletTexture, false, _world.GameMap);
             Bullet.bullets.Add(newBullet);
         }

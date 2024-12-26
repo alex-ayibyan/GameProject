@@ -33,7 +33,7 @@ namespace GameProject
         public bool specialTankRoundTriggered = false;
 
         private double specialRoundCooldownTimer = 0;
-        private const double CooldownTime = 5; // 10 seconds cooldown duration
+        private const double CooldownTime = 5;
         private bool specialRoundOnCooldown = false;
 
         private int lastSpecialRoundScore = 0;
@@ -71,20 +71,19 @@ namespace GameProject
             if (gameWorld._currentState is PlayingState && specialTankRoundTriggered)
             {
                 specialTankRoundTriggered = false;
-                specialRoundOnCooldown = true; // Enable cooldown after special round ends
+                specialRoundOnCooldown = true;
                 specialRoundCooldownTimer = 0;
                 Debug.WriteLine("Resetting specialTankRoundTriggered flag in PlayingState.");
             }
 
             if (specialRoundOnCooldown)
             {
-                specialRoundCooldownTimer += gametime.ElapsedGameTime.TotalSeconds; // Count up the cooldown time
+                specialRoundCooldownTimer += gametime.ElapsedGameTime.TotalSeconds;
 
                 if (specialRoundCooldownTimer >= CooldownTime)
                 {
-                    // Cooldown is complete, allow the special round to be triggered again
                     specialRoundOnCooldown = false;
-                    specialRoundCooldownTimer = 0; // Reset the cooldown timer
+                    specialRoundCooldownTimer = 0;
                     Debug.WriteLine("Cooldown complete, ready for next special round.");
                 }
             }

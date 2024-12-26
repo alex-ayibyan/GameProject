@@ -13,16 +13,22 @@ namespace GameProject.GameState
     public class GameOverState : IGameState
     {
         private GameWorld _world;
+        private bool _hasReset = false;
 
         public GameOverState(GameWorld world)
         {
             _world = world;
+            
         }
 
         public void Update(GameTime gameTime)
         {
 
-            _world.Reset();
+            if (!_hasReset)
+            {
+                _world.Reset();
+                _hasReset = true;
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 _world.ChangeState(GameStates.Playing);
