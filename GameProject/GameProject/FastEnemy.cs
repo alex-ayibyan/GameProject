@@ -12,9 +12,9 @@ namespace GameProject
     public class FastEnemy : Enemy
     {
         
-        public FastEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap) : base(newPosition, sprite, gameMap)
+        public FastEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap, int speed) : base(newPosition, sprite, gameMap)
         {
-            Speed = 200;
+            Speed = speed;
             Radius = 20;
             animation = new SpriteAnimation(sprite, 4, 20);
 

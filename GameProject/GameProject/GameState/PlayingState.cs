@@ -28,7 +28,6 @@ namespace GameProject.GameState
         private Controller _controller;
 
         private bool debugMode = false;
-
         private float _debugTimer = 0f; 
         private float _debugInterval = 4f;
 
@@ -50,10 +49,8 @@ namespace GameProject.GameState
         {
             _player.Update(gameTime);
 
-
             _debugTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Check if the interval has passed
             if (_debugTimer >= _debugInterval)
             {
                 Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState}");
@@ -61,7 +58,6 @@ namespace GameProject.GameState
                 // Reset the timer
                 _debugTimer = 0f;
             }
-
 
             _camera.Position = new Vector2(_player.Position.X, _player.Position.Y);
             //_camera.Position = new Vector2(1500, 1500);
@@ -98,7 +94,6 @@ namespace GameProject.GameState
             spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
 
             spriteBatch.DrawString(_world.GeneralFont, $"Difficulty: {_controller.difficultyLevel}", new Vector2(2300, 1100), Color.White);
-
 
             if (debugMode)
             {

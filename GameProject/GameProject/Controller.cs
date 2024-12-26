@@ -40,6 +40,8 @@ namespace GameProject
 
         public int difficultyLevel = 1;
 
+        private int fastSpeed;
+
         public Controller(GameWorld gameWorld, MapGenerator map, ScoreController score)
         {
             this.gameWorld = gameWorld;
@@ -119,7 +121,6 @@ namespace GameProject
             {
                 difficultyLevel = newDifficultyLevel;
 
-                // Adjust the maxTime based on difficulty
                 switch (difficultyLevel)
                 {
                     case 1:
@@ -127,19 +128,22 @@ namespace GameProject
                         break;
 
                     case 2:
-                        maxTime = 1.5D;
+                        maxTime = 1.8D;
                         break;
 
                     case 3:
-                        maxTime = 1D;
+                        maxTime = 1.5D;
+                        fastSpeed = 150;
                         break;
 
                     case 4:
-                        maxTime = 0.5D;
+                        maxTime = 1.3D;
+                        fastSpeed = 200;
                         break;
 
                     default:
-                        maxTime = 0.5D;
+                        maxTime = 1.0D;
+                        fastSpeed = 250;
                         Debug.WriteLine("Maximum difficulty reached.");
                         break;
                 }
@@ -168,12 +172,12 @@ namespace GameProject
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 10 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 40 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch
             {
-                EnemyType.Fast => new FastEnemy(spawnPosition, fastEnemyTexture, gameMap),
+                EnemyType.Fast => new FastEnemy(spawnPosition, fastEnemyTexture, gameMap, fastSpeed),
                 _ => new Enemy(spawnPosition, regularEnemyTexture, gameMap)
             };
 

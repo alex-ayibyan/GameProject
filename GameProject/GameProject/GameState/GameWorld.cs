@@ -52,7 +52,7 @@ namespace GameProject.GameState
 
         private Song _currentMusic;
 
-        private GraphicsDevice graphics;
+        public GraphicsDevice graphics;
 
         public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content)
         {
