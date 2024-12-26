@@ -32,6 +32,8 @@ namespace GameProject.GameState
         private Texture2D regularEnemy;
         private Texture2D fastEnemy;
         private Texture2D tankEnemy;
+        public Texture2D waterBullet;
+        public Texture2D fireBullet;
 
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
@@ -49,7 +51,7 @@ namespace GameProject.GameState
         private Song gameOverMusic;
         private Song playMusic;
         private Song specialRoundMusic;
-
+        
         private Song _currentMusic;
 
         public GraphicsDevice graphics;
@@ -78,12 +80,16 @@ namespace GameProject.GameState
             menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
             regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
             fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
-            tankEnemy = _content.Load<Texture2D>("Enemies/TankEnemy");
+            tankEnemy = _content.Load<Texture2D>("Enemies/FlameEnemy");
 
             startMusic = _content.Load<Song>("Sounds/StartScreenMusic");
             gameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
             playMusic = _content.Load<Song>("Sounds/MainGameMusic");
             specialRoundMusic = _content.Load<Song>("Sounds/SpecialRoundMusic");
+
+            waterBullet = _content.Load<Texture2D>("WaterBall");
+            fireBullet = _content.Load<Texture2D>("FireBall");
+            player.bulletTexture = waterBullet;
 
             _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy);
@@ -149,7 +155,7 @@ namespace GameProject.GameState
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
 
-            Controller.timer = Controller.maxTime;
+            Controller.timer = 2D;
             Camera.Position = new Vector2(1600,1500);
 
             InitializeStates(Player, graphics, Camera);

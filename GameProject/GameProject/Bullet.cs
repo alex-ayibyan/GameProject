@@ -117,7 +117,7 @@ namespace GameProject
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Vector2(position.X - 160, position.Y - 90), Color.White);
+            spriteBatch.Draw(texture, new Vector2(position.X - 20 , position.Y ), Color.White);
         }
     }
 }

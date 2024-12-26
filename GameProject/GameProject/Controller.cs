@@ -23,7 +23,7 @@ namespace GameProject
     public class Controller
     {
         public static double timer = 2D;
-        public static double maxTime = 2D;
+        public double maxTime = 2D;
         static Random rnd = new Random();
         public static bool inGame = false;
         private MapGenerator gameMap;

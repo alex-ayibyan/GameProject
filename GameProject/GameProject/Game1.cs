@@ -65,16 +65,13 @@ namespace GameProject
             gameMap.LoadMap("../../../MapData/GameMap3_Ground.csv", "../../../MapData/GameMap3_Objects.csv", "../../../MapData/GameMap3_Collision.csv");
             player.GameMap = gameMap;
             
-            
-
             player.animations[0] = new SpriteAnimation(walkDown, 4, 8);
             player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
             player.animations[2] = new SpriteAnimation(walkLeft, 4, 8);
             player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
             player.animation = player.animations[0];
 
-            Texture2D bulletTexture = Content.Load<Texture2D>("FireBall");
-            player.bulletTexture = bulletTexture;
+           
 
             
 

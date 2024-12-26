@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/FireBall.png</SourceFile>
-  <SourceTime>2024-12-04T01:50:45.5879409+01:00</SourceTime>
+  <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/../../../../../../../../Pictures/FireBall.png</SourceFile>
+  <SourceTime>2024-12-26T04:07:26.4392081+01:00</SourceTime>
   <DestFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/bin/DesktopGL/Content/FireBall.xnb</DestFile>
-  <DestTime>2024-12-04T01:51:20.001173+01:00</DestTime>
+  <DestTime>2024-12-26T04:08:23.4263756+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

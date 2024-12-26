@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Sounds/MainGameMusic.ogg</SourceFile>
-  <SourceTime>2024-12-25T21:17:48.657973+01:00</SourceTime>
+  <SourceTime>2024-12-26T02:25:59.3797015+01:00</SourceTime>
   <DestFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/bin/DesktopGL/Sounds/MainGameMusic.xnb</DestFile>
-  <DestTime>2024-12-25T21:18:21.841+01:00</DestTime>
+  <DestTime>2024-12-26T03:40:25.750032+01:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SongProcessor</Processor>

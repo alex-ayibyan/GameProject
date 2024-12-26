@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Down.png</SourceFile>
-  <SourceTime>2024-12-06T01:58:55.7877889+01:00</SourceTime>
+  <SourceTime>2024-12-26T02:25:59.3441084+01:00</SourceTime>
   <DestFile>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/bin/DesktopGL/Player2/Down.xnb</DestFile>
-  <DestTime>2024-12-11T17:36:42.4172267+01:00</DestTime>
+  <DestTime>2024-12-26T03:40:23.9325036+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

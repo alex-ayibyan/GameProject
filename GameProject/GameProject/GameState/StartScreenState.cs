@@ -48,7 +48,7 @@ namespace GameProject.GameState
             Vector2 quitTextSize = _menuFont.MeasureString("Quit");
             _quitButtonRectangle = new Rectangle(450, 400, (int)quitTextSize.X, (int)quitTextSize.Y);
 
-            Vector2 settingsTextSize = _menuFont.MeasureString("Settings");
+            Vector2 settingsTextSize = _menuFont.MeasureString("Choose Difficulty");
             _settingsButtonRectangle = new Rectangle(450, 500, (int)settingsTextSize.X, (int)settingsTextSize.Y);
 
             Vector2 helpTextSize = _menuFont.MeasureString("Help");
@@ -92,7 +92,8 @@ namespace GameProject.GameState
                 }
                 else if (_selectedButtonIndex == 2)
                 {
-                    Debug.WriteLine("Settings Button Pressed");
+                    Debug.WriteLine("Choose Difficulty Button Pressed");
+                    //_gameWorld.ChangeState(GameStates.)
                 }
                 else if (_selectedButtonIndex == 3)
                 {
