@@ -77,7 +77,8 @@ namespace GameProject.GameState
             GameMap = gameMap;
 
             InitializeStates();
-            
+            _currentState = _states[GameStates.StartScreen];
+
         }
 
         public void InitializeStates()
@@ -103,8 +104,6 @@ namespace GameProject.GameState
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
             _states[GameStates.GameOver] = new GameOverState(this, titleFont, menuFont, _controller, Camera);
             _states[GameStates.ChooseDifficulty] = new ChooseDifficultyState(this, menuFont, _controller);
-
-            _currentState = _states[GameStates.StartScreen];
         }
 
         public void ChangeState(GameStates newState)
@@ -170,6 +169,7 @@ namespace GameProject.GameState
 
         public void Reset()
         {
+            InitializeStates();
             Player.Reset();
             Score.ResetScore();
             Enemy.enemies.Clear();
