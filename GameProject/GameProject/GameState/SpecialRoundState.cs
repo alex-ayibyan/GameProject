@@ -114,11 +114,13 @@ namespace GameProject.GameState
 
             foreach (var spawnPosition in tankEnemySpawnPositions)
             {
-                var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller.difficultyLevel, _controller)
+                var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller)
                 {
+                    
                     IsStationary = true,
-                    CanShootBackAtPlayer = true
+                    CanShootBackAtPlayer = true,
                 };
+                specialTank.IncreaseHealth(1);
                 Enemy.enemies.Add(specialTank);
             }
             transitionBackToPlaying = false;

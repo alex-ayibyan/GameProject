@@ -22,11 +22,11 @@ namespace GameProject
         public Player _player;
         private Controller _controller;
 
-        public TankEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap, GameWorld world, int difficultyLevel, Controller controller) : base(newPosition, sprite, gameMap)
+        public TankEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap, GameWorld world, Controller controller) : base(newPosition, sprite, gameMap)
         {
             Speed = 50;
             Radius = 40;
-            Health = -1 + difficultyLevel;
+            Health = 1;
             animation = new SpriteAnimation(sprite, 5, 10);
 
             animation.Scale = 2.5f;
@@ -77,6 +77,11 @@ namespace GameProject
             {
                 Dead = true;
             }
+        }
+        public void IncreaseHealth(int amount)
+        {
+            Health += amount;
+            Debug.WriteLine($"TankEnemy Health Increased: {Health}");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GameProject.GameState;
@@ -38,7 +39,7 @@ namespace GameProject
 
         private int lastSpecialRoundScore = 0;
 
-        public int difficultyLevel = 1;
+        public int difficultyLevel;
 
         private int fastSpeed;
 
@@ -67,6 +68,7 @@ namespace GameProject
                 if (kState.GetPressedKeyCount() > 0)
                 {
                     inGame = true;
+                    SetDifficulty();
                 }
             }
 
@@ -91,8 +93,7 @@ namespace GameProject
             }
 
         
-             IncreaseDifficulty();
-             Debug.WriteLine($"Difficulty increased to level {difficultyLevel} at score {scoreController.Score}.");
+
             
 
             if (scoreController.Score >= (lastSpecialRoundScore + 20) && !specialTankRoundTriggered && !specialRoundOnCooldown)
@@ -113,41 +114,31 @@ namespace GameProject
 
         }
 
-        public void IncreaseDifficulty()
+        public void SetDifficulty()
         {
-            int newDifficultyLevel = (scoreController.Score / 20) + 1;
-
-            if (newDifficultyLevel > difficultyLevel)
-            {
-                difficultyLevel = newDifficultyLevel;
-
                 switch (difficultyLevel)
                 {
                     case 1:
                         maxTime = 2D;
-                        break;
-
-                    case 2:
-                        maxTime = 1.8D;
-                        break;
-
-                    case 3:
-                        maxTime = 1.5D;
                         fastSpeed = 150;
                         break;
 
-                    case 4:
-                        maxTime = 1.3D;
-                        fastSpeed = 200;
+                    case 2:
+                        maxTime = 1.6D;
+                        fastSpeed = 170;
                         break;
 
-                    default:
+                    case 3:
+                        maxTime = 1.3D;
+                        fastSpeed = 190;
+                        break;
+
+                    case 4:
                         maxTime = 1.0D;
                         fastSpeed = 250;
-                        Debug.WriteLine("Maximum difficulty reached.");
                         break;
                 }
-            }
+            Debug.WriteLine($"Difficulty Level: {difficultyLevel}, maxTime: {maxTime}, fastSpeed: {fastSpeed}");
         }
 
         private void TriggerSpecialRound(Texture2D tankEnemyTexture)
@@ -172,7 +163,7 @@ namespace GameProject
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 40 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 60 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch
@@ -206,7 +197,6 @@ namespace GameProject
         {
             timer = 2D;        
             maxTime = 2D;     
-            difficultyLevel = 1;
             lastSpecialRoundScore = 0;
         }
     }

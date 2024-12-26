@@ -17,7 +17,7 @@ namespace GameProject.GameState
 {
     public enum GameStates
     {
-        StartScreen, Playing, GameOver, SpecialRound
+        StartScreen, Playing, GameOver, SpecialRound, ChooseDifficulty
     }
     public class GameWorld
     {
@@ -46,6 +46,7 @@ namespace GameProject.GameState
         public MapGenerator GameMap { get; private set; }
 
         private ContentManager _content;
+        private Controller _controller;
 
         private Song startMusic;
         private Song gameOverMusic;
@@ -56,7 +57,7 @@ namespace GameProject.GameState
 
         public GraphicsDevice graphics;
 
-        public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content)
+        public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content, Controller controller)
         {
             Camera = camera;
             Score = score;
@@ -65,6 +66,8 @@ namespace GameProject.GameState
             GeneralFont = generalFont;
 
             _content = content;
+            _controller = new Controller(this, gameMap, score);
+
 
             _states = new Dictionary<GameStates, IGameState>();
 
@@ -91,10 +94,11 @@ namespace GameProject.GameState
             fireBullet = _content.Load<Texture2D>("FireBall");
             player.bulletTexture = waterBullet;
 
-            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera);
-            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy);
+            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera, _controller);
+            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy, _controller);
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
             _states[GameStates.GameOver] = new GameOverState(this);
+            _states[GameStates.ChooseDifficulty] = new ChooseDifficultyState(this, menuFont, _controller);
 
             _currentState = _states[GameStates.StartScreen];
         }
@@ -119,6 +123,10 @@ namespace GameProject.GameState
             Song newMusic = null;
 
             if (_currentState is StartScreenState)
+            {
+                newMusic = startMusic;
+            }
+            else if (_currentState is ChooseDifficultyState)
             {
                 newMusic = startMusic;
             }

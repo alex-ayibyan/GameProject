@@ -27,11 +27,12 @@ namespace GameProject.GameState
         private MapGenerator _mapGenerator;
         private Controller _controller;
 
+
         private bool debugMode = false;
         private float _debugTimer = 0f; 
         private float _debugInterval = 4f;
 
-        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
+        public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture, Controller controller)
         {
             _world = world;
             _player = player;
@@ -41,13 +42,15 @@ namespace GameProject.GameState
             _fastEnemyTexture = fastEnemyTexture;
             _tankEnemyTexture = tankEnemyTexture;
             _mapGenerator = _world.GameMap;
+            _controller = controller;
 
-            _controller = new Controller(_world ,_mapGenerator, score);
+
         }
 
         public void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
+            _controller.SetDifficulty();
 
             _debugTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 

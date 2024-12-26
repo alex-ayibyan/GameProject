@@ -71,11 +71,11 @@ namespace GameProject
             player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
             player.animation = player.animations[0];
 
-           
 
+            Controller controller = new Controller(_world, gameMap, score);
             
 
-            _world = new GameWorld(camera, generalFont, score, gameMap, Content);
+            _world = new GameWorld(camera, generalFont, score, gameMap, Content, controller);
 
             _world.InitializeStates(player, GraphicsDevice, camera);
         }
