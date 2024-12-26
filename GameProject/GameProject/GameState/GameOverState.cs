@@ -40,6 +40,7 @@ namespace GameProject.GameState
             _controller = controller;
             _titleFont = titleFont;
             _menuFont = menuFont;
+            _gameWorld.Camera.Position = new Vector2(1000, 350);
 
             Vector2 restartTextSize = _menuFont.MeasureString("Restart");
             _restartButtonRectangle = new Rectangle(600, 300, (int)restartTextSize.X, (int)restartTextSize.Y);
@@ -61,7 +62,12 @@ namespace GameProject.GameState
         public void Update(GameTime gameTime)
         {
 
-            _gameWorld.Reset();
+            
+            if (!_hasReset)
+            {
+                _gameWorld.Reset();
+                _hasReset = true;
+            }
 
 
             KeyboardState keyboardState = Keyboard.GetState();

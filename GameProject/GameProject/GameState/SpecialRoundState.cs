@@ -111,7 +111,6 @@ namespace GameProject.GameState
         public void StartSpecialRound()
         {
 
-
             foreach (var spawnPosition in tankEnemySpawnPositions)
             {
                 var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller)

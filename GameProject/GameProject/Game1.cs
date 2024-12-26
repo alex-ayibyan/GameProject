@@ -60,6 +60,9 @@ namespace GameProject
             Texture2D walkRight = Content.Load<Texture2D>("Player/Right");
             Texture2D walkLeft = Content.Load<Texture2D>("Player/Left");
 
+            Debug.WriteLine("Loading player textures...");
+            Debug.WriteLine("Loaded walkDown texture: " + (walkDown == null ? "Failed" : "Success"));
+
             MapGenerator gameMap = new MapGenerator(Content, _graphics.GraphicsDevice);
 
             gameMap.LoadMap("../../../Map/GameMap3_Ground.csv", "../../../Map/GameMap3_Objects.csv", "../../../Map/GameMap3_Collision.csv");
@@ -77,7 +80,7 @@ namespace GameProject
 
             _world = new GameWorld(player, camera, generalFont, score, gameMap, Content, controller);
 
-            _world.InitializeStates(GraphicsDevice, camera);
+            _world.InitializeStates();
         }
 
         protected override void Update(GameTime gameTime)

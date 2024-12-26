@@ -31,9 +31,9 @@ namespace GameProject.GameState
 
         private SpriteFont titleFont;
         private SpriteFont menuFont;
-        private Texture2D regularEnemy;
-        private Texture2D fastEnemy;
-        private Texture2D tankEnemy;
+        public Texture2D regularEnemy;
+        public Texture2D fastEnemy;
+        public Texture2D tankEnemy;
         public Texture2D waterBullet;
         public Texture2D fireBullet;
 
@@ -75,11 +75,12 @@ namespace GameProject.GameState
             _states = new Dictionary<GameStates, IGameState>();
 
             GameMap = gameMap;
-            
 
+            InitializeStates();
+            
         }
 
-        public void LoadContent()
+        public void InitializeStates()
         {
             titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
             menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
@@ -94,12 +95,8 @@ namespace GameProject.GameState
 
             waterBullet = _content.Load<Texture2D>("WaterBall");
             fireBullet = _content.Load<Texture2D>("FireBall");
-            Player.bulletTexture = waterBullet;
-        }
 
-        public void InitializeStates(GraphicsDevice graphicsDevice, Camera camera)
-        {
-            LoadContent();
+            Player.bulletTexture = waterBullet;
 
             _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, _controller, Camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy, _controller);
@@ -112,8 +109,6 @@ namespace GameProject.GameState
 
         public void ChangeState(GameStates newState)
         {
-            
-
             if (_currentState == _states[newState])
             {
                 return;
@@ -121,8 +116,8 @@ namespace GameProject.GameState
 
             _previousState = _currentState;
             _currentState = _states[newState];
-            Debug.WriteLine($"State changed to: {newState}");
 
+            Debug.WriteLine($"State changed to: {newState}");
         }
         public void GoBackToPreviousState()
         {
@@ -175,16 +170,13 @@ namespace GameProject.GameState
 
         public void Reset()
         {
-            LoadContent();
             Player.Reset();
             Score.ResetScore();
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
 
             Controller.timer = 2D;
-            Camera.Position = new Vector2(1000,350);
-
-            
+            Camera.Position = new Vector2(1000, 350);
         }
     }
 }

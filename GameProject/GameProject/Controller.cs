@@ -148,8 +148,6 @@ namespace GameProject
                 Enemy.enemies.Clear();
                 specialTankRoundTriggered = true;
 
-                Debug.WriteLine("Triggering Special Round...");
-
                 gameWorld.ChangeState(GameStates.SpecialRound);
 
                 var specialRoundState = (SpecialRoundState)gameWorld._currentState;
