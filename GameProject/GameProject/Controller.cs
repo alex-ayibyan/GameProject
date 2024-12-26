@@ -161,7 +161,7 @@ namespace GameProject
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 20 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 0 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch
