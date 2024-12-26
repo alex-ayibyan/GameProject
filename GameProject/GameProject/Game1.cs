@@ -62,7 +62,7 @@ namespace GameProject
 
             MapGenerator gameMap = new MapGenerator(Content, _graphics.GraphicsDevice);
 
-            gameMap.LoadMap("../../../MapData/GameMap3_Ground.csv", "../../../MapData/GameMap3_Objects.csv", "../../../MapData/GameMap3_Collision.csv");
+            gameMap.LoadMap("../../../Map/GameMap3_Ground.csv", "../../../Map/GameMap3_Objects.csv", "../../../Map/GameMap3_Collision.csv");
             player.GameMap = gameMap;
             
             player.animations[0] = new SpriteAnimation(walkDown, 4, 8);
@@ -75,9 +75,9 @@ namespace GameProject
             Controller controller = new Controller(_world, gameMap, score);
             
 
-            _world = new GameWorld(camera, generalFont, score, gameMap, Content, controller);
+            _world = new GameWorld(player, camera, generalFont, score, gameMap, Content, controller);
 
-            _world.InitializeStates(player, GraphicsDevice, camera);
+            _world.InitializeStates(GraphicsDevice, camera);
         }
 
         protected override void Update(GameTime gameTime)

@@ -57,8 +57,6 @@ namespace GameProject.GameState
             if (_debugTimer >= _debugInterval)
             {
                 Debug.WriteLine($"Timer: {gameTime.ElapsedGameTime.TotalSeconds}, Trigger: {_controller.specialTankRoundTriggered}, GameState: {_world._currentState}");
-
-                // Reset the timer
                 _debugTimer = 0f;
             }
 
@@ -77,7 +75,6 @@ namespace GameProject.GameState
                 }
                 _world.ChangeState(GameStates.GameOver);
             }
-
         }
 
         private void CancelSpecialRound()

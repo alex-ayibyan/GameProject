@@ -22,6 +22,8 @@ namespace GameProject.GameState
     public class GameWorld
     {
         public IGameState _currentState;
+        private IGameState _previousState;
+
         private Dictionary<GameStates, IGameState> _states;
 
         public Camera Camera { get; private set; }
@@ -57,13 +59,14 @@ namespace GameProject.GameState
 
         public GraphicsDevice graphics;
 
-        public GameWorld(Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content, Controller controller)
+        public GameWorld(Player player, Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content, Controller controller)
         {
             Camera = camera;
             Score = score;
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
             GeneralFont = generalFont;
+            Player = player;
 
             _content = content;
             _controller = new Controller(this, gameMap, score);
@@ -72,13 +75,12 @@ namespace GameProject.GameState
             _states = new Dictionary<GameStates, IGameState>();
 
             GameMap = gameMap;
+            
 
         }
 
-        public void InitializeStates(Player player, GraphicsDevice graphicsDevice, Camera camera)
+        public void LoadContent()
         {
-            Player = player;
-
             titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
             menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
             regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
@@ -92,12 +94,17 @@ namespace GameProject.GameState
 
             waterBullet = _content.Load<Texture2D>("WaterBall");
             fireBullet = _content.Load<Texture2D>("FireBall");
-            player.bulletTexture = waterBullet;
+            Player.bulletTexture = waterBullet;
+        }
 
-            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, camera, _controller);
+        public void InitializeStates(GraphicsDevice graphicsDevice, Camera camera)
+        {
+            LoadContent();
+
+            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, _controller, Camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy, _controller);
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
-            _states[GameStates.GameOver] = new GameOverState(this);
+            _states[GameStates.GameOver] = new GameOverState(this, titleFont, menuFont, _controller, Camera);
             _states[GameStates.ChooseDifficulty] = new ChooseDifficultyState(this, menuFont, _controller);
 
             _currentState = _states[GameStates.StartScreen];
@@ -105,15 +112,25 @@ namespace GameProject.GameState
 
         public void ChangeState(GameStates newState)
         {
+            
 
             if (_currentState == _states[newState])
             {
                 return;
             }
 
+            _previousState = _currentState;
             _currentState = _states[newState];
             Debug.WriteLine($"State changed to: {newState}");
 
+        }
+        public void GoBackToPreviousState()
+        {
+            if (_previousState != null)
+            {
+                var previousGameState = _states.FirstOrDefault(s => s.Value == _previousState).Key;
+                ChangeState(previousGameState);
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -158,19 +175,16 @@ namespace GameProject.GameState
 
         public void Reset()
         {
+            LoadContent();
             Player.Reset();
             Score.ResetScore();
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
 
             Controller.timer = 2D;
-            Camera.Position = new Vector2(1600,1500);
+            Camera.Position = new Vector2(1000,350);
 
-            InitializeStates(Player, graphics, Camera);
-            if (_currentState != _states[GameStates.GameOver])
-            {
-                ChangeState(GameStates.GameOver);
-            }
+            
         }
     }
 }

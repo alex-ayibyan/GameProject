@@ -39,7 +39,7 @@ namespace GameProject
 
         private int lastSpecialRoundScore = 0;
 
-        public int difficultyLevel;
+        public int difficultyLevel = 1;
 
         private int fastSpeed;
 
@@ -124,17 +124,17 @@ namespace GameProject
                         break;
 
                     case 2:
-                        maxTime = 1.6D;
+                        maxTime = 1.5D;
                         fastSpeed = 170;
                         break;
 
                     case 3:
-                        maxTime = 1.3D;
+                        maxTime = 1.0D;
                         fastSpeed = 190;
                         break;
 
                     case 4:
-                        maxTime = 1.0D;
+                        maxTime = 0.5D;
                         fastSpeed = 250;
                         break;
                 }
@@ -163,7 +163,7 @@ namespace GameProject
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 60 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 20 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch

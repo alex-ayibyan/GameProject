@@ -83,7 +83,7 @@ namespace GameProject.GameState
                     _controller.difficultyLevel = _selectedDifficultyIndex + 1;
                     Debug.WriteLine($"Difficulty selected: {_controller.difficultyLevel}");
                     _controller.SetDifficulty();
-                    _gameWorld.ChangeState(GameStates.StartScreen);
+                    _gameWorld.GoBackToPreviousState();
                 }
             }
 

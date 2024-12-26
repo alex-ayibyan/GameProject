@@ -16,7 +16,6 @@ namespace GameProject.GameState
     public class StartScreenState : IGameState
     {
         private GameWorld _gameWorld;
-        private Camera _camera;
         private Controller _controller;
 
         private KeyboardState _previousKeyboardState;
@@ -27,37 +26,34 @@ namespace GameProject.GameState
         private int _selectedButtonIndex;
 
         private Rectangle _startButtonRectangle;
+        private Rectangle _chooseButtonRectangle;
         private Rectangle _quitButtonRectangle;
 
-        private string[] _buttonTexts = { "Start", "Choose Difficulty", "Quit", "Help" };
-        private Rectangle _helpButtonRectangle;
+        private string[] _buttonTexts = { "Start", "Choose Difficulty", "Quit"};
         private Rectangle[] _buttonRectangles;
-        private Rectangle _settingsButtonRectangle;
 
-        private bool _musicStarted = false;
 
-        public StartScreenState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Camera camera, Controller controller)
+        public StartScreenState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Controller controller, Camera camera)
         {
             _gameWorld = gameWorld;
             _titleFont = titleFont;
             _menuFont = menuFont;
-            _camera = camera;
+
             _controller = controller;
+            camera.Position = new Vector2(-100, 0);
 
             Vector2 startTextSize = _menuFont.MeasureString("Start");
-            _startButtonRectangle = new Rectangle(450, 300, (int)startTextSize.X, (int)startTextSize.Y);
+            _startButtonRectangle = new Rectangle(600, 300, (int)startTextSize.X, (int)startTextSize.Y);
 
-            Vector2 quitTextSize = _menuFont.MeasureString("Choose Difficulty");
-            _quitButtonRectangle = new Rectangle(450, 400, (int)quitTextSize.X, (int)quitTextSize.Y);
+            Vector2 chooseTextSize = _menuFont.MeasureString("Choose Difficulty");
+            _chooseButtonRectangle = new Rectangle(600, 400, (int)chooseTextSize.X, (int)chooseTextSize.Y);
 
-            Vector2 settingsTextSize = _menuFont.MeasureString("Quit");
-            _settingsButtonRectangle = new Rectangle(450, 500, (int)settingsTextSize.X, (int)settingsTextSize.Y);
-
-            Vector2 helpTextSize = _menuFont.MeasureString("Help");
-            _helpButtonRectangle = new Rectangle(450, 600, (int)helpTextSize.X, (int)helpTextSize.Y);
+            Vector2 quitTextSize = _menuFont.MeasureString("Quit");
+            _quitButtonRectangle = new Rectangle(600, 500, (int)quitTextSize.X, (int)quitTextSize.Y);
 
 
-            _buttonRectangles = new Rectangle[] { _startButtonRectangle, _quitButtonRectangle, _settingsButtonRectangle, _helpButtonRectangle };
+
+            _buttonRectangles = new Rectangle[] { _startButtonRectangle, _chooseButtonRectangle, _quitButtonRectangle };
             _selectedButtonIndex = 0;
         }
 
@@ -108,7 +104,7 @@ namespace GameProject.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 titlePosition = new Vector2(450, 100);
+            Vector2 titlePosition = new Vector2(600, 100);
             spriteBatch.DrawString(_titleFont, "Welcome To My Game", titlePosition, Color.White);
 
             for (int i = 0; i < _buttonRectangles.Length; i++)
