@@ -88,12 +88,10 @@ namespace GameProject
                 }
             }
 
-            int milestone = (difficultyLevel + 1) * 20;
-            if (scoreController.Score >= milestone)
-            {
-                IncreaseDifficulty();
-                Debug.WriteLine($"Difficulty increased to level {difficultyLevel} at score {scoreController.Score}.");
-            }
+        
+             IncreaseDifficulty();
+             Debug.WriteLine($"Difficulty increased to level {difficultyLevel} at score {scoreController.Score}.");
+            
 
             if (scoreController.Score >= (lastSpecialRoundScore + 20) && !specialTankRoundTriggered && !specialRoundOnCooldown)
             {
@@ -115,28 +113,36 @@ namespace GameProject
 
         public void IncreaseDifficulty()
         {
-            difficultyLevel++;
-            switch (difficultyLevel)
+            int newDifficultyLevel = (scoreController.Score / 20) + 1;
+
+            if (newDifficultyLevel > difficultyLevel)
             {
-                case 1:
-                    maxTime = 2D;
-                    break;
+                difficultyLevel = newDifficultyLevel;
 
-                case 2:
-                    maxTime = 1.5D;
-                    break;
+                // Adjust the maxTime based on difficulty
+                switch (difficultyLevel)
+                {
+                    case 1:
+                        maxTime = 2D;
+                        break;
 
-                case 3:
-                    maxTime = 1D;
-                    break;
+                    case 2:
+                        maxTime = 1.5D;
+                        break;
 
-                case 4:
-                    maxTime = 0.5D;
-                    break;
+                    case 3:
+                        maxTime = 1D;
+                        break;
 
-                default:
-                    Debug.WriteLine("Maximum difficulty reached.");
-                    break;
+                    case 4:
+                        maxTime = 0.5D;
+                        break;
+
+                    default:
+                        maxTime = 0.5D;
+                        Debug.WriteLine("Maximum difficulty reached.");
+                        break;
+                }
             }
         }
 

@@ -96,7 +96,9 @@ namespace GameProject.GameState
             EntityController.Draw(spriteBatch);
 
             spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
-            
+
+            spriteBatch.DrawString(_world.GeneralFont, $"Difficulty: {_controller.difficultyLevel}", new Vector2(2300, 1100), Color.White);
+
 
             if (debugMode)
             {

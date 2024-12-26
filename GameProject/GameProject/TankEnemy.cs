@@ -25,7 +25,7 @@ namespace GameProject
         {
             Speed = 50;
             Radius = 40;
-            Health = 0 + difficultyLevel;
+            Health = -1 + difficultyLevel;
             animation = new SpriteAnimation(sprite, 8, 10);
 
             animation.Scale = 2.5f;
