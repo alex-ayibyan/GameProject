@@ -77,7 +77,7 @@ namespace GameProject
                 Dead = true;
             }
         }
-        public void IncreaseHealth(int amount)
+        public void IncreaseHealth(double amount)
         {
             Health += amount;
             Debug.WriteLine($"TankEnemy Health Increased: {Health}");

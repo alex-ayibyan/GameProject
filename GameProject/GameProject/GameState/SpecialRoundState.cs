@@ -31,6 +31,8 @@ namespace GameProject.GameState
         private float _debugTimer = 0f;
         private float _debugInterval = 4f;
 
+        public double roundCounter = 0;
+
         private Vector2[] tankEnemySpawnPositions = new Vector2[]
         {
             new Vector2(64 * 32, 40 * 32), // Spawn Position 1 (Top/Right)
@@ -110,16 +112,16 @@ namespace GameProject.GameState
 
         public void StartSpecialRound()
         {
+            roundCounter += 0.5;
 
             foreach (var spawnPosition in tankEnemySpawnPositions)
             {
                 var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller)
                 {
-                    
                     IsStationary = true,
                     CanShootBackAtPlayer = true,
                 };
-                specialTank.IncreaseHealth(1);
+                specialTank.IncreaseHealth(roundCounter);
                 Enemy.enemies.Add(specialTank);
             }
             transitionBackToPlaying = false;
@@ -141,6 +143,11 @@ namespace GameProject.GameState
         public void RemoveTankEnemies()
         {
             Enemy.enemies.RemoveAll(e => e is TankEnemy && e.Dead);
+        }
+
+        public void ResetRoundCounter()
+        {
+            roundCounter = 0;
         }
     }
 }

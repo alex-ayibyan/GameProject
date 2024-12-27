@@ -197,6 +197,11 @@ namespace GameProject.GameState
             Enemy.enemies.Clear();
             Bullet.bullets.Clear();
 
+            if (_states[GameStates.SpecialRound] is SpecialRoundState specialRoundState)
+            {
+                specialRoundState.ResetRoundCounter();
+            }
+
             Controller.timer = 2D;
             // Camera.Position = new Vector2(1000, 350);
         }

@@ -14,7 +14,7 @@ namespace GameProject
         public int Speed { get; set; }
         public bool Dead { get; set; }
         public int Radius { get; set; }
-        public int Health { get; set; }
+        public double Health { get; set; }
 
         public SpriteAnimation animation;
         public MapGenerator _gameMap;
