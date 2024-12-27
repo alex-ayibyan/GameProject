@@ -16,7 +16,9 @@ namespace GameProject
 
         public bool IsStationary { get; set; }
         public bool CanShootBackAtPlayer { get; set; }
-        private double shootTimer = 2D;
+
+        private double shootTimer;
+        private double baseShootingSpeed;
 
         public GameWorld _world;
         public Player _player;
@@ -35,11 +37,16 @@ namespace GameProject
 
             _world = world;
             _controller = controller;
+
+            baseShootingSpeed = Math.Max(_controller.shootingSpeed, 0.8);
+            shootTimer = baseShootingSpeed;
         }
 
         public override void Update(GameTime gameTime, Vector2 playerPosition, bool isPlayerDead)
         {
             base.Update(gameTime, playerPosition, isPlayerDead);
+
+            
 
             if (IsStationary)
             {
@@ -49,11 +56,11 @@ namespace GameProject
             if (CanShootBackAtPlayer)
             {
                 shootTimer -= gameTime.ElapsedGameTime.TotalSeconds;
-
                 if (shootTimer <= 0)
                 {
                     ShootAtPlayer();
-                    shootTimer = _controller.maxTime;
+                    baseShootingSpeed = Math.Max(_controller.shootingSpeed, 0.8); 
+                    shootTimer = baseShootingSpeed;
                 }
             }
         }

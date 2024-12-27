@@ -42,6 +42,9 @@ namespace GameProject
         public double invincibilityTimer = 0.0;
         private const double invincibilityDuration = 2.0;
 
+        private double shootCooldown = 0.5;
+        private double timeSinceLastShot = 0.0;
+
         public float Scale
         {
             get { return scale; }
@@ -75,6 +78,8 @@ namespace GameProject
                     isInvincible = false;
                 }
             }
+
+            timeSinceLastShot += dt;
 
             isMoving = false;
             Vector2 proposedPosition = position;
@@ -146,7 +151,7 @@ namespace GameProject
             animation.Position = new Vector2(position.X - 32, position.Y - 32);
 
 
-            if (kState.IsKeyDown(Keys.Space))
+            if (kState.IsKeyDown(Keys.Space) && timeSinceLastShot >= shootCooldown)
             {
                 animation.setFrame(1);
             }
@@ -159,12 +164,13 @@ namespace GameProject
                 animation.setFrame(0); 
             }
 
-            if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
+            if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space) && timeSinceLastShot >= shootCooldown)
             {
                 Debug.WriteLine($"Firing bullet at position: {position}, Direction: {direction}");
                 shootSound.Play();
                 Bullet.bullets.Add(new Bullet(position, direction, bulletTexture, true, GameMap));
-                
+                timeSinceLastShot = 0.0;
+
             }
 
             kStateOld = kState;

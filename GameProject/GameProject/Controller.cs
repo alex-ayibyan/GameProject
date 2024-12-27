@@ -25,6 +25,7 @@ namespace GameProject
     {
         public static double timer = 2D;
         public double maxTime = 2D;
+        public double shootingSpeed;
         static Random rnd = new Random();
         public static bool inGame = false;
         private MapGenerator gameMap;
@@ -116,29 +117,33 @@ namespace GameProject
 
         public void SetDifficulty()
         {
-                switch (difficultyLevel)
+            switch (difficultyLevel)
                 {
                     case 1:
                         maxTime = 2D;
+                        shootingSpeed = 1.6D;
                         fastSpeed = 150;
                         break;
 
                     case 2:
                         maxTime = 1.5D;
+                        shootingSpeed = 1.3D;
                         fastSpeed = 170;
                         break;
 
                     case 3:
                         maxTime = 1.0D;
+                        shootingSpeed = 1D;
                         fastSpeed = 190;
                         break;
 
                     case 4:
                         maxTime = 0.5D;
+                        shootingSpeed = 0.8D;
                         fastSpeed = 250;
                         break;
                 }
-            Debug.WriteLine($"Difficulty Level: {difficultyLevel}, maxTime: {maxTime}, fastSpeed: {fastSpeed}");
+            Debug.WriteLine($"Difficulty Level: {difficultyLevel}, maxTime: {maxTime}, fastSpeed: {fastSpeed}, shootingSpeed: {shootingSpeed}");
         }
 
         private void TriggerSpecialRound(Texture2D tankEnemyTexture)
