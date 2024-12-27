@@ -33,8 +33,8 @@ namespace GameProject
         public MapGenerator GameMap;
 
         public int lives = 3; // Het aantal levens dat de speler heeft
-        private bool isInvincible = false; // Onschendbaarheid na schade
-        private double invincibilityTimer = 0.0; // Timer voor de onschendbaarheid
+        public bool isInvincible = false; // Onschendbaarheid na schade
+        public double invincibilityTimer = 0.0; // Timer voor de onschendbaarheid
         private const double invincibilityDuration = 2.0;
 
         public float Scale

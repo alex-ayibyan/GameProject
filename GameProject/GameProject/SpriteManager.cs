@@ -29,5 +29,9 @@ namespace GameProject
         {
             spriteBatch.Draw(Texture, Position, Rectangles[FrameIndex], Color, Rotation, Origin, Scale, SpriteEffect, 0f);
         }
+        public void Draw(SpriteBatch spriteBatch, Color color)
+        {
+            spriteBatch.Draw(Texture, Position, Rectangles[FrameIndex], color, Rotation, Origin, Scale, SpriteEffect, 0f);
+        }
     }
 }

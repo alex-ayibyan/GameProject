@@ -97,7 +97,22 @@ namespace GameProject.GameState
         public void Draw(SpriteBatch spriteBatch)
         {
             _mapGenerator.Draw(spriteBatch);
-            _player.animation.Draw(spriteBatch);
+            if (_player.isInvincible)
+            {
+                if ((int)(_player.invincibilityTimer * 5) % 2 == 0)
+                {
+                    _player.animation.Draw(spriteBatch, Color.White * 0.5f);
+                }
+                else
+                {
+                    _player.animation.Draw(spriteBatch, Color.White);
+                }
+            }
+            else
+            {
+                _player.animation.Draw(spriteBatch, Color.White);
+            }
+
             EntityController.Draw(spriteBatch);
 
             spriteBatch.DrawString(_world.GeneralFont, $"Score: {_score.Score}", new Vector2(2300, 1000), Color.White);
@@ -113,7 +128,21 @@ namespace GameProject.GameState
 
             for (int i = 0; i < _player.lives; i++)
             {
-                spriteBatch.Draw(_world.lifeTexture, new Vector2(2200 + i * 120, 1200), Color.White);
+                if (_player.isInvincible)
+                {
+                    if ((int)(_player.invincibilityTimer * 4) % 2 == 0)
+                    {
+                        spriteBatch.Draw(_world.lifeTexture, new Vector2(2200 + i * 120, 1200), Color.White * 0.5f);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_world.lifeTexture, new Vector2(2200 + i * 120, 1200), Color.White);
+                    }
+                }
+                else
+                {
+                    spriteBatch.Draw(_world.lifeTexture, new Vector2(2200 + i * 120, 1200), Color.White);
+                }
             }
         }
 
