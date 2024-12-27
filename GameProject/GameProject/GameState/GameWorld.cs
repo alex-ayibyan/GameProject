@@ -17,7 +17,7 @@ namespace GameProject.GameState
 {
     public enum GameStates
     {
-        StartScreen, Playing, GameOver, SpecialRound, ChooseDifficulty
+        StartScreen, Playing, GameOver, SpecialRound, ChooseDifficulty, ControlsState
     }
     public class GameWorld
     {
@@ -113,6 +113,7 @@ namespace GameProject.GameState
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
             _states[GameStates.GameOver] = new GameOverState(this, titleFont, menuFont, _controller, Camera);
             _states[GameStates.ChooseDifficulty] = new ChooseDifficultyState(this, menuFont, _controller);
+            _states[GameStates.ControlsState] = new ControlsState(this, menuFont, titleFont);
         }
 
         public void ChangeState(GameStates newState)
@@ -163,6 +164,10 @@ namespace GameProject.GameState
                 newMusic = startMusic;
             }
             else if (_currentState is ChooseDifficultyState)
+            {
+                newMusic = startMusic;
+            }
+            else if (_currentState is ControlsState)
             {
                 newMusic = startMusic;
             }

@@ -33,19 +33,19 @@ namespace GameProject.GameState
             _controller = controller;
 
             Vector2 oneTextSize = _menuFont.MeasureString("1 (Easy)");
-            _oneButtonRectangle = new Rectangle(450, 200, (int)oneTextSize.X, (int)oneTextSize.Y);
+            _oneButtonRectangle = new Rectangle(600, 300, (int)oneTextSize.X, (int)oneTextSize.Y);
 
             Vector2 twoTextSize = _menuFont.MeasureString("2 (Normal)");
-            _twoButtonRectangle = new Rectangle(450, 250, (int)twoTextSize.X, (int)twoTextSize.Y);
+            _twoButtonRectangle = new Rectangle(600, 350, (int)twoTextSize.X, (int)twoTextSize.Y);
 
             Vector2 threeTextSize = _menuFont.MeasureString("3 (Hard)");
-            _threeButtonRectangle = new Rectangle(450, 300, (int)threeTextSize.X, (int)threeTextSize.Y);
+            _threeButtonRectangle = new Rectangle(600, 400, (int)threeTextSize.X, (int)threeTextSize.Y);
 
             Vector2 fourTextSize = _menuFont.MeasureString("4 (Very Hard)");
-            _fourButtonRectangle = new Rectangle(450, 350, (int)fourTextSize.X, (int)fourTextSize.Y);
+            _fourButtonRectangle = new Rectangle(600, 450, (int)fourTextSize.X, (int)fourTextSize.Y);
 
             Vector2 backTextSize = _menuFont.MeasureString("Back");
-            _backButtonRectangle = new Rectangle(450, 400, (int)backTextSize.X, (int)backTextSize.Y);
+            _backButtonRectangle = new Rectangle(600, 500, (int)backTextSize.X, (int)backTextSize.Y);
 
             _difficultyButtonRectangles = new Rectangle[] { _oneButtonRectangle, _twoButtonRectangle, _threeButtonRectangle, _fourButtonRectangle, _backButtonRectangle };
 
@@ -58,7 +58,6 @@ namespace GameProject.GameState
         {
             if (_gameWorld._elapsedTimeSinceStateChange < _gameWorld._stateChangeDelay)
             {
-                // Ignore input during the state change delay
                 return;
             }
 

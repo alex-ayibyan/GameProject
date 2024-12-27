@@ -27,9 +27,10 @@ namespace GameProject.GameState
 
         private Rectangle _startButtonRectangle;
         private Rectangle _chooseButtonRectangle;
+        private Rectangle _controlsButtonRectangle;
         private Rectangle _quitButtonRectangle;
 
-        private string[] _buttonTexts = { "Start", "Choose Difficulty", "Quit"};
+        private string[] _buttonTexts = { "Start", "Choose Difficulty", "Controls", "Quit"};
         private Rectangle[] _buttonRectangles;
 
 
@@ -49,10 +50,13 @@ namespace GameProject.GameState
             Vector2 chooseTextSize = _menuFont.MeasureString("Choose Difficulty");
             _chooseButtonRectangle = new Rectangle(600, 400, (int)chooseTextSize.X, (int)chooseTextSize.Y);
 
-            Vector2 quitTextSize = _menuFont.MeasureString("Quit");
-            _quitButtonRectangle = new Rectangle(600, 500, (int)quitTextSize.X, (int)quitTextSize.Y);
+            Vector2 controlsTextSize = _menuFont.MeasureString("Controls");
+            _controlsButtonRectangle = new Rectangle(600, 500, (int)controlsTextSize.X, (int)controlsTextSize.Y);
 
-            _buttonRectangles = new Rectangle[] { _startButtonRectangle, _chooseButtonRectangle, _quitButtonRectangle };
+            Vector2 quitTextSize = _menuFont.MeasureString("Quit");
+            _quitButtonRectangle = new Rectangle(600, 600, (int)quitTextSize.X, (int)quitTextSize.Y);
+
+            _buttonRectangles = new Rectangle[] { _startButtonRectangle, _chooseButtonRectangle, _controlsButtonRectangle, _quitButtonRectangle };
             _selectedButtonIndex = 0;
 
         }
@@ -97,11 +101,11 @@ namespace GameProject.GameState
                 }
                 else if (_selectedButtonIndex == 2)
                 {
-                    Environment.Exit(0);
+                    _gameWorld.ChangeState(GameStates.ControlsState);
                 }
                 else if (_selectedButtonIndex == 3)
                 {
-                    Debug.WriteLine("Help Button Pressed");
+                    Environment.Exit(0);
                 }
             }
 

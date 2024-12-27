@@ -75,6 +75,8 @@ namespace GameProject.GameState
                 }
                 _world.ChangeState(GameStates.GameOver);
             }
+
+            
         }
 
         private void CancelSpecialRound()
