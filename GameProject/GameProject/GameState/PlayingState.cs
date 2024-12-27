@@ -36,7 +36,7 @@ namespace GameProject.GameState
         {
             _world = world;
             _player = player;
-            _score = score;
+            _score = score;   
             _camera = camera;
             _regularEnemyTexture = regularEnemyTexture;
             _fastEnemyTexture = fastEnemyTexture;

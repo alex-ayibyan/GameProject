@@ -59,6 +59,10 @@ namespace GameProject.GameState
 
         public GraphicsDevice graphics;
 
+        public float _stateChangeDelay = 0.1f;
+        public float _elapsedTimeSinceStateChange = 0f;
+
+
         public GameWorld(Player player, Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content, Controller controller)
         {
             Camera = camera;
@@ -99,6 +103,8 @@ namespace GameProject.GameState
 
             Player.bulletTexture = waterBullet;
 
+            // Camera.Position = new Vector2(1000,100);
+
             _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, _controller, Camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy, _controller);
             _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
@@ -117,6 +123,8 @@ namespace GameProject.GameState
             _currentState = _states[newState];
 
             Debug.WriteLine($"State changed to: {newState}");
+
+            _elapsedTimeSinceStateChange = 0f;
         }
         public void GoBackToPreviousState()
         {
@@ -129,7 +137,21 @@ namespace GameProject.GameState
 
         public void Update(GameTime gameTime)
         {
-            _currentState.Update(gameTime);
+
+            if (_currentState is PlayingState || _currentState is SpecialRoundState)
+            {
+                _elapsedTimeSinceStateChange = _stateChangeDelay;
+            }
+            else
+            {
+                _elapsedTimeSinceStateChange += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (_elapsedTimeSinceStateChange >= _stateChangeDelay)
+            {
+                _elapsedTimeSinceStateChange = _stateChangeDelay;
+                _currentState.Update(gameTime);
+            }
 
             Song newMusic = null;
 
@@ -176,7 +198,7 @@ namespace GameProject.GameState
             Bullet.bullets.Clear();
 
             Controller.timer = 2D;
-            Camera.Position = new Vector2(1000, 350);
+            // Camera.Position = new Vector2(1000, 350);
         }
     }
 }

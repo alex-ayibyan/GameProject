@@ -17,8 +17,10 @@ namespace GameProject.GameState
 
         private GameWorld _gameWorld;
         private Controller _controller;
+        private Camera _camera;
 
         private KeyboardState _previousKeyboardState;
+        private KeyboardState _currentKeyboardState;
 
         private SpriteFont _titleFont;
         private SpriteFont _menuFont;
@@ -26,11 +28,10 @@ namespace GameProject.GameState
         private int _selectedButtonIndex;
 
         private Rectangle _restartButtonRectangle;
-        private Rectangle _newDifficultyButtonRectangle;
         private Rectangle _mainMenuButtonRectangle;
         private Rectangle _quitButtonRectangle;
 
-        private string[] _buttonTexts = { "Restart", "Choose New Difficulty", "Back to main menu", "Quit" };
+        private string[] _buttonTexts = { "Restart", "Back to main menu", "Quit" };
         private Rectangle[] _buttonRectangles;
 
 
@@ -40,28 +41,25 @@ namespace GameProject.GameState
             _controller = controller;
             _titleFont = titleFont;
             _menuFont = menuFont;
-            _gameWorld.Camera.Position = new Vector2(1000, 350);
+            _camera = camera;
 
             Vector2 restartTextSize = _menuFont.MeasureString("Restart");
             _restartButtonRectangle = new Rectangle(600, 300, (int)restartTextSize.X, (int)restartTextSize.Y);
 
-            Vector2 newDifficultyTextSize = _menuFont.MeasureString("Choose New Difficulty");
-            _newDifficultyButtonRectangle = new Rectangle(600, 400, (int)newDifficultyTextSize.X, (int)newDifficultyTextSize.Y);
-
             Vector2 mainMenuTextSize = _menuFont.MeasureString("Back to main menu");
-            _mainMenuButtonRectangle = new Rectangle(600, 500, (int)mainMenuTextSize.X, (int)mainMenuTextSize.Y);
+            _mainMenuButtonRectangle = new Rectangle(600, 400, (int)mainMenuTextSize.X, (int)mainMenuTextSize.Y);
 
             Vector2 quitTextSize = _menuFont.MeasureString("Quit");
-            _quitButtonRectangle = new Rectangle(600, 600, (int)quitTextSize.X, (int)quitTextSize.Y);
+            _quitButtonRectangle = new Rectangle(600, 500, (int)quitTextSize.X, (int)quitTextSize.Y);
 
 
-            _buttonRectangles = new Rectangle[] { _restartButtonRectangle, _newDifficultyButtonRectangle, _mainMenuButtonRectangle, _quitButtonRectangle};
+            _buttonRectangles = new Rectangle[] { _restartButtonRectangle, _mainMenuButtonRectangle, _quitButtonRectangle};
             _selectedButtonIndex = 0;
         }
 
         public void Update(GameTime gameTime)
         {
-
+            _camera.Position = new Vector2(1000, 400);
             
             if (!_hasReset)
             {
@@ -70,9 +68,9 @@ namespace GameProject.GameState
             }
 
 
-            KeyboardState keyboardState = Keyboard.GetState();
+            _currentKeyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.Down) && !_previousKeyboardState.IsKeyDown(Keys.Down))
+            if (_currentKeyboardState.IsKeyDown(Keys.Down) && !_previousKeyboardState.IsKeyDown(Keys.Down))
             {
                 if (_selectedButtonIndex < _buttonRectangles.Length - 1)
                 {
@@ -80,7 +78,7 @@ namespace GameProject.GameState
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.Up) && !_previousKeyboardState.IsKeyDown(Keys.Up))
+            if (_currentKeyboardState.IsKeyDown(Keys.Up) && !_previousKeyboardState.IsKeyDown(Keys.Up))
             {
                 if (_selectedButtonIndex > 0)
                 {
@@ -88,7 +86,7 @@ namespace GameProject.GameState
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.Enter) && !_previousKeyboardState.IsKeyDown(Keys.Enter))
+            if (_currentKeyboardState.IsKeyDown(Keys.Space) && !_previousKeyboardState.IsKeyDown(Keys.Space))
             {
                 if (_selectedButtonIndex == 0)
                 {
@@ -97,19 +95,15 @@ namespace GameProject.GameState
                 }
                 else if (_selectedButtonIndex == 1)
                 {
-                    _gameWorld.ChangeState(GameStates.ChooseDifficulty);
-                }
-                else if (_selectedButtonIndex == 2)
-                {
                     _gameWorld.ChangeState(GameStates.StartScreen);
                 }
-                else if (_selectedButtonIndex == 3)
+                else if (_selectedButtonIndex == 2)
                 {
                     Environment.Exit(0);
                 }
             }
 
-            _previousKeyboardState = keyboardState;
+            _previousKeyboardState = _currentKeyboardState;
         }
 
         public void Draw(SpriteBatch spriteBatch)

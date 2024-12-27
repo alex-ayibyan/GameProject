@@ -50,10 +50,18 @@ namespace GameProject.GameState
             _difficultyButtonRectangles = new Rectangle[] { _oneButtonRectangle, _twoButtonRectangle, _threeButtonRectangle, _fourButtonRectangle, _backButtonRectangle };
 
             _selectedDifficultyIndex = 0;
+
+
         }
 
         public void Update(GameTime gameTime)
         {
+            if (_gameWorld._elapsedTimeSinceStateChange < _gameWorld._stateChangeDelay)
+            {
+                // Ignore input during the state change delay
+                return;
+            }
+
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Down) && !_previousKeyboardState.IsKeyDown(Keys.Down))
@@ -72,7 +80,7 @@ namespace GameProject.GameState
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.Enter) && !_previousKeyboardState.IsKeyDown(Keys.Enter))
+            if (keyboardState.IsKeyDown(Keys.Space) && !_previousKeyboardState.IsKeyDown(Keys.Space))
             {
                 if (_selectedDifficultyIndex == 4)
                 {
@@ -98,5 +106,6 @@ namespace GameProject.GameState
                 spriteBatch.DrawString(_menuFont, _difficultyTexts[i], new Vector2(_difficultyButtonRectangles[i].X, _difficultyButtonRectangles[i].Y), buttonColor);
             }
         }
+
     }
 }

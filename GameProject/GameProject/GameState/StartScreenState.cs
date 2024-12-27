@@ -33,6 +33,7 @@ namespace GameProject.GameState
         private Rectangle[] _buttonRectangles;
 
 
+
         public StartScreenState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Controller controller, Camera camera)
         {
             _gameWorld = gameWorld;
@@ -40,7 +41,7 @@ namespace GameProject.GameState
             _menuFont = menuFont;
 
             _controller = controller;
-            camera.Position = new Vector2(-100, 0);
+            // camera.Position = new Vector2(1000, 0);
 
             Vector2 startTextSize = _menuFont.MeasureString("Start");
             _startButtonRectangle = new Rectangle(600, 300, (int)startTextSize.X, (int)startTextSize.Y);
@@ -51,14 +52,19 @@ namespace GameProject.GameState
             Vector2 quitTextSize = _menuFont.MeasureString("Quit");
             _quitButtonRectangle = new Rectangle(600, 500, (int)quitTextSize.X, (int)quitTextSize.Y);
 
-
-
             _buttonRectangles = new Rectangle[] { _startButtonRectangle, _chooseButtonRectangle, _quitButtonRectangle };
             _selectedButtonIndex = 0;
+
         }
 
         public void Update(GameTime gameTime)
         {
+            if (_gameWorld._elapsedTimeSinceStateChange < _gameWorld._stateChangeDelay)
+            {
+                // Ignore input during the state change delay
+                return;
+            }
+
             Debug.WriteLine($"Difficulty selected: {_controller.difficultyLevel}");
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -78,7 +84,7 @@ namespace GameProject.GameState
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.Enter) && !_previousKeyboardState.IsKeyDown(Keys.Enter))
+            if (keyboardState.IsKeyDown(Keys.Space) && !_previousKeyboardState.IsKeyDown(Keys.Space))
             {
                 if (_selectedButtonIndex == 0)
                 {
