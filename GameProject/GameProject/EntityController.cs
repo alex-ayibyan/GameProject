@@ -70,7 +70,7 @@ namespace GameProject
                     if (Vector2.Distance(bullet.Position, player.Position) < sum)
                     {
                         bullet.Collided = true;
-                        player.dead = true;
+                        player.TakeDamage();
                     }
                 }
             }
@@ -86,7 +86,7 @@ namespace GameProject
                 int sum = 32 + enemy.Radius;
                 if (Vector2.Distance(player.Position, enemy.Position) < sum && !player.dead)
                 {
-                    player.dead = true;
+                    player.TakeDamage();
                 }
 
             }

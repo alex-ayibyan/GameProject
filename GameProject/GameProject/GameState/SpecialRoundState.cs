@@ -108,6 +108,13 @@ namespace GameProject.GameState
             }
 
             spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
+
+            spriteBatch.DrawString(_world.GeneralFont, $"Difficulty: {_controller.difficultyLevel}", new Vector2(2300, 1100), Color.White);
+
+            for (int i = 0; i < _player.lives; i++)
+            {
+                spriteBatch.Draw(_world.lifeTexture, new Vector2(2200 + i * 120, 1200), Color.White);
+            }
         }
 
         public void StartSpecialRound()

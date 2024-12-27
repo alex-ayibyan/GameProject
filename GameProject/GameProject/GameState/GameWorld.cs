@@ -36,6 +36,7 @@ namespace GameProject.GameState
         public Texture2D tankEnemy;
         public Texture2D waterBullet;
         public Texture2D fireBullet;
+        public Texture2D lifeTexture;
 
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
@@ -100,6 +101,8 @@ namespace GameProject.GameState
 
             waterBullet = _content.Load<Texture2D>("WaterBall");
             fireBullet = _content.Load<Texture2D>("FireBall");
+
+            lifeTexture = _content.Load<Texture2D>("Heart");
 
             Player.bulletTexture = waterBullet;
 

@@ -17,6 +17,7 @@
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/GeneralFont.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/MenuFont.spritefont</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Fonts/TitleFont.spritefont</File>
+    <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Heart.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/map2.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Down.png</File>
     <File>C:/Users/alexa/Documents/B2S1/GitProjecten/GameDevelopment/GameProject/GameProject/GameProject/Content/Player2/Left.png</File>
@@ -88,6 +89,7 @@
     <File>Player/Sprite.png</File>
     <File>Player/Up.png</File>
     <File>WaterBall.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

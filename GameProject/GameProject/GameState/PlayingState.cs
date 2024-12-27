@@ -99,6 +99,11 @@ namespace GameProject.GameState
             {
                 DrawDebugRectangles(spriteBatch);
             }
+
+            for (int i = 0; i < _player.lives; i++)
+            {
+                spriteBatch.Draw(_world.lifeTexture, new Vector2(2200 + i * 120, 1200), Color.White);
+            }
         }
 
         private void DrawDebugRectangles(SpriteBatch spriteBatch)

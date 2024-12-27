@@ -32,6 +32,11 @@ namespace GameProject
 
         public MapGenerator GameMap;
 
+        public int lives = 3; // Het aantal levens dat de speler heeft
+        private bool isInvincible = false; // Onschendbaarheid na schade
+        private double invincibilityTimer = 0.0; // Timer voor de onschendbaarheid
+        private const double invincibilityDuration = 2.0;
+
         public float Scale
         {
             get { return scale; }
@@ -56,6 +61,15 @@ namespace GameProject
         {
             KeyboardState kState = Keyboard.GetState();
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (isInvincible)
+            {
+                invincibilityTimer -= dt;
+                if (invincibilityTimer <= 0)
+                {
+                    isInvincible = false; // Verwijder de onschendbaarheid
+                }
+            }
 
             isMoving = false;
             Vector2 proposedPosition = position;
@@ -182,8 +196,26 @@ namespace GameProject
             return true;
         }
 
+        public void TakeDamage()
+        {
+            if (isInvincible) return;
+
+            lives--;
+
+            if (lives <= 0)
+            {
+                dead = true;
+            }
+            else
+            {
+                isInvincible = true;
+                invincibilityTimer = invincibilityDuration;
+            }
+        }
+
         public void Reset()
         {
+            lives = 3;
             position = defaultPosition;
             dead = false;
             isMoving = false;
