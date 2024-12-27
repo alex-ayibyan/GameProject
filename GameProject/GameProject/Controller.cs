@@ -96,7 +96,7 @@ namespace GameProject
 
             
 
-            if (scoreController.Score >= (lastSpecialRoundScore + 20) && !specialTankRoundTriggered && !specialRoundOnCooldown)
+            if (scoreController.Score >= (lastSpecialRoundScore + 30) && !specialTankRoundTriggered && !specialRoundOnCooldown)
             {
                 lastSpecialRoundScore = scoreController.Score;
                 TriggerSpecialRound(tankEnemyTexture);
@@ -161,7 +161,7 @@ namespace GameProject
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 0 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType = scoreController.Score >= 60 ? EnemyType.Fast : EnemyType.Regular;
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch

@@ -65,7 +65,6 @@ namespace GameProject.GameState
         {
             if (_gameWorld._elapsedTimeSinceStateChange < _gameWorld._stateChangeDelay)
             {
-                // Ignore input during the state change delay
                 return;
             }
 

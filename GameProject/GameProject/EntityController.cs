@@ -39,7 +39,7 @@ namespace GameProject
             {
                 bullet.Update(gameTime);
 
-                if (bullet.FiredByPlayer) // Assuming that you have a flag to indicate this
+                if (bullet.FiredByPlayer)
                 {
                     foreach (var enemy in Enemy.enemies)
                     {

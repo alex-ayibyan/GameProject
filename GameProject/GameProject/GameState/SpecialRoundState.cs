@@ -124,6 +124,8 @@ namespace GameProject.GameState
 
             spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
 
+            spriteBatch.DrawString(_world.GeneralFont, $"Enemy Health: {roundCounter+1}", new Vector2(2300, 1500), Color.White);
+
             spriteBatch.DrawString(_world.GeneralFont, $"Difficulty: {_controller.difficultyLevel}", new Vector2(2300, 1100), Color.White);
 
             for (int i = 0; i < _player.lives; i++)

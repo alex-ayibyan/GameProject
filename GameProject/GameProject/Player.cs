@@ -5,10 +5,13 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using GameProject.GameState;
 using GameProject.Map;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameProject
 {
@@ -30,11 +33,13 @@ namespace GameProject
         public SpriteAnimation[] animations = new SpriteAnimation[4];
         public Texture2D bulletTexture;
 
+        public SoundEffect shootSound;
+
         public MapGenerator GameMap;
 
-        public int lives = 3; // Het aantal levens dat de speler heeft
-        public bool isInvincible = false; // Onschendbaarheid na schade
-        public double invincibilityTimer = 0.0; // Timer voor de onschendbaarheid
+        public int lives = 3;
+        public bool isInvincible = false;
+        public double invincibilityTimer = 0.0;
         private const double invincibilityDuration = 2.0;
 
         public float Scale
@@ -67,7 +72,7 @@ namespace GameProject
                 invincibilityTimer -= dt;
                 if (invincibilityTimer <= 0)
                 {
-                    isInvincible = false; // Verwijder de onschendbaarheid
+                    isInvincible = false;
                 }
             }
 
@@ -100,11 +105,11 @@ namespace GameProject
 
             if (kState.IsKeyDown(Keys.LeftShift))
             {
-                speed = 600; // Sprint
+                speed = 600;
             }
             else
             {
-                speed = 300; // Normal
+                speed = 300;
             }
 
             if (dead)
@@ -143,7 +148,7 @@ namespace GameProject
 
             if (kState.IsKeyDown(Keys.Space))
             {
-                animation.setFrame(1); // Attack frame when space is pressed
+                animation.setFrame(1);
             }
             else if (isMoving)
             {
@@ -151,14 +156,15 @@ namespace GameProject
             }
             else
             {
-                animation.setFrame(0); // Idle frame
+                animation.setFrame(0); 
             }
 
-            // Bullet firing
             if (kState.IsKeyDown(Keys.Space) && kStateOld.IsKeyUp(Keys.Space))
             {
                 Debug.WriteLine($"Firing bullet at position: {position}, Direction: {direction}");
+                shootSound.Play();
                 Bullet.bullets.Add(new Bullet(position, direction, bulletTexture, true, GameMap));
+                
             }
 
             kStateOld = kState;

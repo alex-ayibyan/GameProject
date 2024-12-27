@@ -92,13 +92,13 @@ namespace GameProject.Map
                     32
                 );
 
-                if (tileIndex == 96)  // Assume tile value 1 represents a blocked (solid) tile
+                if (tileIndex == 96)
                 {
-                    spriteBatch.Draw(texture, destRect, srcRect, Color.Red);  // Use red to highlight solid tiles
+                    spriteBatch.Draw(texture, destRect, srcRect, Color.Red);
                 }
                 else
                 {
-                    spriteBatch.Draw(texture, destRect, srcRect, Color.White);  // Otherwise draw normally
+                    spriteBatch.Draw(texture, destRect, srcRect, Color.White);
                 }
             }
         }

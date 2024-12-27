@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Reflection.Metadata;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GameProject.GameState
 {
@@ -55,6 +56,7 @@ namespace GameProject.GameState
         private Song gameOverMusic;
         private Song playMusic;
         private Song specialRoundMusic;
+        public SoundEffect shootSound;
         
         private Song _currentMusic;
 
@@ -94,10 +96,12 @@ namespace GameProject.GameState
             fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
             tankEnemy = _content.Load<Texture2D>("Enemies/FlameEnemy");
 
-            startMusic = _content.Load<Song>("Sounds/StartScreenMusic");
+            startMusic = _content.Load<Song>("Sounds/MenuMusic");
             gameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
-            playMusic = _content.Load<Song>("Sounds/MainGameMusic");
-            specialRoundMusic = _content.Load<Song>("Sounds/SpecialRoundMusic");
+            playMusic = _content.Load<Song>("Sounds/GameMusic");
+            specialRoundMusic = _content.Load<Song>("Sounds/SpecialMusic");
+            shootSound = _content.Load<SoundEffect>("Sounds/shootingSound");
+
 
             waterBullet = _content.Load<Texture2D>("WaterBall");
             fireBullet = _content.Load<Texture2D>("FireBall");
@@ -105,6 +109,7 @@ namespace GameProject.GameState
             lifeTexture = _content.Load<Texture2D>("Heart");
 
             Player.bulletTexture = waterBullet;
+            Player.shootSound = shootSound;
 
             // Camera.Position = new Vector2(1000,100);
 
