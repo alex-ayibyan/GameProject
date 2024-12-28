@@ -16,9 +16,9 @@ namespace GameProject.Map
 {
     public class MapGenerator
     {
-        private Texture2D _tilesetTexture;
-        private GraphicsDevice _graphicsDevice;
-        private Texture2D _rectangleTexture;
+        private readonly Texture2D _tilesetTexture;
+        private readonly GraphicsDevice _graphicsDevice;
+        private readonly Texture2D _rectangleTexture;
         private Dictionary<Vector2, int> ground;
         private Dictionary<Vector2, int> objects;
         private Dictionary<Vector2, int> collision;
@@ -62,7 +62,6 @@ namespace GameProject.Map
                 }
             }
 
-            // Check if the layer is loaded correctly
             Debug.WriteLine($"Map loaded with {layer.Count} tiles.");
 
             return layer;
@@ -74,7 +73,7 @@ namespace GameProject.Map
             
             DrawLayer(spriteBatch, objects, _tilesetTexture, 1);
 
-           // DrawLayer(spriteBatch, collision, _tilesetTexture, 2);
+           // DrawLayer(spriteBatch, collision, _tilesetTexture, 2); // ColissionLayer
         }
 
         private void DrawLayer(SpriteBatch spriteBatch, Dictionary<Vector2, int> layer, Texture2D texture, int tileSize)

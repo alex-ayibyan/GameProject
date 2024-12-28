@@ -18,7 +18,7 @@ namespace GameProject.Entities
 {
     public class Player
     {
-        static public Vector2 defaultPosition = new Vector2(1600, 1500);
+        static private Vector2 defaultPosition = new Vector2(1600, 1500);
 
         public Vector2 position = defaultPosition;
         private int speed = 300;
@@ -43,7 +43,7 @@ namespace GameProject.Entities
         public double invincibilityTimer = 0.0;
         private const double invincibilityDuration = 2.0;
 
-        private double shootCooldown = 0.2;
+        private readonly double shootCooldown = 0.2;
         private double timeSinceLastShot = 0.0;
 
         public float Scale

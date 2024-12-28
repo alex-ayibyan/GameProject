@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GameProject.Entities;
 using GameProject.GameState;
 using GameProject.Map;
+using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -24,24 +25,24 @@ namespace GameProject.Controllers
     }
     public class Controller
     {
-        public static double timer = 2D;
-        public double maxTime = 2D;
-        public double shootingSpeed;
-        static Random rnd = new Random();
-        public static bool inGame = false;
-        private MapGenerator gameMap;
-        private ScoreController scoreController;
-        private GameWorld gameWorld;
+        public static double Timer = 2D;
+        private double maxTime = 2D;
+        public double ShootingSpeed;
+        static readonly Random rnd = new();
+        private static bool inGame = false;
+        private readonly MapGenerator gameMap;
+        private readonly ScoreController scoreController;
+        private readonly GameWorld gameWorld;
 
-        public bool specialTankRoundTriggered = false;
+        public bool SpecialTankRoundTriggered = false;
 
         private double specialRoundCooldownTimer = 0;
-        private const double CooldownTime = 5;
+        private const double cooldownTime = 5;
         private bool specialRoundOnCooldown = false;
 
         private int lastSpecialRoundScore = 0;
 
-        public int difficultyLevel = 1;
+        public int DifficultyLevel = 1;
 
         private int fastSpeed;
 
@@ -62,7 +63,7 @@ namespace GameProject.Controllers
 
             if (inGame)
             {
-                timer -= gametime.ElapsedGameTime.TotalSeconds;
+                Timer -= gametime.ElapsedGameTime.TotalSeconds;
             }
             else
             {
@@ -74,9 +75,9 @@ namespace GameProject.Controllers
                 }
             }
 
-            if (gameWorld._currentState is PlayingState && specialTankRoundTriggered)
+            if (gameWorld.CurrentState is PlayingState && SpecialTankRoundTriggered)
             {
-                specialTankRoundTriggered = false;
+                SpecialTankRoundTriggered = false;
                 specialRoundOnCooldown = true;
                 specialRoundCooldownTimer = 0;
                 Debug.WriteLine("Resetting specialTankRoundTriggered flag in PlayingState.");
@@ -86,7 +87,7 @@ namespace GameProject.Controllers
             {
                 specialRoundCooldownTimer += gametime.ElapsedGameTime.TotalSeconds;
 
-                if (specialRoundCooldownTimer >= CooldownTime)
+                if (specialRoundCooldownTimer >= cooldownTime)
                 {
                     specialRoundOnCooldown = false;
                     specialRoundCooldownTimer = 0;
@@ -94,15 +95,15 @@ namespace GameProject.Controllers
                 }
             }
 
-            if (scoreController.Score >= lastSpecialRoundScore + 30 && !specialTankRoundTriggered && !specialRoundOnCooldown)
+            if (scoreController.Score >= lastSpecialRoundScore + 30 && !SpecialTankRoundTriggered && !specialRoundOnCooldown)
             {
                 lastSpecialRoundScore = scoreController.Score;
                 TriggerSpecialRound(tankEnemyTexture);
             }
-            else if (timer <= 0 && !specialTankRoundTriggered)
+            else if (Timer <= 0 && !SpecialTankRoundTriggered)
             {
                 SpawnEnemy(regularEnemyTexture, fastEnemyTexture);
-                timer = maxTime;
+                Timer = maxTime;
 
                 if (maxTime > 0.5)
                 {
@@ -114,45 +115,45 @@ namespace GameProject.Controllers
 
         public void SetDifficulty()
         {
-            switch (difficultyLevel)
+            switch (DifficultyLevel)
             {
                 case 1:
                     maxTime = 2D;
-                    shootingSpeed = 1.6D;
+                    ShootingSpeed = 1.6D;
                     fastSpeed = 150;
                     break;
 
                 case 2:
                     maxTime = 1.5D;
-                    shootingSpeed = 1.3D;
+                    ShootingSpeed = 1.3D;
                     fastSpeed = 170;
                     break;
 
                 case 3:
                     maxTime = 1.0D;
-                    shootingSpeed = 1D;
+                    ShootingSpeed = 1D;
                     fastSpeed = 190;
                     break;
 
                 case 4:
                     maxTime = 0.5D;
-                    shootingSpeed = 0.8D;
+                    ShootingSpeed = 0.8D;
                     fastSpeed = 250;
                     break;
             }
-            Debug.WriteLine($"Difficulty Level: {difficultyLevel}, maxTime: {maxTime}, fastSpeed: {fastSpeed}, shootingSpeed: {shootingSpeed}");
+            Debug.WriteLine($"Difficulty Level: {DifficultyLevel}, maxTime: {maxTime}, fastSpeed: {fastSpeed}, shootingSpeed: {ShootingSpeed}");
         }
 
         private void TriggerSpecialRound(Texture2D tankEnemyTexture)
         {
-            if (!specialTankRoundTriggered)
+            if (!SpecialTankRoundTriggered)
             {
-                Enemy.enemies.Clear();
-                specialTankRoundTriggered = true;
+                Enemy.Enemies.Clear();
+                SpecialTankRoundTriggered = true;
 
                 gameWorld.ChangeState(GameStates.SpecialRound);
 
-                var specialRoundState = (SpecialRoundState)gameWorld._currentState;
+                var specialRoundState = (SpecialRoundState)gameWorld.CurrentState;
                 specialRoundState.StartSpecialRound();
 
                 Debug.WriteLine("Special Round triggered.");
@@ -172,7 +173,7 @@ namespace GameProject.Controllers
                 _ => new Enemy(spawnPosition, regularEnemyTexture, gameMap)
             };
 
-            Enemy.enemies.Add(newEnemy);
+            Enemy.Enemies.Add(newEnemy);
         }
 
         private Vector2 GetRandomSpawnPosition(int side)
@@ -195,7 +196,7 @@ namespace GameProject.Controllers
         }
         private void ResetGame()
         {
-            timer = 2D;
+            Timer = 2D;
             maxTime = 2D;
             lastSpecialRoundScore = 0;
         }

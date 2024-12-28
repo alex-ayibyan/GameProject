@@ -1,4 +1,5 @@
 ﻿using GameProject.Controllers;
+using GameProject.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,10 +15,9 @@ namespace GameProject.GameState
     class ControlsState : IGameState
     {
 
-        private GameWorld _gameWorld;
-        private SpriteFont _menuFont;
-        private SpriteFont _titleFont;
-        private Texture2D _backgroundTexture;
+        private readonly GameWorld _gameWorld;
+        private readonly SpriteFont _menuFont;
+        private readonly SpriteFont _titleFont;
 
         public ControlsState(GameWorld gameWorld, SpriteFont menuFont, SpriteFont titleFont)
         {
@@ -51,7 +51,7 @@ namespace GameProject.GameState
 
         public Song GetBackgroundMusic()
         {
-            return _gameWorld.startMusic;
+            return _gameWorld.StartMusic;
         }
     }
 }

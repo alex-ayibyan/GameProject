@@ -2,7 +2,7 @@
 using GameProject.Controllers;
 using GameProject.Entities;
 using GameProject.Map;
-using GameProject.States;
+using GameProject.States.BaseStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,14 +16,14 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 
-namespace GameProject.GameState
+namespace GameProject.States
 {
     public class PlayingState : BaseGameState
     {
-        private Texture2D _regularEnemyTexture;
-        private Texture2D _fastEnemyTexture;
-        private Texture2D _tankEnemyTexture;
-        private Controller _controller;
+        private readonly Texture2D _regularEnemyTexture;
+        private readonly Texture2D _fastEnemyTexture;
+        private readonly Texture2D _tankEnemyTexture;
+        private readonly Controller _controller;
 
         public PlayingState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture, Controller controller)
             : base(world, player, score, camera)
@@ -42,7 +42,7 @@ namespace GameProject.GameState
 
             if (_player.dead)
             {
-                if (_controller.specialTankRoundTriggered)
+                if (_controller.SpecialTankRoundTriggered)
                 {
                     CancelSpecialRound();
                 }
@@ -52,8 +52,8 @@ namespace GameProject.GameState
 
         private void CancelSpecialRound()
         {
-            Enemy.enemies.RemoveAll(e => e is TankEnemy);
-            _controller.specialTankRoundTriggered = false;
+            Enemy.Enemies.RemoveAll(e => e is TankEnemy);
+            _controller.SpecialTankRoundTriggered = false;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -63,7 +63,7 @@ namespace GameProject.GameState
 
         public override Song GetBackgroundMusic()
         {
-            return _world.playMusic;
+            return _world.PlayMusic;
         }
     }
 }

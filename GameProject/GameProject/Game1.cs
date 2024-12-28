@@ -17,10 +17,6 @@ using GameProject.Entities;
 
 namespace GameProject
 {
-    public enum Direction
-    {
-        Down, Up, Left, Right
-    }
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -52,7 +48,6 @@ namespace GameProject
 
             var player = new Player();
 
-
             var scoreFont = Content.Load<SpriteFont>("scoreFont");
             var score = ScoreController.GetInstance(scoreFont);
             var generalFont = Content.Load<SpriteFont>("Fonts/GeneralFont");
@@ -62,10 +57,7 @@ namespace GameProject
             Texture2D walkRight = Content.Load<Texture2D>("Player/Right");
             Texture2D walkLeft = Content.Load<Texture2D>("Player/Left");
 
-            Debug.WriteLine("Loading player textures...");
-            Debug.WriteLine("Loaded walkDown texture: " + (walkDown == null ? "Failed" : "Success"));
-
-            MapGenerator gameMap = new MapGenerator(Content, _graphics.GraphicsDevice);
+            MapGenerator gameMap = new(Content, _graphics.GraphicsDevice);
 
             gameMap.LoadMap("../../../Map/GameMap3_Ground.csv", "../../../Map/GameMap3_Objects.csv", "../../../Map/GameMap3_Collision.csv");
             player.GameMap = gameMap;

@@ -16,13 +16,13 @@ namespace GameProject.Entities
         public static List<Bullet> bullets = new List<Bullet>();
 
         private Vector2 position;
-        private int speed = 1000;
+        private readonly int speed = 1000;
         public int radius = 18;
-        private Direction direction;
+        private readonly Direction direction;
         private bool collided = false;
 
-        private Texture2D texture;
-        private MapGenerator _gameMap;
+        private readonly Texture2D texture;
+        private readonly MapGenerator _gameMap;
 
         public bool FiredByPlayer { get; set; }
 
@@ -62,7 +62,7 @@ namespace GameProject.Entities
             int tileSize = 32;
             int tileX = (int)(newPosition.X / tileSize);
             int tileY = (int)(newPosition.Y / tileSize);
-            Vector2 tileKey = new Vector2(tileX, tileY);
+            Vector2 tileKey = new(tileX, tileY);
 
             if (_gameMap.Collision != null)
             {

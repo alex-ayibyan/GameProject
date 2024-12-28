@@ -23,7 +23,7 @@ namespace GameProject.Entities
 
         public GameWorld _world;
         public Player _player;
-        private Controller _controller;
+        private readonly Controller _controller;
 
         public TankEnemy(Vector2 newPosition, Texture2D sprite, MapGenerator gameMap, GameWorld world, Controller controller) : base(newPosition, sprite, gameMap)
         {
@@ -39,7 +39,7 @@ namespace GameProject.Entities
             _world = world;
             _controller = controller;
 
-            baseShootingSpeed = Math.Max(_controller.shootingSpeed, 0.8);
+            baseShootingSpeed = Math.Max(_controller.ShootingSpeed, 0.8);
             shootTimer = baseShootingSpeed;
         }
 
@@ -60,7 +60,7 @@ namespace GameProject.Entities
                 if (shootTimer <= 0)
                 {
                     ShootAtPlayer();
-                    baseShootingSpeed = Math.Max(_controller.shootingSpeed, 0.8);
+                    baseShootingSpeed = Math.Max(_controller.ShootingSpeed, 0.8);
                     shootTimer = baseShootingSpeed;
                 }
             }
@@ -72,7 +72,7 @@ namespace GameProject.Entities
 
             Direction bulletDirection = (Direction)random.Next(0, 4);
 
-            Bullet newBullet = new Bullet(Position, bulletDirection, _world.fireBullet, false, _world.GameMap);
+            Bullet newBullet = new Bullet(Position, bulletDirection, _world.FireBullet, false, _world.GameMap);
             Bullet.bullets.Add(newBullet);
         }
 

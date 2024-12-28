@@ -16,7 +16,7 @@ namespace GameProject.Controllers
     public static class EntityController
     {
 
-        private static MapGenerator _gameWorld;
+        private static readonly MapGenerator _gameWorld;
 
         public static void CreateBullet(Vector2 position, Direction direction, Texture2D texture, bool firedByPlayer)
         {
@@ -28,7 +28,7 @@ namespace GameProject.Controllers
         public static void CreateEnemy(Vector2 position, Texture2D texture)
         {
             var enemy = new Enemy(position, texture, _gameWorld);
-            Enemy.enemies.Add(enemy);
+            Enemy.Enemies.Add(enemy);
         }
 
 
@@ -41,7 +41,7 @@ namespace GameProject.Controllers
 
                 if (bullet.FiredByPlayer)
                 {
-                    foreach (var enemy in Enemy.enemies)
+                    foreach (var enemy in Enemy.Enemies)
                     {
 
 
@@ -76,10 +76,10 @@ namespace GameProject.Controllers
             }
 
             Bullet.bullets.RemoveAll(b => b.Collided);
-            Enemy.enemies.RemoveAll(e => e.Dead);
+            Enemy.Enemies.RemoveAll(e => e.Dead);
 
 
-            foreach (var enemy in Enemy.enemies)
+            foreach (var enemy in Enemy.Enemies)
             {
                 enemy.Update(gameTime, playerPosition, isPlayerDead);
 
@@ -99,7 +99,7 @@ namespace GameProject.Controllers
                 bullet.Draw(spriteBatch);
             }
 
-            foreach (var enemy in Enemy.enemies)
+            foreach (var enemy in Enemy.Enemies)
             {
                 enemy.Draw(spriteBatch);
             }

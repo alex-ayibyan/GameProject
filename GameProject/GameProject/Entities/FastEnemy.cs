@@ -12,7 +12,6 @@ namespace GameProject.Entities
 {
     public class FastEnemy : Enemy
     {
-        private Vector2 patrolDirection;
         private float zigzagTimer = 0;
         private bool zigzagLeft = true;
         private Vector2 lastPosition;

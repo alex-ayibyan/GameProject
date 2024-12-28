@@ -3,6 +3,7 @@ using GameProject.Controllers;
 using GameProject.Entities;
 using GameProject.Map;
 using GameProject.States;
+using GameProject.States.BaseStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
@@ -17,14 +18,14 @@ namespace GameProject.GameState
 {
     public class SpecialRoundState : BaseGameState
     {
-        private Texture2D _tankEnemyTexture;
-        private Controller _controller;
-        private Vector2[] tankEnemySpawnPositions = new Vector2[]
+        private readonly Texture2D _tankEnemyTexture;
+        private readonly Controller _controller;
+        private readonly Vector2[] tankEnemySpawnPositions = new Vector2[]
         {
-            new Vector2(64 * 32, 40 * 32),
-            new Vector2(64 * 32, 58 * 32),
-            new Vector2(33 * 32, 58 * 32),
-            new Vector2(33 * 32, 41 * 32)
+            new(64 * 32, 40 * 32),
+            new(64 * 32, 58 * 32),
+            new(33 * 32, 58 * 32),
+            new(33 * 32, 41 * 32)
         };
 
         private bool transitionBackToPlaying = false;
@@ -39,14 +40,14 @@ namespace GameProject.GameState
 
     public override void Update(GameTime gameTime)
     {
-        UpdateCommon(gameTime); // Use the common update logic from BaseGameState
+        UpdateCommon(gameTime);
         _controller.Update(gameTime, null, null, _tankEnemyTexture);
         
 
         if (!transitionBackToPlaying)
         {
-            bool allTankEnemiesDead = Enemy.enemies.All(e => !(e is TankEnemy) || e.Dead);
-            bool noEnemiesLeft = !Enemy.enemies.Any();
+            bool allTankEnemiesDead = Enemy.Enemies.All(e => !(e is TankEnemy) || e.Dead);
+            bool noEnemiesLeft = !Enemy.Enemies.Any();
 
             if (allTankEnemiesDead || noEnemiesLeft || _world.Player.dead)
             {
@@ -60,7 +61,7 @@ namespace GameProject.GameState
         DrawCommon(spriteBatch);
         spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
         spriteBatch.DrawString(_world.GeneralFont, $"BossEnemy Health: {roundCounter + 1}", new Vector2(2300, 1500), Color.White);
-        foreach (var enemy in Enemy.enemies)
+        foreach (var enemy in Enemy.Enemies)
         {
             enemy.Draw(spriteBatch);
         }
@@ -78,7 +79,7 @@ namespace GameProject.GameState
                 CanShootBackAtPlayer = true,
             };
             specialTank.IncreaseHealth(roundCounter);
-            Enemy.enemies.Add(specialTank);
+            Enemy.Enemies.Add(specialTank);
         }
         transitionBackToPlaying = false;
     }
@@ -86,14 +87,14 @@ namespace GameProject.GameState
     private void EndSpecialRound()
     {
         RemoveTankEnemies();
-        _controller.specialTankRoundTriggered = false;
+        _controller.SpecialTankRoundTriggered = false;
         _world.ChangeState(GameStates.Playing);
         transitionBackToPlaying = true;
     }
 
     private void RemoveTankEnemies()
     {
-        Enemy.enemies.RemoveAll(e => e is TankEnemy && e.Dead);
+        Enemy.Enemies.RemoveAll(e => e is TankEnemy && e.Dead);
     }
 
     public void ResetRoundCounter()
@@ -103,7 +104,7 @@ namespace GameProject.GameState
 
     public override Song GetBackgroundMusic()
     {
-        return _world.specialRoundMusic;
+        return _world.SpecialRoundMusic;
     }
     }
 }

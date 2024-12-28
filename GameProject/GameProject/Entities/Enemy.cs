@@ -9,7 +9,7 @@ namespace GameProject.Entities
 {
     public class Enemy
     {
-        public static List<Enemy> enemies = new List<Enemy>();
+        public static readonly List<Enemy> Enemies = new();
 
         public Vector2 Position { get; set; }
         public int Speed { get; set; }

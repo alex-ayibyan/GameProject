@@ -15,58 +15,47 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using GameProject.Entities;
 using GameProject.GameState;
+using GameProject.States;
 
 namespace GameProject.Controllers
 {
-    public enum GameStates
-    {
-        StartScreen, Playing, GameOver, SpecialRound, ChooseDifficulty, ControlsState
-    }
+    
     public class GameWorld
     {
-        public IGameState _currentState;
-        private IGameState _previousState;
-
-        private Dictionary<GameStates, IGameState> _states;
+        public IGameState CurrentState;
+        public IGameState PreviousState;
+        private readonly Dictionary<GameStates, IGameState> _states;
 
         public Camera Camera { get; private set; }
         public Player Player { get; private set; }
+        private readonly ContentManager _content;
+        public Controller Controller;
 
-        private SpriteFont titleFont;
-        private SpriteFont menuFont;
-        public Texture2D regularEnemy;
-        public Texture2D fastEnemy;
-        public Texture2D tankEnemy;
-        public Texture2D waterBullet;
-        public Texture2D fireBullet;
-        public Texture2D lifeTexture;
+        private SpriteFont _titleFont;
+        private SpriteFont _menuFont;
+        public Texture2D RegularEnemy;
+        public Texture2D FastEnemy;
+        public Texture2D TankEnemy;
+        public Texture2D WaterBullet;
+        public Texture2D FireBullet;
+        public Texture2D LifeTexture;
 
         public List<Enemy> Enemies { get; private set; }
         public List<Bullet> Bullets { get; private set; }
         public SpriteFont GeneralFont { get; private set; }
-
-        public Texture2D ButtonTexture { get; private set; }
-
         public Texture2D Background { get; private set; }
         public ScoreController Score { get; private set; }
         public MapGenerator GameMap { get; private set; }
 
-        private ContentManager _content;
-        public Controller _controller;
-
-        public Song startMusic;
-        public Song gameOverMusic;
-        public Song playMusic;
-        public Song specialRoundMusic;
-        public SoundEffect shootSound;
-
+        public Song StartMusic { get; private set; }
+        public Song GameOverMusic { get; private set; }
+        public Song PlayMusic { get; private set; }
+        public Song SpecialRoundMusic { get; private set; }
+        public SoundEffect ShootSound { get; private set; }
         private Song _currentMusic;
 
-        public GraphicsDevice graphics;
-
-        public float _stateChangeDelay = 0.2f;
-        public float _elapsedTimeSinceStateChange = 0f;
-
+        public float StateChangeDelay = 0.2f;
+        public float ElapsedTimeSinceStateChange = 0f;
 
         public GameWorld(Player player, Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content, Controller controller)
         {
@@ -78,67 +67,65 @@ namespace GameProject.Controllers
             Player = player;
 
             _content = content;
-            _controller = new Controller(this, gameMap, score);
+            Controller = new Controller(this, gameMap, score);
             _states = new Dictionary<GameStates, IGameState>();
             GameMap = gameMap;
 
             InitializeStates();
-            _currentState = _states[GameStates.StartScreen];
+            CurrentState = _states[GameStates.StartScreen];
 
         }
 
         public void InitializeStates()
         {
-            titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
-            menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
-            regularEnemy = _content.Load<Texture2D>("SlimeEnemy");
-            fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
-            tankEnemy = _content.Load<Texture2D>("Enemies/FlameEnemy");
+            _titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
+            _menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
+            RegularEnemy = _content.Load<Texture2D>("SlimeEnemy");
+            FastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
+            TankEnemy = _content.Load<Texture2D>("Enemies/FlameEnemy");
 
-            startMusic = _content.Load<Song>("Sounds/MenuMusic");
-            gameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
-            playMusic = _content.Load<Song>("Sounds/GameMusic");
-            specialRoundMusic = _content.Load<Song>("Sounds/SpecialMusic");
-            shootSound = _content.Load<SoundEffect>("Sounds/shootingSound");
+            StartMusic = _content.Load<Song>("Sounds/MenuMusic");
+            GameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
+            PlayMusic = _content.Load<Song>("Sounds/GameMusic");
+            SpecialRoundMusic = _content.Load<Song>("Sounds/SpecialMusic");
+            ShootSound = _content.Load<SoundEffect>("Sounds/shootingSound");
 
 
-            waterBullet = _content.Load<Texture2D>("WaterBall");
-            fireBullet = _content.Load<Texture2D>("FireBall");
+            WaterBullet = _content.Load<Texture2D>("WaterBall");
+            FireBullet = _content.Load<Texture2D>("FireBall");
 
-            lifeTexture = _content.Load<Texture2D>("Heart");
+            LifeTexture = _content.Load<Texture2D>("Heart");
 
-            Player.bulletTexture = waterBullet;
-            Player.shootSound = shootSound;
+            Player.bulletTexture = WaterBullet;
+            Player.shootSound = ShootSound;
 
-            // Camera.Position = new Vector2(1000,100);
-
-            _states[GameStates.StartScreen] = new StartScreenState(this, titleFont, menuFont, _controller, Camera);
-            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, regularEnemy, fastEnemy, tankEnemy, _controller);
-            _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, tankEnemy);
-            _states[GameStates.GameOver] = new GameOverState(this, titleFont, menuFont, _controller, Camera);
-            _states[GameStates.ChooseDifficulty] = new ChooseDifficultyState(this, menuFont, _controller);
-            _states[GameStates.ControlsState] = new ControlsState(this, menuFont, titleFont);
+            _states[GameStates.StartScreen] = new StartScreenState(this, _titleFont, _menuFont, Controller, Camera);
+            _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, RegularEnemy, FastEnemy, TankEnemy, Controller);
+            _states[GameStates.SpecialRound] = new SpecialRoundState(this, Player, Score, Camera, TankEnemy);
+            _states[GameStates.GameOver] = new GameOverState(this, _titleFont, _menuFont, Controller, Camera);
+            _states[GameStates.ChooseDifficulty] = new ChooseDifficultyState(this, _titleFont, _menuFont, Controller, Camera);
+            _states[GameStates.ControlsState] = new ControlsState(this, _menuFont, _titleFont);
         }
 
         public void ChangeState(GameStates newState)
         {
-            if (_currentState == _states[newState])
+            if (CurrentState == _states[newState])
             {
                 return;
             }
 
-            _previousState = _currentState;
-            _currentState = _states[newState];
+            PreviousState = CurrentState;
+            CurrentState = _states[newState];
 
             Debug.WriteLine($"State changed to: {newState}");
 
-            _elapsedTimeSinceStateChange = 0f;
+            ElapsedTimeSinceStateChange = 0f;
         }
         public void GoBackToPreviousState()
         {
-            if (_previousState != null)
+            if (PreviousState != null)
             {
-                var previousGameState = _states.FirstOrDefault(s => s.Value == _previousState).Key;
+                var previousGameState = _states.FirstOrDefault(s => s.Value == PreviousState).Key;
                 ChangeState(previousGameState);
             }
         }
@@ -146,22 +133,22 @@ namespace GameProject.Controllers
         public void Update(GameTime gameTime)
         {
 
-            if (_currentState is PlayingState || _currentState is SpecialRoundState)
+            if (CurrentState is PlayingState || CurrentState is SpecialRoundState)
             {
-                _elapsedTimeSinceStateChange = _stateChangeDelay;
+                ElapsedTimeSinceStateChange = StateChangeDelay;
             }
             else
             {
-                _elapsedTimeSinceStateChange += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                ElapsedTimeSinceStateChange += (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if (_elapsedTimeSinceStateChange >= _stateChangeDelay)
+            if (ElapsedTimeSinceStateChange >= StateChangeDelay)
             {
-                _elapsedTimeSinceStateChange = _stateChangeDelay;
-                _currentState.Update(gameTime);
+                ElapsedTimeSinceStateChange = StateChangeDelay;
+                CurrentState.Update(gameTime);
             }
 
-            var newMusic = _currentState.GetBackgroundMusic();
+            var newMusic = CurrentState.GetBackgroundMusic();
             if (newMusic != _currentMusic)
             {
                 MediaPlayer.Stop();
@@ -172,7 +159,7 @@ namespace GameProject.Controllers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            _currentState.Draw(spriteBatch);
+            CurrentState.Draw(spriteBatch);
         }
 
         public void Reset()
@@ -180,7 +167,7 @@ namespace GameProject.Controllers
             InitializeStates();
             Player.Reset();
             Score.ResetScore();
-            Enemy.enemies.Clear();
+            Enemy.Enemies.Clear();
             Bullet.bullets.Clear();
 
             if (_states[GameStates.SpecialRound] is SpecialRoundState specialRoundState)
@@ -188,7 +175,7 @@ namespace GameProject.Controllers
                 specialRoundState.ResetRoundCounter();
             }
 
-            Controller.timer = 2D;
+            Controller.Timer = 2D;
         }
     }
 }
