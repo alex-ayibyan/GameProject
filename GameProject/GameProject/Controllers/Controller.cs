@@ -45,7 +45,7 @@ namespace GameProject.Controllers
         {
             this.gameWorld = gameWorld;
             gameMap = map;
-            scoreController = score ?? throw new ArgumentNullException(nameof(score));
+            scoreController = score;
         }
 
         public void Update(GameTime gametime, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)
@@ -159,7 +159,15 @@ namespace GameProject.Controllers
         {
             int side = rnd.Next(5);
 
-            EnemyType selectedType = scoreController.Score >= 60 ? EnemyType.Fast : EnemyType.Regular;
+            EnemyType selectedType;
+            if (scoreController.Score >= 30)
+            {
+                selectedType = rnd.Next(2) == 0 ? EnemyType.Fast : EnemyType.Regular;
+            }
+            else
+            {
+                selectedType = EnemyType.Regular;
+            }
 
             Vector2 spawnPosition = GetRandomSpawnPosition(side);
             Enemy newEnemy = selectedType switch

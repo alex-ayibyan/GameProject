@@ -28,7 +28,6 @@ namespace GameProject.Controllers
         public IGameState PreviousState;
         private readonly Dictionary<GameStates, IGameState> _states;
         private readonly GraphicsDevice _graphics;
-
         public Camera Camera { get; private set; }
         public Player Player { get; private set; }
         private readonly ContentManager _content;
@@ -65,15 +64,10 @@ namespace GameProject.Controllers
             Camera = camera;
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
-
             _graphics = graphics;
-
             Player = new Player();
-
             GameMap = new(content, _graphics);
-            
             _content = content;
-
             _states = new Dictionary<GameStates, IGameState>();
 
             LoadContent();
@@ -119,6 +113,7 @@ namespace GameProject.Controllers
             Player.animations[2] = new SpriteAnimation(walkLeft, 4, 8);
             Player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
             Player.animation = Player.animations[0];
+
             Player.shootSound = ShootSound;
             Player.bulletTexture = WaterBullet;
             Player.GameMap = GameMap;
