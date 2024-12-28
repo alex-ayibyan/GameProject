@@ -43,7 +43,7 @@ namespace GameProject.Entities
         public double invincibilityTimer = 0.0;
         private const double invincibilityDuration = 2.0;
 
-        private double shootCooldown = 0.5;
+        private double shootCooldown = 0.2;
         private double timeSinceLastShot = 0.0;
 
         public float Scale

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GameProject.GameState
 {
-    class ChooseDifficultyState : IGameState
+    public class ChooseDifficultyState : IGameState
     {
         private GameWorld _gameWorld;
         private SpriteFont _menuFont;

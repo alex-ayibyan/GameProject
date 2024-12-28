@@ -52,7 +52,7 @@ namespace GameProject.Controllers
         public MapGenerator GameMap { get; private set; }
 
         private ContentManager _content;
-        private Controller _controller;
+        public Controller _controller;
 
         public Song startMusic;
         public Song gameOverMusic;
@@ -95,9 +95,9 @@ namespace GameProject.Controllers
             fastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
             tankEnemy = _content.Load<Texture2D>("Enemies/FlameEnemy");
 
-            startMusic = _content.Load<Song>("Sounds/Lijpe");
-            gameOverMusic = _content.Load<Song>("Sounds/GodVergeefMe");
-            playMusic = _content.Load<Song>("Sounds/BOEF");
+            startMusic = _content.Load<Song>("Sounds/MenuMusic");
+            gameOverMusic = _content.Load<Song>("Sounds/GameOverMusic");
+            playMusic = _content.Load<Song>("Sounds/GameMusic");
             specialRoundMusic = _content.Load<Song>("Sounds/SpecialMusic");
             shootSound = _content.Load<SoundEffect>("Sounds/shootingSound");
 
