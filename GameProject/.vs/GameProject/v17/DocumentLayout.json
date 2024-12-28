@@ -155,7 +155,7 @@
               "RelativeDocumentMoniker": "GameProject\\Controllers\\Controller.cs",
               "ToolTip": "C:\\Users\\alexa\\Documents\\B2S1\\GitProjecten\\GameDevelopment\\GameProject\\GameProject\\GameProject\\Controllers\\Controller.cs",
               "RelativeToolTip": "GameProject\\Controllers\\Controller.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAgwIcAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAgwHcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T01:51:36.786Z",
               "IsPinned": true,
@@ -220,8 +220,7 @@
               "RelativeToolTip": "GameProject\\States\\ControlsState.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T01:48:57.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-27T01:48:57.706Z"
             },
             {
               "$type": "Document",
@@ -281,8 +280,7 @@
               "RelativeToolTip": "GameProject\\Controllers\\EntityController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T01:59:25.468Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T01:59:25.468Z"
             },
             {
               "$type": "Document",
