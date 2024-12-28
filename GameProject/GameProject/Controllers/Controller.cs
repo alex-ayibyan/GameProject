@@ -17,12 +17,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace GameProject.Controllers
 {
-    public enum EnemyType
-    {
-        Regular,
-        Fast,
-        Tank
-    }
+    
     public class Controller
     {
         public static double Timer = 2D;
@@ -50,7 +45,7 @@ namespace GameProject.Controllers
         {
             this.gameWorld = gameWorld;
             gameMap = map;
-            scoreController = score;
+            scoreController = score ?? throw new ArgumentNullException(nameof(score));
         }
 
         public void Update(GameTime gametime, Texture2D regularEnemyTexture, Texture2D fastEnemyTexture, Texture2D tankEnemyTexture)

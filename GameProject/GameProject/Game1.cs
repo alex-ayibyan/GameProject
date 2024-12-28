@@ -46,33 +46,7 @@ namespace GameProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var player = new Player();
-
-            var scoreFont = Content.Load<SpriteFont>("scoreFont");
-            var score = ScoreController.GetInstance(scoreFont);
-            var generalFont = Content.Load<SpriteFont>("Fonts/GeneralFont");
-
-            Texture2D walkDown = Content.Load<Texture2D>("Player/Down");
-            Texture2D walkUp = Content.Load<Texture2D>("Player/Up");
-            Texture2D walkRight = Content.Load<Texture2D>("Player/Right");
-            Texture2D walkLeft = Content.Load<Texture2D>("Player/Left");
-
-            MapGenerator gameMap = new(Content, _graphics.GraphicsDevice);
-
-            gameMap.LoadMap("../../../Map/GameMap3_Ground.csv", "../../../Map/GameMap3_Objects.csv", "../../../Map/GameMap3_Collision.csv");
-            player.GameMap = gameMap;
-            
-            player.animations[0] = new SpriteAnimation(walkDown, 4, 8);
-            player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
-            player.animations[2] = new SpriteAnimation(walkLeft, 4, 8);
-            player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
-            player.animation = player.animations[0];
-
-
-            Controller controller = new Controller(_world, gameMap, score);
-            
-
-            _world = new GameWorld(player, camera, generalFont, score, gameMap, Content, controller);
+            _world = new GameWorld(_graphics.GraphicsDevice, camera, Content);
 
             _world.InitializeStates();
         }

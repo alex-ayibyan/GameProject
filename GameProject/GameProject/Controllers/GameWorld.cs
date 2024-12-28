@@ -16,6 +16,8 @@ using Microsoft.Xna.Framework.Audio;
 using GameProject.Entities;
 using GameProject.GameState;
 using GameProject.States;
+using System.Numerics;
+using GameProject.Graphics;
 
 namespace GameProject.Controllers
 {
@@ -25,6 +27,7 @@ namespace GameProject.Controllers
         public IGameState CurrentState;
         public IGameState PreviousState;
         private readonly Dictionary<GameStates, IGameState> _states;
+        private readonly GraphicsDevice _graphics;
 
         public Camera Camera { get; private set; }
         public Player Player { get; private set; }
@@ -57,29 +60,37 @@ namespace GameProject.Controllers
         public float StateChangeDelay = 0.2f;
         public float ElapsedTimeSinceStateChange = 0f;
 
-        public GameWorld(Player player, Camera camera, SpriteFont generalFont, ScoreController score, MapGenerator gameMap, ContentManager content, Controller controller)
+        public GameWorld(GraphicsDevice graphics, Camera camera, ContentManager content)
         {
             Camera = camera;
-            Score = score;
             Enemies = new List<Enemy>();
             Bullets = new List<Bullet>();
-            GeneralFont = generalFont;
-            Player = player;
 
+            _graphics = graphics;
+
+            Player = new Player();
+
+            GameMap = new(content, _graphics);
+            
             _content = content;
-            Controller = new Controller(this, gameMap, score);
+
             _states = new Dictionary<GameStates, IGameState>();
-            GameMap = gameMap;
+
+            LoadContent();
+            Score = ScoreController.GetInstance(GeneralFont);
+            Controller = new Controller(this, GameMap, Score);
 
             InitializeStates();
             CurrentState = _states[GameStates.StartScreen];
-
         }
-
-        public void InitializeStates()
+        private void LoadContent()
         {
             _titleFont = _content.Load<SpriteFont>("Fonts/TitleFont");
             _menuFont = _content.Load<SpriteFont>("Fonts/MenuFont");
+            GeneralFont = _content.Load<SpriteFont>("Fonts/GeneralFont");
+            
+            GameMap.LoadMap("../../../Map/GameMap3_Ground.csv", "../../../Map/GameMap3_Objects.csv", "../../../Map/GameMap3_Collision.csv");
+
             RegularEnemy = _content.Load<Texture2D>("SlimeEnemy");
             FastEnemy = _content.Load<Texture2D>("Enemies/FastEnemy");
             TankEnemy = _content.Load<Texture2D>("Enemies/FlameEnemy");
@@ -90,14 +101,27 @@ namespace GameProject.Controllers
             SpecialRoundMusic = _content.Load<Song>("Sounds/SpecialMusic");
             ShootSound = _content.Load<SoundEffect>("Sounds/shootingSound");
 
-
             WaterBullet = _content.Load<Texture2D>("WaterBall");
             FireBullet = _content.Load<Texture2D>("FireBall");
 
             LifeTexture = _content.Load<Texture2D>("Heart");
+        }
 
-            Player.bulletTexture = WaterBullet;
+        public void InitializeStates()
+        {
+            Texture2D walkDown = _content.Load<Texture2D>("Player/Down");
+            Texture2D walkUp = _content.Load<Texture2D>("Player/Up");
+            Texture2D walkRight = _content.Load<Texture2D>("Player/Right");
+            Texture2D walkLeft = _content.Load<Texture2D>("Player/Left");
+
+            Player.animations[0] = new SpriteAnimation(walkDown, 4, 8);
+            Player.animations[1] = new SpriteAnimation(walkUp, 4, 8);
+            Player.animations[2] = new SpriteAnimation(walkLeft, 4, 8);
+            Player.animations[3] = new SpriteAnimation(walkRight, 4, 8);
+            Player.animation = Player.animations[0];
             Player.shootSound = ShootSound;
+            Player.bulletTexture = WaterBullet;
+            Player.GameMap = GameMap;
 
             _states[GameStates.StartScreen] = new StartScreenState(this, _titleFont, _menuFont, Controller, Camera);
             _states[GameStates.Playing] = new PlayingState(this, Player, Score, Camera, RegularEnemy, FastEnemy, TankEnemy, Controller);
@@ -164,6 +188,7 @@ namespace GameProject.Controllers
 
         public void Reset()
         {
+            LoadContent();
             InitializeStates();
             Player.Reset();
             Score.ResetScore();
