@@ -6,12 +6,14 @@ using Comora;
 using System.Threading.Tasks.Sources;
 using static System.Formats.Asn1.AsnWriter;
 using System.Diagnostics;
-using GameProject.GameState;
 using System;
 
 using GameProject.Map;
 using System.Collections.Generic;
 using TiledSharp;
+using GameProject.Controllers;
+using GameProject.Graphics;
+using GameProject.Entities;
 
 namespace GameProject
 {
@@ -52,7 +54,7 @@ namespace GameProject
 
 
             var scoreFont = Content.Load<SpriteFont>("scoreFont");
-            var score = new ScoreController(scoreFont);
+            var score = ScoreController.GetInstance(scoreFont);
             var generalFont = Content.Load<SpriteFont>("Fonts/GeneralFont");
 
             Texture2D walkDown = Content.Load<Texture2D>("Player/Down");

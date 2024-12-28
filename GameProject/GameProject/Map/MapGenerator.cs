@@ -34,9 +34,9 @@ namespace GameProject.Map
 
         public void LoadMap(string groundLayerPath, string objectsLayerPath, string collisionLayerPath)
         {
-            ground = LoadLayer(groundLayerPath);   // Load ground layer
-            objects = LoadLayer(objectsLayerPath); // Load objects layer
-            collision = LoadLayer(collisionLayerPath); // Load collision layer
+            ground = LoadLayer(groundLayerPath);   // ground layer
+            objects = LoadLayer(objectsLayerPath); // objects layer
+            collision = LoadLayer(collisionLayerPath); // collision layer
         }
 
         
