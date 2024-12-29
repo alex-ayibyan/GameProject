@@ -14,7 +14,6 @@ namespace GameProject.GameState
 {
     class ControlsState : IGameState
     {
-
         private readonly GameWorld _gameWorld;
         private readonly SpriteFont _menuFont;
         private readonly SpriteFont _titleFont;
@@ -38,19 +37,20 @@ namespace GameProject.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         { 
-            spriteBatch.DrawString(_titleFont, "Game Controls:", new Vector2(600, 100), Color.White);
-            spriteBatch.DrawString(_menuFont, "Move Up: Arrow Up", new Vector2(600, 250), Color.White);
-            spriteBatch.DrawString(_menuFont, "Move Down: Arrow Down", new Vector2(600, 320), Color.White);
-            spriteBatch.DrawString(_menuFont, "Move Left: Arrow Left", new Vector2(600, 390), Color.White);
-            spriteBatch.DrawString(_menuFont, "Move Right: Arrow Right", new Vector2(600, 460), Color.White);
-            spriteBatch.DrawString(_menuFont, "Shoot: Spacebar", new Vector2(600, 530), Color.White);
-            spriteBatch.DrawString(_menuFont, "Sprint: LeftShift", new Vector2(600, 600), Color.White);
-            spriteBatch.DrawString(_menuFont, "Quit: Escape", new Vector2(600, 670), Color.White);
-            spriteBatch.DrawString(_menuFont, "Press space to go back", new Vector2(600, 800), Color.White);
+            spriteBatch.DrawString(_titleFont, "Game Controls:", new Vector2(400, 100), Color.White);
+            spriteBatch.DrawString(_menuFont, "Move Up: Arrow Up", new Vector2(400, 250), Color.White);
+            spriteBatch.DrawString(_menuFont, "Move Down: Arrow Down", new Vector2(400, 320), Color.White);
+            spriteBatch.DrawString(_menuFont, "Move Left: Arrow Left", new Vector2(400, 390), Color.White);
+            spriteBatch.DrawString(_menuFont, "Move Right: Arrow Right", new Vector2(400, 460), Color.White);
+            spriteBatch.DrawString(_menuFont, "Shoot: Spacebar", new Vector2(400, 530), Color.White);
+            spriteBatch.DrawString(_menuFont, "Sprint: LeftShift", new Vector2(400, 600), Color.White);
+            spriteBatch.DrawString(_menuFont, "Quit: Escape", new Vector2(400, 670), Color.White);
+            spriteBatch.DrawString(_menuFont, "Press space to go back", new Vector2(400, 800), Color.White);
         }
 
         public Song GetBackgroundMusic()
         {
+            MediaPlayer.IsRepeating = true;
             return _gameWorld.StartMusic;
         }
     }

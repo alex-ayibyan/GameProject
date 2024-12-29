@@ -22,11 +22,11 @@ namespace GameProject.GameState
         public ChooseDifficultyState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Controller controller, Camera camera)
             : base(gameWorld, titleFont, menuFont, controller, camera, new string[] { "1 (Easy)", "2 (Normal)", "3 (Hard)", "4 (Very Hard)", "Back" },
                 new Rectangle[] {
-                new Rectangle(600, 300, (int)menuFont.MeasureString("1 (Easy)").X, (int)menuFont.MeasureString("1 (Easy)").Y),
-                new Rectangle(600, 350, (int)menuFont.MeasureString("2 (Normal)").X, (int)menuFont.MeasureString("2 (Normal)").Y),
-                new Rectangle(600, 400, (int)menuFont.MeasureString("3 (Hard)").X, (int)menuFont.MeasureString("3 (Hard)").Y),
-                new Rectangle(600, 450, (int)menuFont.MeasureString("4 (Very Hard)").X, (int)menuFont.MeasureString("4 (Very Hard)").Y),
-                new Rectangle(600, 500, (int)menuFont.MeasureString("Back").X, (int)menuFont.MeasureString("Back").Y)
+                new Rectangle(400, 300, (int)menuFont.MeasureString("1 (Easy)").X, (int)menuFont.MeasureString("1 (Easy)").Y),
+                new Rectangle(400, 350, (int)menuFont.MeasureString("2 (Normal)").X, (int)menuFont.MeasureString("2 (Normal)").Y),
+                new Rectangle(400, 400, (int)menuFont.MeasureString("3 (Hard)").X, (int)menuFont.MeasureString("3 (Hard)").Y),
+                new Rectangle(400, 450, (int)menuFont.MeasureString("4 (Very Hard)").X, (int)menuFont.MeasureString("4 (Very Hard)").Y),
+                new Rectangle(400, 500, (int)menuFont.MeasureString("Back").X, (int)menuFont.MeasureString("Back").Y)
                 })
         {
             _backButtonRectangle = _buttonRectangles[4];
@@ -51,12 +51,13 @@ namespace GameProject.GameState
         {
             base.Draw(spriteBatch);
 
-            Vector2 titlePosition = new Vector2(600, 100);
+            Vector2 titlePosition = new Vector2(400, 100);
             spriteBatch.DrawString(_titleFont, "Choose Difficulty", titlePosition, Color.White);
         }
 
         public override Song GetBackgroundMusic()
         {
+            MediaPlayer.IsRepeating = true;
             return _gameWorld.StartMusic;
         }
 

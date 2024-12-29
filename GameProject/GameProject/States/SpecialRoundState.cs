@@ -31,81 +31,82 @@ namespace GameProject.GameState
         private bool transitionBackToPlaying = false;
         public double roundCounter = 0;
 
-    public SpecialRoundState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D tankEnemyTexture)
-        : base(world, player, score, camera)
-        {
-            _tankEnemyTexture = tankEnemyTexture;
-            _controller = new Controller(_world, _mapGenerator, score);
-        }
+        public SpecialRoundState(GameWorld world, Player player, ScoreController score, Camera camera, Texture2D tankEnemyTexture)
+            : base(world, player, score, camera)
+            {
+                _tankEnemyTexture = tankEnemyTexture;
+                _controller = new Controller(_world, _mapGenerator, score);
+            }
 
-    public override void Update(GameTime gameTime)
-    {
-        UpdateCommon(gameTime);
-        _controller.Update(gameTime, null, null, _tankEnemyTexture);
+        public override void Update(GameTime gameTime)
+        {
+            UpdateCommon(gameTime);
+            _controller.Update(gameTime, null, null, _tankEnemyTexture);
         
 
-        if (!transitionBackToPlaying)
-        {
-            bool allTankEnemiesDead = Enemy.Enemies.All(e => !(e is TankEnemy) || e.Dead);
-            bool noEnemiesLeft = !Enemy.Enemies.Any();
-
-            if (allTankEnemiesDead || noEnemiesLeft || _world.Player.dead)
+            if (!transitionBackToPlaying)
             {
-                EndSpecialRound();
+                bool allTankEnemiesDead = Enemy.Enemies.All(e => !(e is TankEnemy) || e.Dead);
+                bool noEnemiesLeft = !Enemy.Enemies.Any();
+
+                if (allTankEnemiesDead || noEnemiesLeft || _world.Player.dead)
+                {
+                    EndSpecialRound();
+                }
             }
         }
-    }
 
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        DrawCommon(spriteBatch);
-        spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
-        spriteBatch.DrawString(_world.GeneralFont, $"BossEnemy Health: {roundCounter + 1}", new Vector2(2300, 1500), Color.White);
-        foreach (var enemy in Enemy.Enemies)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            enemy.Draw(spriteBatch);
-        }
-    }
-
-    public void StartSpecialRound()
-    {
-        roundCounter += 0.5;
-
-        foreach (var spawnPosition in tankEnemySpawnPositions)
-        {
-            var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller)
+            DrawCommon(spriteBatch);
+            spriteBatch.DrawString(_world.GeneralFont, "Special Round!", new Vector2(2300, 1400), Color.Yellow);
+            spriteBatch.DrawString(_world.GeneralFont, $"BossEnemy Health: {roundCounter + 1}", new Vector2(2300, 1500), Color.White);
+            foreach (var enemy in Enemy.Enemies)
             {
-                IsStationary = true,
-                CanShootBackAtPlayer = true,
-            };
-            specialTank.IncreaseHealth(roundCounter);
-            Enemy.Enemies.Add(specialTank);
+                enemy.Draw(spriteBatch);
+            }
         }
-        transitionBackToPlaying = false;
-    }
 
-    private void EndSpecialRound()
-    {
-        RemoveTankEnemies();
-        _controller.SpecialTankRoundTriggered = false;
-        _world.ChangeState(GameStates.Playing);
-        transitionBackToPlaying = true;
-    }
+        public void StartSpecialRound()
+        {
+            roundCounter += 0.5;
 
-    private void RemoveTankEnemies()
-    {
-        Enemy.Enemies.RemoveAll(e => e is TankEnemy && e.Dead);
-    }
+            foreach (var spawnPosition in tankEnemySpawnPositions)
+            {
+                var specialTank = new TankEnemy(spawnPosition, _tankEnemyTexture, _mapGenerator, _world, _controller)
+                {
+                    IsStationary = true,
+                    CanShootBackAtPlayer = true,
+                };
+                specialTank.IncreaseHealth(roundCounter);
+                Enemy.Enemies.Add(specialTank);
+            }
+            transitionBackToPlaying = false;
+        }
 
-    public void ResetRoundCounter()
-    {
-        roundCounter = 0;
-    }
+        private void EndSpecialRound()
+        {
+            RemoveTankEnemies();
+            _controller.SpecialTankRoundTriggered = false;
+            _world.ChangeState(GameStates.Playing);
+            transitionBackToPlaying = true;
+        }
 
-    public override Song GetBackgroundMusic()
-    {
-        return _world.SpecialRoundMusic;
-    }
+        private void RemoveTankEnemies()
+        {
+            Enemy.Enemies.RemoveAll(e => e is TankEnemy && e.Dead);
+        }
+
+        public void ResetRoundCounter()
+        {
+            roundCounter = 0;
+        }
+
+        public override Song GetBackgroundMusic()
+        {
+                MediaPlayer.IsRepeating = true;
+                return _world.SpecialRoundMusic;
+        }
     }
 }
 

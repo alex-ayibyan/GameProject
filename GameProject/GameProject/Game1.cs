@@ -33,7 +33,7 @@ namespace GameProject
 
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 3000;
+            _graphics.PreferredBackBufferWidth = 2000;
             _graphics.PreferredBackBufferHeight = 1200;
 
             this.camera = new Camera(_graphics.GraphicsDevice);

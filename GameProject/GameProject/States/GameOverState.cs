@@ -22,15 +22,15 @@ namespace GameProject.GameState
         public GameOverState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Controller controller, Camera camera)
             : base(gameWorld, titleFont, menuFont, controller, camera, new string[] { "Restart", "Back to main menu", "Quit" },
                 new Rectangle[] {
-                new Rectangle(600, 300, (int)menuFont.MeasureString("Restart").X, (int)menuFont.MeasureString("Restart").Y),
-                new Rectangle(600, 400, (int)menuFont.MeasureString("Back to main menu").X, (int)menuFont.MeasureString("Back to main menu").Y),
-                new Rectangle(600, 500, (int)menuFont.MeasureString("Quit").X, (int)menuFont.MeasureString("Quit").Y)
+                new Rectangle(400, 300, (int)menuFont.MeasureString("Restart").X, (int)menuFont.MeasureString("Restart").Y),
+                new Rectangle(400, 400, (int)menuFont.MeasureString("Back to main menu").X, (int)menuFont.MeasureString("Back to main menu").Y),
+                new Rectangle(400, 500, (int)menuFont.MeasureString("Quit").X, (int)menuFont.MeasureString("Quit").Y)
                 })
         { }
 
         public override void Update(GameTime gameTime)
         {
-            _camera.Position = new Vector2(1000, 400);
+            _camera.Position = new Vector2(600, 400);
 
             if (!_hasReset)
             {
@@ -62,12 +62,13 @@ namespace GameProject.GameState
         {
             base.Draw(spriteBatch);
 
-            Vector2 titlePosition = new Vector2(600, 100);
+            Vector2 titlePosition = new Vector2(400, 100);
             spriteBatch.DrawString(_titleFont, "Game Over", titlePosition, Color.White);
         }
 
         public override Song GetBackgroundMusic()
         {
+            MediaPlayer.IsRepeating = true;
             return _gameWorld.GameOverMusic;
         }
     }

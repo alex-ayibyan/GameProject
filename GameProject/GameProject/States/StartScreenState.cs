@@ -21,10 +21,10 @@ namespace GameProject.GameState
         public StartScreenState(GameWorld gameWorld, SpriteFont titleFont, SpriteFont menuFont, Controller controller, Camera camera)
         : base(gameWorld, titleFont, menuFont, controller, camera, new string[] { "Start", "Choose Difficulty", "Controls", "Quit" },
             new Rectangle[] {
-                new Rectangle(600, 300, (int)menuFont.MeasureString("Start").X, (int)menuFont.MeasureString("Start").Y),
-                new Rectangle(600, 400, (int)menuFont.MeasureString("Choose Difficulty").X, (int)menuFont.MeasureString("Choose Difficulty").Y),
-                new Rectangle(600, 500, (int)menuFont.MeasureString("Controls").X, (int)menuFont.MeasureString("Controls").Y),
-                new Rectangle(600, 600, (int)menuFont.MeasureString("Quit").X, (int)menuFont.MeasureString("Quit").Y)
+                new Rectangle(400, 300, (int)menuFont.MeasureString("Start").X, (int)menuFont.MeasureString("Start").Y),
+                new Rectangle(400, 400, (int)menuFont.MeasureString("Choose Difficulty").X, (int)menuFont.MeasureString("Choose Difficulty").Y),
+                new Rectangle(400, 500, (int)menuFont.MeasureString("Controls").X, (int)menuFont.MeasureString("Controls").Y),
+                new Rectangle(400, 600, (int)menuFont.MeasureString("Quit").X, (int)menuFont.MeasureString("Quit").Y)
             })
         { }
 
@@ -52,12 +52,13 @@ namespace GameProject.GameState
         {
             base.Draw(spriteBatch);
 
-            Vector2 titlePosition = new Vector2(600, 100);
-            spriteBatch.DrawString(_titleFont, "Welcome To My Game", titlePosition, Color.White);
+            Vector2 titlePosition = new Vector2(400, 100);
+            spriteBatch.DrawString(_titleFont, "Toxic Takedown", titlePosition, Color.White);
         }
 
         public override Song GetBackgroundMusic()
         {
+            MediaPlayer.IsRepeating = true;
             return _gameWorld.StartMusic;
         }
     }

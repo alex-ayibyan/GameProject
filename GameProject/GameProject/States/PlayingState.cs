@@ -63,6 +63,7 @@ namespace GameProject.States
 
         public override Song GetBackgroundMusic()
         {
+            MediaPlayer.IsRepeating = true;
             return _world.PlayMusic;
         }
     }
